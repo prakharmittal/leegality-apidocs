@@ -22,13 +22,13 @@
   } ],
   "tags" : [ {
     "name" : "Webhook 2.1",
-    "description" : "Sample Webhook Data for V2.1, The value for webhook version parameter in API is \"V2.1\" (This version is deprecated. Please use version 2.3)"
+    "description" : "Sample Webhook Data for V2.1 (This version is deprecated. Please use version 2.3)"
   }, {
     "name" : "Webhook 2.2",
-    "description" : "Sample Webhook Data for V2.2, The value for webhook version parameter in API is \"V2.2\" (This version is deprecated. Please use version 2.3)"
+    "description" : "Sample Webhook Data for V2.2 (This version is deprecated. Please use version 2.3)"
   }, {
     "name" : "Webhook 2.3",
-    "description" : "Sample Webhook Data for V2.3, The value for webhook version parameter in API is \"V2.3\""
+    "description" : "Sample Webhook Data for V2.3"
   } ],
   "paths" : {
     "/your/success/v2.1/webhook" : {
