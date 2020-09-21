@@ -535,6 +535,32 @@
             "type": "integer",
             "description": "if success then 1, else 0."
           },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "invitations": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ResendInvitationApiResponseObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ResendInvitationApiResponseObject": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
           "name": {
             "type": "string",
             "description": "Name of the invitee."
