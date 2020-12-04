@@ -308,6 +308,14 @@
             "type": "string",
             "description": "Pass the stamp series value here. If you have enabled the option of choosing the stamp while using the workflow. You can check the stamp series value from 'Stamp' tab in the dashboard."
           },
+          "seriesGroup": {
+            "type": "string",
+            "description": "Pass the stamp group value here. If you have enabled the option of choosing the stamp group while using the workflow. You can check the stamp group value from 'Stamp' tab in the dashboard."
+          },
+          "stampValue": {
+            "type": "string",
+            "description": "Pass the stamp amount value here. If you have enabled the option of choosing the stamp group while using the workflow."
+          },
           "invitees": {
             "type": "array",
             "items": {
@@ -333,6 +341,9 @@
           },
           "fields": {
             "description": "To be used if you are using a Template. Pass the values of the fields of the Template based on the sample JSON provided in your Dashboard for your Template. You can download the same from the Download Form Fields Button from your Template Editor."
+          },
+          "additionalFiles": {
+            "description": "This parameter accepts array of string, Pass the Base64 encoded files string value of the PDF file you want to append with the file. Maximum size of all files is upto 9MB. In case of template these files will be appended to the selected template."
           }
         }
       },
