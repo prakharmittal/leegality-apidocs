@@ -1,0 +1,1840 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Leegality Documentation Gateway",
+    "description": "Welcome to the reference for the Leegality REST API \nIntegrate with our eSigning Gateway using our REST API resources.\n\nYou can use our API for creating and deleting Signing invitations; for fetching Documents, Audit Trails and other details for existing invitations; and for searching documents based on your custom query.\n\nBehind our API calls are layers of secure channeling to ensure that your data is processed in a safe and secure manner.  The API is based on REST principles, and is a JSON-backed interface.\n## What’s New in our eSigning Gateway ?\n\n  **Introducing The New Workflow:**\n  \n  A signing journey consists of a combination of configurations: Template used, Contracting Features used, Signature types permitted, Signature Verification settings, Automation Settings, Signing Invite Customisations etc. \n  \n  Earlier, each API call used to manually pass the all the various configurations for every signing request.  \n\n  We have changed this: Now, the various configurations for a Workflow are set and saved by the user in the Dashboard. The API call for executing the workflow only requires the user to pass three variables. With this New Workflow, we will fetch your configuration details for you from how you have saved them in the Dashboard. \n\n  Therefore, no more heavy requests to our API :)\n\n\n\n## Integration Flow\nIn terms of the flow-\n\n1. The first step to create a Sign Invitation is by creating a Workflow in your dashboard. \n\n    a. You can create one by selecting Workflow option under My Drawer section on your dashboard.\n    \n    b. After selecting the Workflow option you can add a Workflow profile by selecting “New Workflow Profile” option, and then giving the profile a name, after this you can upload a PDF or use a template according to your choice,\n    \n    c. In case you want to use a Stamp Paper for the profile, you need to select the relevant Stamp Series ID. Please note that you need to pre-purchase a particular number of Stamps to be able to use this functionality.\n    \n    d. Post this, you can add any number of signers to the workflow profile. A signer is called an invitee. By default, a signer order is assigned to the request as per which the invitations of subsequent invitees are only activated on successful eSigning by the previous invitees. You can also deactivate Signing order if your use case so requires.\n    \n    e. Once you have configured Signature type and other options for all the invitees with their custom configurations (if any), you can proceed to the next stage,\n    \n    f. Here, you can set custom appearances for the signatures using the set appearances option and can configure the same for each invitee and assign custom coordinates for them.\n    \n    g. Once appearances are set you’re good to go. Click on save to create the workflow profile. Once this is done, check the status of the workflow, it should be in a Published state to be able to use.\n    \n2. The next step is to create a Sign Invitation by making a POST   call to\n    the Create API from your back-end server.      \n\n    a.One Sign Invitation can be used to get a single PDF file eSigned.\n\n    b. You need to provide the profile ID of the Workflow created in the previous step.\n\n    c. You need to mandatorily pass the Name, email and/or phone number of the invitee to create an invitation for the invitee.\n\n    d. If you’re using a PDF type Workflow, you also need to pass the PDF file to be signed in a Base64 format. Or, if you’re using a Template type Workflow and you have fillable fields, you can download the fields using the “Download Form Fields” option available on the dashboard.\n\n2. In response to a successful call in the previous step, you will receive a Document ID and Signing URL in reponse.\n\n    Signing URL is a unique user-specific URL created for every request. The user can sign the document from this URL. You have various ways of sending the user to this URL to eSign the document.    \n\n    a. You can use our Front-end Web and Mobile SDKs to open the URL from within your application.\n\n    b. You can redirect the user to the URL and have him redirected back to the redirection URL set by you on completion or error.\n\n    c. You can set that the URLs created be automatically sent to their email/phone to complete the process outside your application.\n3. On successful signing, a notification with the updated document is sent to the Success Webhook set by you for every particular invitee. In case of error, the notification is sent to a separate Error Webhook provided by you.\n\n    Alternatively, you can also make a GET call to the Details API with the relvant Document ID to check the status of the invitation and/or to fetch the document.    \n\n    a. Once a document is successfully signed by all assigned invitees, it is considered as completed and an audit trail is generated for the particular document. The Audit Trail is sent to the success Webhook on successful signing by the last invitee, and can also alternatively be fetched by calling the Details API once the document has been completed.    \n\n    b. Completed documents are also saved in your Dashboard by default. By enforcing the Delete on Complete functionality from the Dashboard or while create the Signing Request , you can program the documents to automatically get deleted from your Dashboard after 7 days of completion.    \n\n    c.  A URL of the signed document is also sent to all the signers by default for them to view, download or delete the signed document. In case, Delete on Complete functionality is turned on, the URL automatically expires after 7 days of completion unless express saved by the user in his Leegality Account.\n    \n## Account Authentication\n1. You need to obtain an “Auth Token” from the API Settings Tab from your Leegality dashboard to be able to interact with our API.\n2. You can also optionally whitelist the IPs from where you want to interact with our APIs. The same can be done from the API Settings Tab as well. It is highly recommended that you do so before going live.\n3. To verify Webhook calls, you can verify the value of the MAC key in Webhook calls. The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers.\n## Types of eSign\n1. Personal, Basic and Essential Plan customers can use Aadhaar eSign (OTP and Biometric), and VirtualSign.\n2. Business, Corporate and Enterprise Plan customers in addition can use DSC, Automated Virtual Signer and DocSigner or HSM Signer.\n\n   ### Aadhaar eSign\n   \n    Aadhaar eSign is an Aadhaar authentication based digital signature which can be carried out using the Aadhaar OTP or Aadhaar Biometric verification method. For Aadhaar biometric, you need to procure a Aadhaar registered Biometric Device. The same can be either used from a Windows PC or a Android Device (using our Android Biometric SDK)\n    \n   ### Virtual Sign \n    \n    Virtual Sign is an Mobile/Email OTP based authentication for approval of a document.\n\n   ### DSC \n   \n    DSC is a USB-dongle based technique of digitally signing a document. The signer needs to install Leegality's USB Signing Utility in their PC and need to possess a USB Dongle with a valid Digital Signature Certificate issued by a Certifying Authority.\n\n   ### Document Signer Certificate \n   \n    Document Signer Certificate is a certificate issued to an Organisation for server based signing of documents. To use the same, you need to place a validly issued Document Signer Certificate on your server along with Leegality's Document Signer Utility, and then configure the same from your Dashboard.\n    \n   ### Automated Signer \n   \n    Automated Signing can be carried out either using a Document Signer Certificate or a Virtual Signature pre-configured with any user in your organisational account with Leegality.\n\n## Branding\n  \n1. You can update your organisation’s name under ‘Branding Name’ in your Settings Page to be used in email and phone communication to your users.\n2. Essential and above plans can also upload their own Organisational Logo under ‘Branding Logo’ in their Settings Page to replace the Leegality Default Logo for all signing pages.\n3. Business, Corporate and Enterprise users can also use features like custom sub-domain, custom email-id, email content customisation and custom color schemes for their Organisation.\n## Templates\nYou can create a Template from your Dashboard from the in-built Word Processor, setup custom fields and then use the same to automically generate a PDF file for eSigning.\n\nYou can use your templates while creating a Workflow Profile. Using the workflow profile id associated with the template you can create an eSigning request for use.\n\n\n## Stamps\nIn case you want to use Stamp Papers for your Documents, you need to purchase the desired number of Stamp Papers for the desired State from your Dashboard. Once a request is placed, you can obtain the Stamp Series ID and pass the same while creating a Workflow Profile. We will automatically use the latest available Stamp Paper from the Series and merge the same with your Document.\n## Expiry\nEvery signing Request has an expiry period within which the document must be signed.  This can be set while creating a Workflow, under the Advanced Options tab, using the Expiry parameter, (Default Value is 10, -1 is for 45 minutes, 0 means same day (11:59 PM) , 1 stands for next day , 2 stands for 2 days and so on).\n\nIf the document is not signed by the invitees within the expiry period, the invitation is cancelled and the transaction is reversed. If the invitation is signed by one invitee before the expiry period but has more pending invitations even after the expiry period, the invitaion remains in Sent state and need to be manually activated again- either from the Dashboard or calling the edit API. Error Webhooks are called on expiry of every invitation.\n## Wallet usage\nOn successful request creation, the respective transaction charge is reserved from your Wallet. Once the signature is actually carried out the reserved balance is used. If the invitation expires, the balance reserved for the expired invitations is moved back. In case of a Stamped document, the Stamp Paper is reversed in case no invitee signed the document. If even a single invitee successfully signed the document, the Stamp Paper cannot be reused.\n## Webhooks & Resources\nYou can acccess all the webhook information and resources like SDKs can be accessed from here: https://docs.leegality.com/webhooks_resources\n## Server URLs\nSandbox Dashboard - https://sandbox.leegality.com \nSandbox Base URL - https://sandbox.leegality.com/api/v3.0 \nProduction Dashboard - https://app1.leegality.com \nProduction Base URL - https://app1.leegality.com/api/v3.0",
+    "termsOfService": "https://leegality.com/tnc.html",
+    "contact": {
+      "name": "Leegality Support",
+      "email": "contact@leegality.com"
+    },
+    "x-logo": { 
+      "url": "https://raw.githubusercontent.com/prakharmittal/leegality-apidocs/master/logo.png"
+    },
+    "version": "3.0"
+  },
+  "externalDocs": {
+    "description": "Website",
+    "url": "https://leegality.com"
+  },
+  "servers": [
+    {
+      "url": "https://sandbox.leegality.com/api/v3.0"
+    }
+  ],
+  "tags": [
+    {
+      "name": "eSigning Gateway",
+      "description": "The complete eSigning workflow API"
+    },
+    {
+      "name": "Stamp API",
+      "description": "API for stamps and stamp groups"
+    },
+    {
+      "name": "Wallet Balance API",
+      "description": "API for eSign Wallet Balance"
+    }
+  ],
+  "paths": {
+    "/sign/request": {
+      "get": {
+        "tags": [
+          "eSigning Gateway"
+        ],
+        "summary": "Use this API to check transaction status",
+        "description": "You need to call this API with the documentId to get the status of the transaction and/or to fetch the latest version of the document, and the Audit Trail if the document has been completed.\nResponse for the Details API is also the same as the Success Webhook Data apart from the signType parameter. signType parameter will only be provided in the Webhook Data, and not in the Response to the Details API.",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "query",
+            "description": "Leegality's Unique document level reference number, received as a response to POST call made to the Create API.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailsApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "eSigning Gateway"
+        ],
+        "summary": "Use this API to create an eSigning Request",
+        "description": "A POST call has to made to this API with name, email ID and/or Phone Number of the user(s). \nA Published Workflow Profile ID needs to be passed in order to successfully create an eSigning request.\n\nIf you're using a PDF Type Workflow you can pass a PDF file encoded in Base64 format. If you're using a Template Type Workflow and have fillable fields, you can pass the fields under the fields parameter as available on your dashboard.\nOn successful request creation, you get an ID & eSigning URL in response.",
+        "requestBody": {
+          "description": "Send the Auth Token (generated from the Settings Tab of your Dashbaord) in the Header with key 'X-Auth-Token'",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "eSigning Gateway"
+        ],
+        "summary": "Use this API to delete a particular invitation or document.",
+        "description": "You need to call this API with the documentId to delete a particular invitation or document.",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "query",
+            "description": "Unique document level reference number received as a response to POST call made to the Create API.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    },
+    "/sign/request/list": {
+      "get": {
+        "tags": [
+          "eSigning Gateway"
+        ],
+        "summary": "Use this API to search",
+        "description": "You need to call this API with a custom Search Query to search your existing documents and invitations.",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "The search query with which you want to search your invitations or completed documents. The search is made in document names , documentIDs, Internal Reference Numbers, invitee names, invitee emails and phone numbers.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "If you want to add filter for status of document you can use this parameter. Possible values are DRAFT, SENT, RECEIVED, SIGNED, COMPLETED, EXPIRED.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "max",
+            "in": "query",
+            "description": "This parameter can be used to set the maximum number of records you want to receive in response. Default value is 20 and maximum possible value is 40.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Pass the offset value to offset the number of records to be ignored.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    },
+    "/sign/request/reactivate": {
+      "post": {
+        "tags": [
+          "eSigning Gateway"
+        ],
+        "summary": "Use this API to reactivate expired documents",
+        "description": "You can use this API to reactivate expired documents within 30 days of expiry. Please note that Stamped Documents cannot be reactivated using this API. ",
+        "requestBody": {
+          "description": "Send the Auth Token (generated from the Settings Tab of your Dashbaord) in the Header with key 'X-Auth-Token'",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReactivateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReactivateApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    },
+    "/sign/request/resend": {
+      "post": {
+        "tags": [
+          "eSigning Gateway"
+        ],
+        "summary": "Use this API to resend notifications",
+        "description": "You can use this API to resend notifications. It will give you status of each signURL along with its status.",
+        "requestBody": {
+          "description": "Send the Auth Token (generated from the Settings Tab of your Dashbaord) in the Header with key 'X-Auth-Token'",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResendApiRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResendApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    },
+    "/document/details": {
+      "get": {
+        "tags": [
+          "eSigning Gateway"
+        ],
+        "summary": "Use this API to check document details",
+        "description": "You need to call this API to get the in-depth detail of the document.",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "query",
+            "description": "This parameter requires the unique Document ID generated by Leegality.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "file",
+            "in": "query",
+            "description": "Default Value = true\n  You can disable this parameter by passing the value ‘false’ if\n  you don’t want to receive the PDF file in API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "auditTrail",
+            "in": "query",
+            "description": "Default Value = false You can enable this parameter by passing the value ‘true’ if you want to receive the digitally signed audit trail in API\n  response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "attachments",
+            "in": "query",
+            "description": "Default Value = false You can enable this parameter by passing the value ‘true’ if you want to receive the attachment files which the owner uploaded or signer uploaded while sending and signing the document respectively.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "failureReason",
+            "in": "query",
+            "description": "Default Value = false You can enable this parameter by passing the value ‘true’ if you want to receive the failure reason of a sign invitation.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "verificationResponse",
+            "in": "query",
+            "description": "Default Value = false You can enable this parameter by passing the value ‘true’ if you want to receive verification response of a sign invitation.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentDetailsApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    },
+    "/document/completed": {
+      "get": {
+        "tags": [
+          "eSigning Gateway"
+        ],
+        "summary": "Use this API to check list of completed documents",
+        "description": "This API is used to fetch all the completed documents within an organization owned by the organization users only. The order of the document list in the API response will be in ascending order as per the completion date of the document.",
+        "parameters": [
+          {
+            "name": "max",
+            "in": "query",
+            "description": "Default Value= 20 Max Value= 40 This parameter is for pagination. You can adjust the number of records you want to fetch in a single API call by adjusting the number appropriately.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Default Value= 0 This parameter is for pagination. You can use this parameter if you want to skip some number of records from top.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "You can use this parameter if you want to filter out documents as per their name. The name provided here will not be an exact match but a pattern match.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "irn",
+            "in": "query",
+            "description": "You can use this parameter if you want to filter our documents having specific internal reference numbers. The irn match will be an exact match.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "folderId",
+            "in": "query",
+            "description": "You can use this parameter if you want to filter out documents having specific folder ID. The folderId match will be an exact match.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Format= dd-MM-yyyy Eg. 01-01-2020 (For 1st Jan 2020) You can use this parameter if you want to filter the documents completed after a specific date.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "Format= dd-MM-yyyy Eg. 01-01-2020 (For 1st Jan 2020) You can use this parameter if you want to filter the documents completed before a specific date.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentCompletedApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    },
+    "/series/list": {
+      "get": {
+        "tags": [
+          "Stamp API"
+        ],
+        "summary": "Use this API to get detail list of stamp series",
+        "description": "You need to call this API to get the details of all  the stamp series.",
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeriesListApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    },
+    "/series/groups/list": {
+      "get": {
+        "tags": [
+          "Stamp API"
+        ],
+        "summary": "Use this API to get detail list of stamp groups",
+        "description": "You need to call this API to get the details of all  the stamp groups.",
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeriesGroupApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    },
+    "/wallet/balance/details": {
+      "get": {
+        "tags": [
+          "Wallet Balance API"
+        ],
+        "summary": "Use this API to get eSign balance status.",
+        "description": "You need to call this API to get detail of all eSign credits purchased..",
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletBalanceDetailsApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    },
+    "/wallet/balance/list": {
+      "get": {
+        "tags": [
+          "Wallet Balance API"
+        ],
+        "summary": "Use this API to get detail list of eSign balances purchased.",
+        "description": "You need to call this API to get the status of eSign credits.",
+        "parameters": [
+          {
+            "name": "completed",
+            "in": "query",
+            "description": "Sending this parameter as true will give the list of eSign puchases which are completely consumed. If this parameter is not sent or is sent as false, this will give a list of all the purchases which still have eSign credits remaining.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "max",
+            "in": "query",
+            "description": "This parameter can be used to set the maximum number of records you want to receive in response. Default value is 20 and maximum possible value is 40.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Pass the offset value to offset the number of records to be ignored.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletBalanceListApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SignRequest": {
+        "required": [
+          "file",
+          "invitees",
+          "profileId"
+        ],
+        "type": "object",
+        "properties": {
+          "profileId": {
+            "type": "string",
+            "description": "Provide the ID of the Workflow from your Leegality Dashboard."
+          },
+          "file": {
+            "$ref": "#/components/schemas/File"
+          },
+          "stampSeries": {
+            "type": "string",
+            "description": "Pass the stamp series value here. If you have enabled the option of choosing the stamp while using the workflow. You can check the stamp series value from 'Stamp' tab in the dashboard."
+          },
+          "seriesGroup": {
+            "type": "string",
+            "description": "Pass the stamp group value here. If you have enabled the option of choosing the stamp group while using the workflow. You can check the stamp group value from 'Stamp' tab in the dashboard."
+          },
+          "stampValue": {
+            "type": "string",
+            "description": "Pass the stamp amount value here. If you have enabled the option of choosing the stamp group while using the workflow."
+          },
+          "invitees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Invitee"
+            }
+          },
+          "irn": {
+            "type": "string",
+            "description": "irn stands for Internal Reference Number. Use this value to set a custom Internal Refernce Number to your document. You can later use the internal reference number to search for this document either through the Search API or through your Dashboard."
+          }
+        }
+      },
+      "File": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Use this to set the Name of file to be eSigned."
+          },
+          "file": {
+            "type": "string",
+            "description": "Pass the Base64 encoded file string value of the PDF file you want to get eSigned from the user. Maximum size of the file before encoding is 5 MB."
+          },
+          "fields": {
+            "description": "To be used if you are using a Template. Pass the values of the fields of the Template based on the sample JSON provided in your Dashboard for your Template. You can download the same from the Download Form Fields Button from your Template Editor."
+          },
+          "additionalFiles": {
+            "description": "This parameter accepts array of string, Pass the Base64 encoded files string value of the PDF file you want to append with the file. Maximum size of all files is upto 9MB. In case of template these files will be appended to the selected template."
+          }
+        }
+      },
+      "AadhaarConfig": {
+        "type": "object",
+        "properties": {
+          "verifyName": {
+            "type": "boolean",
+            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification. If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored.",
+            "default": false
+          },
+          "verifySmartName": {
+            "type": "boolean",
+            "description": "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName and only in case of Aadhaar eSign or DSC.\n If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyPincode": {
+            "type": "string",
+            "description": "Pass PINCODE if you want to verify the user's PIN Code with the PIN Code contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. The document will only be generated if the PIN Codes match. The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyYob": {
+            "type": "integer",
+            "description": "Pass YEAR OF BIRTH in DIGITS if you want to verify the user's Year of Birth with the Year of Birth contained in the Digital Signature Certificate. This parameter will only function in case of an Aadhaar eSign. The document will only be generated if the Year of Birth matches. In case the certificate does not have this value, this parameter will be ignored. Value should be between 1900 and the current year. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyTitle": {
+            "type": "string",
+            "description": "Pass the last 4 digits of the UID No. if you want to verify the user's identity as contained in the Digital Signature Certificate. This paramater only works with Aadhaar eSign. The document will only be generated if both the values match. In case, the value is not present in the certificate, this parameter will be ignored. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyState": {
+            "type": "string",
+            "description": "Pass value of State if you want to verify the user's State with the value of State contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. The document will only be generated if the values of States match.The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyGender": {
+            "type": "string",
+            "description": "Pass Gender value if you want to verify the user's Gender with the value contained in the Digital Signature Certificate issued.This parameter will only function in case of Aadhaar eSign. The document will only be generated if both the values match. Possible values are 'M' for Male, 'F' for Female and 'T' for Transgender. All values have to be in Capitals. In case the certificate does not have this value, the parameter will be ignored. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          }
+        }
+      },
+      "DscConfig": {
+        "type": "object",
+        "properties": {
+          "verifyName": {
+            "type": "boolean",
+            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification. If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored.",
+            "default": false
+          },
+          "verifySmartName": {
+            "type": "boolean",
+            "description": "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName and only in case of Aadhaar eSign or DSC.\n If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyPincode": {
+            "type": "string",
+            "description": "Pass PINCODE if you want to verify the user's PIN Code with the PIN Code contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. The document will only be generated if the PIN Codes match. The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyState": {
+            "type": "string",
+            "description": "Pass value of State if you want to verify the user's State with the value of State contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. The document will only be generated if the values of States match.The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          }
+        }
+      },
+      "ReactivateRequest": {
+        "required": [
+          "documentId"
+        ],
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string",
+            "description": "Document ID which need to be reactivated."
+          },
+          "expiryDays": {
+            "maximum": 30,
+            "minimum": -1,
+            "type": "integer",
+            "description": "Can be used to define the new timeout period after which an uncompleted transaction gets cancelled and reversed. -1 is for 45 minutes, 0 means same day (11:59 PM) , 1 stands for next day , 2 stands for 2 days and so on.",
+            "default": 10
+          }
+        }
+      },
+      "ResendApiRequest": {
+        "required": [
+          "signUrls"
+        ],
+        "type": "object",
+        "properties": {
+          "signUrls": {
+            "maximum": 15,
+            "minimum": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "SignURL's need to be sent in the request which need to be re-notified. It should atleast contain one signURL."
+            }
+          }
+        }
+      },
+      "Invitee": {
+        "required": [
+          "email",
+          "name",
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the invitee."
+          },
+          "email": {
+            "type": "string",
+            "description": "Valid email address of the invitee. Either email or phone is required."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Valid 10 digit mobile number of the invitee. Either email or phone is required."
+          },
+          "organizationName": {
+            "type": "string",
+            "description": "Name of organization of the signer, If you have enabled the configuration to use organizational signatrue while setting up workflow then you can use this parameter to pass the orgnaization name of the signer."
+          },
+          "aadhaarConfig": {
+            "$ref": "#/components/schemas/AadhaarConfig"
+          },
+          "dscConfig": {
+            "$ref": "#/components/schemas/DscConfig"
+          }
+        }
+      },
+      "RequestApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/RequestApiResponse_data"
+          }
+        }
+      },
+      "ReactivateApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/ReactivateApiResponse_data"
+          }
+        }
+      },
+      "DocumentDetailsApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/DocumentDetailsApiResponse_data"
+          }
+        }
+      },
+      "FolderArrayResponseObject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Folder ID, if you are saving document in any folders."
+          },
+          "name": {
+            "type": "string",
+            "description": "Folder Name, if you are saving document in any folder."
+          }
+        }
+      },
+      "StampArrayResponseObject": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "Stamp state name, if you are using stamp papers."
+          },
+          "amount": {
+            "type": "string",
+            "description": "Stamp amount, if you are using stamp papers."
+          },
+          "serialNumber": {
+            "type": "string",
+            "description": "Stamp serial number, if you are using stamp papers."
+          }
+        }
+      },
+      "AttachmentsArrayResponseObject": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Base64 encoded attachment file."
+          },
+          "name": {
+            "type": "string",
+            "description": "Document name."
+          },
+          "type": {
+            "type": "string",
+            "description": "Document type, Possible values= application/pdf, image/png, image/jpg, image/jpeg."
+          }
+        }
+      },
+      "InvitationsArrayResponseObject": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of signer."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of signer."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone of signer."
+          },
+          "signUrl": {
+            "type": "string",
+            "description": "Unique sign invitation URL generated by leegality for each signer."
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Activation status of invitation, Possible values true or false."
+          },
+          "signed": {
+            "type": "boolean",
+            "description": "Signing status of invitation, Possible values true or false."
+          },
+          "rejected": {
+            "type": "boolean",
+            "description": "Rejection status of invitation, Possible values true or false."
+          },
+          "expired": {
+            "type": "boolean",
+            "description": "Expiry status of invitations, Possible values true or false."
+          },
+          "creationDate": {
+            "type": "string",
+            "description": "Creation date of sign invitation in format DD-MM-YYYY HH:MM:SS."
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Expiry date of sign invitation in format DD-MM-YYYY HH:MM:SS."
+          },
+          "signDate": {
+            "type": "string",
+            "description": "Sign date of sign invitation in format DD-MM-YYYY HH:MM:SS, You will receive value of this parameter if invitation is signed otherwise you will receive value as NULL."
+          },
+          "signType": {
+            "type": "string",
+            "description": "You will receive the value if the user has already signed the document. Possible value= AADHAAR, VIRTUAL_SIGN, DSC, DOC_SIGNER, AUTOMATED_SIGN"
+          },
+          "failureReason": {
+            "type": "string",
+            "description": "You will receive this parameter only if you enable it using request parameter failureReason. You will receive appropriate message of failure of this sign invitation."
+          },
+          "verificationResponse": {
+            "$ref": "#/components/schemas/InvitationsArrayResponseObject_verificationResponse"
+          },
+          "attachments": {
+            "type": "array",
+            "description": "You will receive this parameter only if you enable using the attachment key while making API call. This attachments parameter contains the list of all the attachments uploaded by sender while sending the document.",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsArrayResponseObject"
+            }
+          }
+        }
+      },
+      "DocumentCompletedApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/DocumentCompletedApiResponse_data"
+          }
+        }
+      },
+      "DocumentCompletedResponseObject": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string",
+            "description": "Document ID generated by leegality."
+          },
+          "documentName": {
+            "type": "string",
+            "description": "Document name provided by client."
+          },
+          "irn": {
+            "type": "string",
+            "description": "Internal reference number provided by client."
+          },
+          "folderId": {
+            "type": "string",
+            "description": "Folder ID of the folder in which document is lying. Null in case document is not inside any folder."
+          },
+          "folderName": {
+            "type": "string",
+            "description": "Folder Name of the folder in which document is lying. Null in case document is not inside any folder."
+          },
+          "dateCreated": {
+            "type": "string",
+            "description": "Creation date of the document."
+          },
+          "completionDate": {
+            "type": "string",
+            "description": "Completion date of the document."
+          }
+        }
+      },
+      "SeriesListApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/SeriesListApiResponse_data"
+          }
+        }
+      },
+      "SeriesArrayResponseObject": {
+        "type": "object",
+        "properties": {
+          "blocked": {
+            "type": "integer",
+            "description": "Number of stamps blocked."
+          },
+          "denomination": {
+            "type": "integer",
+            "description": "Denomination of stamp in the series."
+          },
+          "firstPartyName": {
+            "type": "string",
+            "description": "Name of first party."
+          },
+          "legend": {
+            "type": "string",
+            "description": "Legend to be printed on the physical stamp paper."
+          },
+          "purpose": {
+            "type": "string",
+            "description": "Purpose of stamp."
+          },
+          "reserved": {
+            "type": "integer",
+            "description": "Number of stamps reserved."
+          },
+          "secondPartyName": {
+            "type": "string",
+            "description": "Name of second party."
+          },
+          "seriesNumber": {
+            "type": "string",
+            "description": "Unique series number"
+          },
+          "state": {
+            "type": "string",
+            "description": "State to which the stamp papers belong."
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total number of stamps."
+          },
+          "underProcess": {
+            "type": "integer",
+            "description": "Number of stamps under process."
+          },
+          "unused": {
+            "type": "integer",
+            "description": "Number of stamps available for use."
+          },
+          "used": {
+            "type": "integer",
+            "description": "Number of stamps already used."
+          }
+        }
+      },
+      "SeriesGroupApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/SeriesGroupApiResponse_data"
+          }
+        }
+      },
+      "SeriesGroupArrayResponseObject": {
+        "type": "object",
+        "properties": {
+          "groupName": {
+            "type": "string",
+            "description": "Name of series group."
+          },
+          "groupNumber": {
+            "type": "string",
+            "description": "Unique series group number."
+          },
+          "maximumValuePermitted": {
+            "type": "string",
+            "description": "Maximum value of the denomination for which a combination of stamp can be applied."
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeriesValueArrayResponseObject"
+            }
+          },
+          "state": {
+            "type": "string"
+          }
+        }
+      },
+      "SeriesValueArrayResponseObject": {
+        "type": "object",
+        "properties": {
+          "denomination": {
+            "type": "string",
+            "description": "Denomination of stamp in this series"
+          },
+          "seriesNumber": {
+            "type": "string",
+            "description": "Series number present in this series group."
+          }
+        }
+      },
+      "WalletBalanceDetailsApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/WalletBalanceDetailsApiResponse_data"
+          }
+        }
+      },
+      "WalletBalanceListApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/WalletBalanceListApiResponse_data"
+          }
+        }
+      },
+      "WalletBalanceListApiResponseObject": {
+        "type": "object",
+        "properties": {
+          "consumed": {
+            "type": "integer",
+            "description": "Consumed eSign Credits."
+          },
+          "expired": {
+            "type": "integer",
+            "description": "Expired eSign Credits."
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Expiry date of these eSign Credits."
+          },
+          "purchaseDate": {
+            "type": "string",
+            "description": "Purchase Date of eSign Credits."
+          },
+          "purchaseQuantity": {
+            "type": "integer",
+            "description": "Purchase Quantity of eSign Credits."
+          },
+          "unused": {
+            "type": "integer",
+            "description": "Unused eSign Credits."
+          }
+        }
+      },
+      "ResendApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/ResendApiResponse_data"
+          }
+        }
+      },
+      "ResendInvitationApiResponseObject": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the invitee."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the invitee."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone Number of the invitee."
+          },
+          "signUrl": {
+            "type": "string",
+            "description": "Invitee specfic URL unique to the request."
+          },
+          "message": {
+            "type": "string",
+            "description": "Status message for the resend notification."
+          }
+        }
+      },
+      "DetailsApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/DetailsApiResponse_data"
+          }
+        }
+      },
+      "ListApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/ListApiResponse_data"
+          }
+        }
+      },
+      "DeleteApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "Request": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the invitee."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the invitee."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone Number of the invitee."
+          },
+          "signUrl": {
+            "type": "string",
+            "description": "Invitee specfic URL unique to the request."
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Status of the URL."
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Request expiration date. Format (dd-MM-yyyy HH:mm:ss)"
+          }
+        }
+      },
+      "WebhookRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the invitee."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the invitee."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone Number of the invitee."
+          },
+          "signUrl": {
+            "type": "string",
+            "description": "User specfic URL unique to the request."
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Status of the URL."
+          },
+          "signed": {
+            "type": "boolean",
+            "description": "Request eSigning status."
+          },
+          "rejected": {
+            "type": "boolean",
+            "description": "Request rejection status."
+          },
+          "expired": {
+            "type": "boolean",
+            "description": "Request expiration status."
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Request expiration date. Format (dd-MM-yyyy HH:mm:ss)"
+          },
+          "signType": {
+            "type": "string",
+            "description": "This parameter will be there only for Webhook when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, DOC_SIGNER, AUTOMATED_SIGN"
+          }
+        }
+      },
+      "ReactivateResponseInvitation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the invitee."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the invitee."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone Number of the invitee."
+          },
+          "signUrl": {
+            "type": "string",
+            "description": "User specfic URL unique to the request."
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Status of the URL."
+          },
+          "signed": {
+            "type": "boolean",
+            "description": "Request eSigning status."
+          },
+          "rejected": {
+            "type": "boolean",
+            "description": "Request rejection status."
+          },
+          "expired": {
+            "type": "boolean",
+            "description": "Request expiration status."
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Request expiration date. Format (dd-MM-yyyy HH:mm:ss)"
+          },
+          "signType": {
+            "type": "string",
+            "description": "This parameter will be there only for Webhook when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, DOC_SIGNER, AUTOMATED_SIGN"
+          }
+        }
+      },
+      "Signer": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. In case of Virtual Sign and Automated Virtual Sign, the name will be the name used for eSigning the document."
+          },
+          "pincode": {
+            "type": "string",
+            "description": "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+          },
+          "state": {
+            "type": "string",
+            "description": "State of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+          },
+          "title": {
+            "type": "string",
+            "description": "Last 4 digit of the unique identifier of signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          },
+          "yob": {
+            "type": "string",
+            "description": "Year of birth of signer in digits as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          },
+          "gender": {
+            "type": "string",
+            "description": "Gender of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. M for Male, F for Female and T for Transgender. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          },
+          "photoHash": {
+            "type": "string",
+            "description": "SHA256 Hash of the photo of the signer in Base64 Format contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          },
+          "uid": {
+            "type": "string",
+            "description": "UIDToken of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          }
+        }
+      },
+      "ListData": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the document."
+          },
+          "documentId": {
+            "type": "string",
+            "description": "Document ID."
+          },
+          "irn": {
+            "type": "string",
+            "description": "Internal Reference Number."
+          },
+          "folderId": {
+            "type": "string",
+            "description": "Folder ID."
+          },
+          "folderName": {
+            "type": "string",
+            "description": "Folder Name."
+          },
+          "status": {
+            "type": "string",
+            "description": "Document Status. Possible values- DRAFT, SENT, RECEIVED, SIGNED, COMPLETED, EXPIRED."
+          }
+        }
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Message Code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success/Error Message."
+          }
+        }
+      },
+      "RequestApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string",
+            "description": "documentId is a unique Leegality ID created for every eSigning request."
+          },
+          "irn": {
+            "type": "string",
+            "description": "Internal Reference Number."
+          },
+          "invitees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Request"
+            }
+          }
+        }
+      },
+      "ReactivateApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string",
+            "description": "documentId is a unique Leegality ID created for every eSigning request."
+          },
+          "irn": {
+            "type": "string",
+            "description": "Internal Reference Number."
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReactivateResponseInvitation"
+            }
+          }
+        }
+      },
+      "DocumentDetailsApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Base64 encoded PDF file, If you disable this parameter using file key while API call, You will receive value as null."
+          },
+          "auditTrail": {
+            "type": "string",
+            "description": "Base64 encoded digitally signed audit trail, You will receive value of this parameter only if document is completed and you        enable the same using auditTrail key while API call otherwise you will receive value as NULL."
+          },
+          "documentId": {
+            "type": "string",
+            "description": "Leegality generated unique Document ID."
+          },
+          "documentName": {
+            "type": "string",
+            "description": "Document name provided by client."
+          },
+          "workflowId": {
+            "type": "string",
+            "description": "Leegality generated unique    Workflow ID, if document generated from workflow."
+          },
+          "workflowName": {
+            "type": "string",
+            "description": "Workflow name provided by client, if document generated from workflow."
+          },
+          "irn": {
+            "type": "string",
+            "description": "Internal reference number provided by client."
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status of the document, Possible values= DRAFT, SENT, COMPLETED, EXPIRED."
+          },
+          "creationDate": {
+            "type": "string",
+            "description": "Creation date of Document in format DD-MM-YYYY HH:MM:SS."
+          },
+          "completionDate": {
+            "type": "string",
+            "description": "Completion date of Document in format DD-MM-YYYY HH:MM:SS, You will receive this value only if document is completed."
+          },
+          "deletionDate": {
+            "type": "string",
+            "description": "Deletion date of Document in format DD-MM-YYYY HH:MM:SS, If you are using deleteOnComplete functionality of Leegality."
+          },
+          "senderName": {
+            "type": "string",
+            "description": "Sender Full Name."
+          },
+          "senderUsername": {
+            "type": "string",
+            "description": "Sender Email/Phone."
+          },
+          "folders": {
+            "type": "array",
+            "description": "You will receive the whole hierarchy of folders created with leegality, in order of last child folder as first element of array and parent folders goes after child folder in the array.",
+            "items": {
+              "$ref": "#/components/schemas/FolderArrayResponseObject"
+            }
+          },
+          "stamp": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StampArrayResponseObject"
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "description": "You will receive this parameter only if you enable using the attachment key while making API call. This attachments parameter contains the list of all the attachments uploaded by sender while sending the document.",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsArrayResponseObject"
+            }
+          },
+          "invitations": {
+            "type": "array",
+            "description": "This parameter contains the list of all the signers.",
+            "items": {
+              "$ref": "#/components/schemas/InvitationsArrayResponseObject"
+            }
+          }
+        }
+      },
+      "InvitationsArrayResponseObject_verificationResponse": {
+        "type": "object",
+        "properties": {
+          "smartNamePercentage": {
+            "type": "integer",
+            "description": "This will contain integer value of matching percentage with the provided name and response from CA authority."
+          },
+          "signatureVerification": {
+            "type": "boolean",
+            "description": "This will contain the value ‘true’, ‘false’ or ‘null’. If you have enabled this verification you will get response as null, if verification passed then ‘true’ otherwise ‘false’"
+          },
+          "nameVerification": {
+            "type": "boolean",
+            "description": "This will contain the value ‘true’, ‘false’ or ‘null’. If you have enabled this verification you will get response as null, if verification passed then ‘true’ otherwise ‘false’"
+          },
+          "pincodeVerification": {
+            "type": "boolean",
+            "description": "This will contain the value ‘true’, ‘false’ or ‘null’. If you have enabled this verification you will get response as null, if verification passed then ‘true’ otherwise ‘false’"
+          },
+          "stateVerification": {
+            "type": "boolean",
+            "description": "This will contain the value ‘true’, ‘false’ or ‘null’. If you have enabled this verification you will get response as null, if verification passed then ‘true’ otherwise ‘false’"
+          },
+          "titleVerification": {
+            "type": "boolean",
+            "description": "This will contain the value ‘true’, ‘false’ or ‘null’. If you have enabled this verification you will get response as null, if verification passed then ‘true’ otherwise ‘false’"
+          },
+          "yobVerification": {
+            "type": "boolean",
+            "description": "This will contain the value ‘true’, ‘false’ or ‘null’. If you have enabled this verification you will get response as null, if verification passed then ‘true’ otherwise ‘false’"
+          },
+          "genderVerification": {
+            "type": "boolean",
+            "description": "This will contain the value ‘true’, ‘false’ or ‘null’. If you have enabled this verification you will get response as null, if verification passed then ‘true’ otherwise ‘false’"
+          }
+        },
+        "description": "You will receive this parameter only if you enable using the verificationResponse key while making API call. This verificationResponse parameter will contain the verification data"
+      },
+      "DocumentCompletedApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentCompletedResponseObject"
+            }
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "Total count of document as per the given filters"
+          }
+        }
+      },
+      "SeriesListApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeriesArrayResponseObject"
+            }
+          }
+        }
+      },
+      "SeriesGroupApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "seriesGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeriesGroupArrayResponseObject"
+            }
+          }
+        }
+      },
+      "WalletBalanceDetailsApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "expired": {
+            "type": "integer",
+            "description": "Expired eSign Credits."
+          },
+          "reserved": {
+            "type": "integer",
+            "description": "Reserved eSign Credits."
+          },
+          "unused": {
+            "type": "integer",
+            "description": "Available for use eSign Credits."
+          },
+          "consumed": {
+            "type": "integer",
+            "description": "Used eSign Credits."
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total eSign Credits."
+          }
+        }
+      },
+      "WalletBalanceListApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "balances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WalletBalanceListApiResponseObject"
+            }
+          }
+        }
+      },
+      "ResendApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "invitations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResendInvitationApiResponseObject"
+            }
+          }
+        }
+      },
+      "DetailsApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string",
+            "description": "Same as the documentId passed in GET call."
+          },
+          "irn": {
+            "type": "string",
+            "description": "Internal Reference Number."
+          },
+          "folderId": {
+            "type": "string",
+            "description": "Folder ID."
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookRequest"
+            }
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Base64 encoded string format of latest version of the document."
+            }
+          },
+          "auditTrail": {
+            "type": "string",
+            "description": "Base64 encoded string format of the Audit Trail generated on completion of the document."
+          },
+          "signers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Signer"
+            }
+          }
+        }
+      },
+      "ListApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Count of total number of available documents."
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListData"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "X-Auth-Token": {
+        "type": "apiKey",
+        "name": "X-Auth-Token",
+        "in": "header"
+      }
+    }
+  }
+}
