@@ -28,8 +28,8 @@
       "description": "The complete eSigning workflow API"
     },
     {
-      "name": "Stamp API",
-      "description": "API for stamps and stamp groups"
+      "name": "Stamp Details API",
+      "description": "API to fetch stamp inventory related information or stamp related operations"
     },
     {
       "name": "Wallet Balance API",
@@ -496,9 +496,9 @@
     "/series/list": {
       "get": {
         "tags": [
-          "Stamp API"
+          "Stamp Details API"
         ],
-        "summary": "Use this API to get detail list of stamp series",
+        "summary": "Use this API to fetch the list of stamp series exists within your account",
         "description": "You need to call this API to get the details of all  the stamp series.",
         "responses": {
           "200": {
@@ -522,9 +522,9 @@
     "/series/groups/list": {
       "get": {
         "tags": [
-          "Stamp API"
+          "Stamp Details API"
         ],
-        "summary": "Use this API to get detail list of stamp groups",
+        "summary": "Use this API to fetch the list of stamp series groups exists within your account",
         "description": "You need to call this API to get the details of all  the stamp groups.",
         "responses": {
           "200": {
