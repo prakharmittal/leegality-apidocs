@@ -210,8 +210,8 @@
             "description": "Internal Reference Number of the document."
           },
           "files": {
-            "title": "Base64 encoded string format of latest version of the document.",
             "type": "array",
+            "description": "Base64 encoded string format of latest version of the document.",
             "items": {
               "type": "string"
             }
@@ -248,8 +248,8 @@
             "description": "Internal Reference Number of the document."
           },
           "files": {
-            "title": "Base64 encoded string format of latest version of the document.",
             "type": "array",
+            "description": "Base64 encoded string format of latest version of the document.",
             "items": {
               "type": "string"
             }
@@ -286,8 +286,8 @@
             "description": "Internal Reference Number of the document."
           },
           "files": {
-            "title": "Base64 encoded string format of latest version of the document.",
             "type": "array",
+            "description": "Base64 encoded string format of latest version of the document.",
             "items": {
               "type": "string"
             }
