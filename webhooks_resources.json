@@ -211,7 +211,7 @@
           },
           "files": {
             "type": "array",
-            "description": "Base64 encoded string format of latest version of the document.",
+            "description": "Base64 encoded string format of latest version of the document testing description.",
             "items": {
               "type": "string"
             }
