@@ -1151,7 +1151,8 @@
             }
           },
           "state": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the state of series group."
           }
         }
       },
@@ -1160,11 +1161,11 @@
         "properties": {
           "denomination": {
             "type": "string",
-            "description": "Denomination of stamp in this series"
+            "description": "Denomination of stamp of this series."
           },
           "seriesNumber": {
             "type": "string",
-            "description": "Series number present in this series group."
+            "description": "Unique series number of the series."
           }
         }
       },
@@ -1360,7 +1361,7 @@
           }
         }
       },
-      "WebhookRequest": {
+      "InviteeRequest": {
         "type": "object",
         "properties": {
           "name": {
@@ -1791,14 +1792,14 @@
           "requests": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/WebhookRequest"
+              "$ref": "#/components/schemas/InviteeRequest"
             }
           },
           "files": {
             "type": "array",
+            "description": "Base64 encoded string format of latest version of the document.",
             "items": {
-              "type": "string",
-              "description": "Base64 encoded string format of latest version of the document."
+              "type": "string"
             }
           },
           "auditTrail": {
