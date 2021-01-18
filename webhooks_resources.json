@@ -210,10 +210,10 @@
             "description": "Internal Reference Number of the document."
           },
           "files": {
+            "title": "Base64 encoded string format of latest version of the document.",
             "type": "array",
             "items": {
-              "type": "string",
-              "description": "Base64 encoded string format of latest version of the document."
+              "type": "string"
             }
           },
           "auditTrail": {
