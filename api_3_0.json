@@ -805,6 +805,18 @@
             "type": "string",
             "description": "Valid 10 digit mobile number of the invitee. Either email or phone is required."
           },
+          "groupId": {
+            "type": "string",
+            "description": "If you are using group Invitee feature and signer from group then you need to pass Group ID in this parameter. You can found the Group ID while downloading payload from Leegality dashboard."
+          },
+          "groupName": {
+            "type": "string",
+            "description": "If you are using group Invitee feature and signer from group then you need to pass Group Name in this parameter. If you have already configured Group Name in the Leegality dashboard while configuring workflow then while downloading payload this parameter will be auto filled."
+          },
+          "completionThreshold": {
+            "type": "string",
+            "description": "If you are using group Invitee feature and signer from group then you need to pass Completion Threeshold in this parameter. If you have already configured Completion Threeshold in the Leegality dashboard while configuring workflow then while downloading payload this parameter will be auto filled."
+          },
           "organizationName": {
             "type": "string",
             "description": "Name of organization of the signer, If you have enabled the configuration to use organizational signatrue while setting up workflow then you can use this parameter to pass the orgnaization name of the signer."
