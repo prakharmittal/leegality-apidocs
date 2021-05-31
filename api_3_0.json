@@ -1108,7 +1108,7 @@
           },
           "attachments": {
             "type": "array",
-            "description": "You will receive this parameter only if you enable using the attachment key while making API call. This attachments parameter contains the list of all the attachments uploaded by sender while sending the document.",
+            "description": "You will receive this parameter only if you enable using the attachment key while making API call. This attachments parameter contains all the attachments uploaded by the Invitee in the signing journey.",
             "items": {
               "$ref": "#/components/schemas/AttachmentsArrayResponseObject"
             }
@@ -1487,7 +1487,7 @@
           },
           "expiryDate": {
             "type": "string",
-            "description": "Request expiration date. Format (dd-MM-yyyy HH:mm:ss)"
+            "description": "Request expiration date. Format: Date"
           }
         }
       },
@@ -1768,7 +1768,7 @@
           },
           "attachments": {
             "type": "array",
-            "description": "You will receive this parameter only if you enable using the attachment key while making API call. This attachments parameter contains the list of all the attachments uploaded by sender while sending the document.",
+            "description": "You will receive this parameter only if you enable using the attachment key while making API call. This attachments parameter contains all the attachments uploaded by the Sender.",
             "items": {
               "$ref": "#/components/schemas/AttachmentsArrayResponseObject"
             }
