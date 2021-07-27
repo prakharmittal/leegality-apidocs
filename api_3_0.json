@@ -8,7 +8,7 @@
       "name": "Leegality Support",
       "email": "contact@leegality.com"
     },
-    "x-logo": { 
+     "x-logo": { 
       "url": "https://raw.githubusercontent.com/prakharmittal/leegality-apidocs/master/logo.png"
     },
     "version": "3.0"
@@ -738,6 +738,9 @@
             "type": "string",
             "description": "Pass the stamp amount value here. If you have enabled the option of choosing the stamp group while using the workflow."
           },
+          "neslData": {
+            "$ref": "#/components/schemas/Nesl"
+          },
           "invitees": {
             "type": "array",
             "items": {
@@ -759,13 +762,13 @@
           },
           "file": {
             "type": "string",
-            "description": "Pass the Base64 encoded file string value of the PDF file you want to get eSigned from the user. Maximum size of the file before encoding is 5 MB."
+            "description": "Pass the Base64 encoded file string value of the PDF file you want to get eSigned from the user. Maximum size of the file before encoding is 15 MB."
           },
           "fields": {
             "description": "To be used if you are using a Template. Pass the values of the fields of the Template based on the sample JSON provided in your Dashboard for your Template. You can download the same from the Download Form Fields Button from your Template Editor."
           },
           "additionalFiles": {
-            "description": "This parameter accepts array of string, Pass the Base64 encoded files string value of the PDF file you want to append with the file. Maximum size of all files is upto 9MB. In case of template these files will be appended to the selected template."
+            "description": "This parameter accepts array of string, Pass the Base64 encoded files string value of the PDF file you want to append with the file. Maximum size of all files is upto 15 MB. In case of template these files will be appended to the selected template."
           }
         }
       },
@@ -774,32 +777,32 @@
         "properties": {
           "verifyName": {
             "type": "boolean",
-            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification. If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored.",
+            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, Nesl or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification. If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored.",
             "default": false
           },
           "verifySmartName": {
             "type": "boolean",
-            "description": "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName and only in case of Aadhaar eSign or DSC.\n If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored."
+            "description": "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName and only in case of Aadhaar eSign, Nesl or DSC.\n If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored."
           },
           "verifyPincode": {
             "type": "string",
-            "description": "Pass PINCODE if you want to verify the user's PIN Code with the PIN Code contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. The document will only be generated if the PIN Codes match. The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+            "description": "Pass PINCODE if you want to verify the user's PIN Code with the PIN Code contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, Nesl or DSC. The document will only be generated if the PIN Codes match. The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
           },
           "verifyYob": {
             "type": "integer",
-            "description": "Pass YEAR OF BIRTH in DIGITS if you want to verify the user's Year of Birth with the Year of Birth contained in the Digital Signature Certificate. This parameter will only function in case of an Aadhaar eSign. The document will only be generated if the Year of Birth matches. In case the certificate does not have this value, this parameter will be ignored. Value should be between 1900 and the current year. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+            "description": "Pass YEAR OF BIRTH in DIGITS if you want to verify the user's Year of Birth with the Year of Birth contained in the Digital Signature Certificate. This parameter will only function in case of an Aadhaar eSign or Nesl. The document will only be generated if the Year of Birth matches. In case the certificate does not have this value, this parameter will be ignored. Value should be between 1900 and the current year. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
           },
           "verifyTitle": {
             "type": "string",
-            "description": "Pass the last 4 digits of the UID No. if you want to verify the user's identity as contained in the Digital Signature Certificate. This paramater only works with Aadhaar eSign. The document will only be generated if both the values match. In case, the value is not present in the certificate, this parameter will be ignored. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+            "description": "Pass the last 4 digits of the UID No. if you want to verify the user's identity as contained in the Digital Signature Certificate. This paramater only works with Aadhaar eSign or Nesl. The document will only be generated if both the values match. In case, the value is not present in the certificate, this parameter will be ignored. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
           },
           "verifyState": {
             "type": "string",
-            "description": "Pass value of State if you want to verify the user's State with the value of State contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. The document will only be generated if the values of States match.The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+            "description": "Pass value of State if you want to verify the user's State with the value of State contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, Nesl or DSC. The document will only be generated if the values of States match.The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
           },
           "verifyGender": {
             "type": "string",
-            "description": "Pass Gender value if you want to verify the user's Gender with the value contained in the Digital Signature Certificate issued.This parameter will only function in case of Aadhaar eSign. The document will only be generated if both the values match. Possible values are 'M' for Male, 'F' for Female and 'T' for Transgender. All values have to be in Capitals. In case the certificate does not have this value, the parameter will be ignored. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+            "description": "Pass Gender value if you want to verify the user's Gender with the value contained in the Digital Signature Certificate issued.This parameter will only function in case of Aadhaar eSign or Nesl. The document will only be generated if both the values match. Possible values are 'M' for Male, 'F' for Female and 'T' for Transgender. All values have to be in Capitals. In case the certificate does not have this value, the parameter will be ignored. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
           }
         }
       },
@@ -808,20 +811,393 @@
         "properties": {
           "verifyName": {
             "type": "boolean",
-            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification. If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored.",
+            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, Nesl or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification. If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored.",
             "default": false
           },
           "verifySmartName": {
             "type": "boolean",
-            "description": "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName and only in case of Aadhaar eSign or DSC.\n If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored."
+            "description": "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName and only in case of Aadhaar eSign, Nesl or DSC.\n If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored."
           },
           "verifyPincode": {
             "type": "string",
-            "description": "Pass PINCODE if you want to verify the user's PIN Code with the PIN Code contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. The document will only be generated if the PIN Codes match. The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+            "description": "Pass PINCODE if you want to verify the user's PIN Code with the PIN Code contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, Nesl or DSC. The document will only be generated if the PIN Codes match. The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
           },
           "verifyState": {
             "type": "string",
-            "description": "Pass value of State if you want to verify the user's State with the value of State contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. The document will only be generated if the values of States match.The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+            "description": "Pass value of State if you want to verify the user's State with the value of State contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, Nesl or DSC. The document will only be generated if the values of States match.The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          }
+        }
+      },
+      "NeslConfig": {
+        "type": "object",
+        "properties": {
+          "verifyName": {
+            "type": "boolean",
+            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, Nesl or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification. If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored.",
+            "default": false
+          },
+          "verifySmartName": {
+            "type": "boolean",
+            "description": "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName and only in case of Aadhaar eSign, Nesl or DSC.\n If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyPincode": {
+            "type": "string",
+            "description": "Pass PINCODE if you want to verify the user's PIN Code with the PIN Code contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, Nesl or DSC. The document will only be generated if the PIN Codes match. The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyYob": {
+            "type": "integer",
+            "description": "Pass YEAR OF BIRTH in DIGITS if you want to verify the user's Year of Birth with the Year of Birth contained in the Digital Signature Certificate. This parameter will only function in case of an Aadhaar eSign or Nesl. The document will only be generated if the Year of Birth matches. In case the certificate does not have this value, this parameter will be ignored. Value should be between 1900 and the current year. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyTitle": {
+            "type": "string",
+            "description": "Pass the last 4 digits of the UID No. if you want to verify the user's identity as contained in the Digital Signature Certificate. This paramater only works with Aadhaar eSign or Nesl. The document will only be generated if both the values match. In case, the value is not present in the certificate, this parameter will be ignored. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyState": {
+            "type": "string",
+            "description": "Pass value of State if you want to verify the user's State with the value of State contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, Nesl or DSC. The document will only be generated if the values of States match.The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyGender": {
+            "type": "string",
+            "description": "Pass Gender value if you want to verify the user's Gender with the value contained in the Digital Signature Certificate issued.This parameter will only function in case of Aadhaar eSign or Nesl. The document will only be generated if both the values match. Possible values are 'M' for Male, 'F' for Female and 'T' for Transgender. All values have to be in Capitals. In case the certificate does not have this value, the parameter will be ignored. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          }
+        }
+      },
+      "Nesl": {
+        "type": "object",
+        "properties": {
+          "documentDetail": {
+            "$ref": "#/components/schemas/NeslDocument"
+          },
+          "stampData": {
+            "$ref": "#/components/schemas/NeslStamp"
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NeslParticipants"
+            }
+          },
+          "neslSecurities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NeslSecurities"
+            }
+          }
+        }
+      },
+      "NeslDocument": {
+        "required": [
+          "accountClosedFlag",
+          "creditSubtype",
+          "dateOfSanction",
+          "emiAmount",
+          "facilityName",
+          "fundType",
+          "loanNumber",
+          "rateOfInterest",
+          "registrationType",
+          "sanctionAmount",
+          "sanctionCurrency",
+          "sanctionNumber",
+          "state",
+          "tenure",
+          "typeOfDebt"
+        ],
+        "type": "object",
+        "properties": {
+          "loanNumber": {
+            "type": "string",
+            "description": "The loan number associated with the debt."
+          },
+          "sanctionNumber": {
+            "type": "string",
+            "description": "The sanction number associated with the debt."
+          },
+          "registrationType": {
+            "type": "string",
+            "description": "Type of debt (Individual Loan or Non-Individual Loan)."
+          },
+          "state": {
+            "type": "string",
+            "description": "The state in which stamp duty is being paid."
+          },
+          "branchName": {
+            "type": "string",
+            "description": "The name of the branch granting the loan."
+          },
+          "branchAddress": {
+            "type": "string",
+            "description": "The address of the branch granting the loan."
+          },
+          "dateOfSanction": {
+            "type": "string",
+            "description": "The date on which the loan was sanctioned as per the lender's CBS."
+          },
+          "emiAmount": {
+            "type": "string",
+            "description": "Interest installment amount payable on the loan."
+          },
+          "rateOfInterest": {
+            "type": "string",
+            "description": "Rate of Interest on the loan."
+          },
+          "sanctionAmount": {
+            "type": "string",
+            "description": "The amount sanctioned by the financial creditor."
+          },
+          "tenure": {
+            "type": "string",
+            "description": "The tenure of the loan."
+          },
+          "typeOfDebt": {
+            "type": "string",
+            "description": "The type of loan (financial debt or operational debt)."
+          },
+          "accountClosedFlag": {
+            "type": "string",
+            "description": "Whether the account is closed (yes, no, or assigned debt)."
+          },
+          "fundType": {
+            "type": "string",
+            "description": "Whether the credit facility is funded or non funded."
+          },
+          "sanctionCurrency": {
+            "type": "string",
+            "description": "The currency in which the loan is denominated (INR or USD)."
+          },
+          "creditSubtype": {
+            "type": "string",
+            "description": "Whether the financial debt is created pursuant to a credit facility or the purchase of a property."
+          },
+          "facilityName": {
+            "type": "string",
+            "description": "The name of the loan facility."
+          },
+          "amountOverdue": {
+            "type": "string",
+            "description": "The amount overdue on the loan."
+          },
+          "otherChargeAmount": {
+            "type": "string",
+            "description": "Any other charges (if applicable)."
+          },
+          "debtStartDate": {
+            "type": "string",
+            "description": "The date on which the financial debt started."
+          },
+          "interestAmount": {
+            "type": "string",
+            "description": "The amount of interest."
+          },
+          "oldDebtRefNo": {
+            "type": "string",
+            "description": "The old debt reference number (applicable in case there is a change in the debt reference number)."
+          },
+          "principalOutstanding": {
+            "type": "string",
+            "description": "The outstanding principal amount."
+          },
+          "loanRemark": {
+            "type": "string",
+            "description": "Loan remarks (if any)."
+          },
+          "totalOutstandingAmount": {
+            "type": "string",
+            "description": "Total outstanding amount."
+          },
+          "creditorBusinessUnit": {
+            "type": "string",
+            "description": "The business unit of the creditor providing the debt (such as SME, Retail etc)."
+          },
+          "drawingPower": {
+            "type": "string",
+            "description": "The drawing power of the loan."
+          },
+          "daysPastDue": {
+            "type": "string",
+            "description": "The number of days past due date."
+          }
+        }
+      },
+      "NeslStamp": {
+        "required": [
+          "articleCode",
+          "considerationPrice",
+          "descriptionOfDocument",
+          "firstParty",
+          "secondParty",
+          "stampDutyAmount",
+          "stampDutyPaidBy"
+        ],
+        "type": "object",
+        "properties": {
+          "firstParty": {
+            "type": "string",
+            "description": "The name of the first party (for the stamp paper)."
+          },
+          "secondParty": {
+            "type": "string",
+            "description": "The name of the second party (for the stamp paper)."
+          },
+          "stampDutyAmount": {
+            "type": "string",
+            "description": "The stamp duty amount."
+          },
+          "considerationPrice": {
+            "type": "string",
+            "description": "The consideration price for the purposes of stamp duty."
+          },
+          "descriptionOfDocument": {
+            "type": "string",
+            "description": "The description of the document for the purposes of stamp duty."
+          },
+          "stampDutyPaidBy": {
+            "type": "string",
+            "description": "The name of the party paying the stamp duty."
+          },
+          "articleCode": {
+            "type": "string",
+            "description": "Article code for payment of stamp duty."
+          }
+        }
+      },
+      "NeslParticipants": {
+        "required": [
+          "contactPersonName",
+          "contactRelation",
+          "dob",
+          "emailId",
+          "fullName",
+          "legalConstitution",
+          "mobileNumber",
+          "officialDocId",
+          "officialDocType",
+          "partyType"
+        ],
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "description": "Full name of the Party."
+          },
+          "contactPersonName": {
+            "type": "string",
+            "description": "Full name of the contact person of the Party."
+          },
+          "contactRelation": {
+            "type": "string",
+            "description": "Relation of the party to the debt (Debtor, Guarantor, Co-obligant)."
+          },
+          "emailId": {
+            "type": "string",
+            "description": "Email ID of the signer."
+          },
+          "mobileNumber": {
+            "type": "string",
+            "description": "Mobile Number of the signer."
+          },
+          "dob": {
+            "type": "string",
+            "description": "Date of Birth/Incorporation."
+          },
+          "legalConstitution": {
+            "type": "string",
+            "description": "Legal constitution of the signer (Resident Individual, Private Limited, Public Limited, LLP, Proprietorship, Partnership, Entity created by Statute, Trust, HUF, Coop Society, Association of Persons, Government, Self Help Groups, Non-Resident, Foreign Company)."
+          },
+          "alternateEmailId": {
+            "type": "string",
+            "description": "Alternate email ID of the signer."
+          },
+          "alternateMobileNumber": {
+            "type": "string",
+            "description": "Alternate mobile of the signer."
+          },
+          "officialDocType": {
+            "type": "string",
+            "description": "Official Document Type (Pan Card, Driving License, Voter ID, Passport, Others)."
+          },
+          "officialDocId": {
+            "type": "string",
+            "description": "Official Document ID."
+          },
+          "registeredAddress": {
+            "type": "string",
+            "description": "Registered address of the signer."
+          },
+          "registeredPinCode": {
+            "type": "string",
+            "description": "PIN code of the registered address of the signer."
+          },
+          "designation": {
+            "type": "string",
+            "description": "Designation of the signer (relevant in case of corporate entities)."
+          },
+          "communicationAddress": {
+            "type": "string",
+            "description": "Communication address of the signer."
+          },
+          "communicationAddressPinCode": {
+            "type": "string",
+            "description": "PIN code of the communication address of the signer."
+          },
+          "cin": {
+            "type": "string",
+            "description": "Corporate Identification Number (relevant in case of corporate entities)."
+          },
+          "kin": {
+            "type": "string",
+            "description": "KYC Identification Number of signer."
+          },
+          "partyType": {
+            "type": "string",
+            "description": "Type of Party (Indian entity/ Resident Individual/ Foreign Entity/ NRI/Foreign Individual."
+          }
+        }
+      },
+      "NeslSecurities": {
+        "required": [
+          "assetId",
+          "assetsType",
+          "chargeType",
+          "securityDescription"
+        ],
+        "type": "object",
+        "properties": {
+          "securityDescription": {
+            "type": "string",
+            "description": "Description of security."
+          },
+          "assetsType": {
+            "type": "string",
+            "description": "Type of asset forming security (Movable, Immovable, Intangible, Not Classified)."
+          },
+          "chargeType": {
+            "type": "string",
+            "description": "Type of charge created (Mortgage, Hypothecation, Charge, Assignment, Pledge, Lien, Negative Lien, Guarantee, Others, Not Classified)."
+          },
+          "assetId": {
+            "type": "string",
+            "description": "Asset ID of the Security (used internally by the lender)."
+          },
+          "doc": {
+            "type": "string",
+            "description": "Date of creation of security."
+          },
+          "dov": {
+            "type": "string",
+            "description": "Date of valuation of security."
+          },
+          "cersaiId": {
+            "type": "string",
+            "description": "CERSAI ID of security created."
+          },
+          "rocChargeId": {
+            "type": "string",
+            "description": "ROC ID for security created."
+          },
+          "securityValue": {
+            "type": "string",
+            "description": "Value of security."
           }
         }
       },
@@ -914,6 +1290,9 @@
           },
           "dscConfig": {
             "$ref": "#/components/schemas/DscConfig"
+          },
+          "neslConfig": {
+            "$ref": "#/components/schemas/NeslConfig"
           }
         }
       },
