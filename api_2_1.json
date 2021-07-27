@@ -366,7 +366,7 @@
           },
           "file": {
             "type": "string",
-            "description": "Pass the Base64 encoded file string value of the PDF file you want to get eSigned from the user. Maximum size of the file before encoding is 5 MB. Either file or templateId is required."
+            "description": "Pass the Base64 encoded file string value of the PDF file you want to get eSigned from the user. Maximum size of the file before encoding is 15 MB. Either file or templateId is required."
           },
           "templateId": {
             "type": "string",
@@ -392,7 +392,7 @@
           },
           "additionalFiles": {
             "type": "array",
-            "description": "If you want to merge multiple files and send all as single invitation you can use this parameter to send additional PDF files.",
+            "description": "If you want to merge multiple files and send all as single invitation you can use this parameter to send additional PDF files. Maximum size of all files is upto 15 MB. In case of template these files will be appended to the selected template.",
             "items": {
               "type": "string"
             }
