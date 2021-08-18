@@ -8,6 +8,9 @@
       "name": "Leegality Support",
       "email": "contact@leegality.com"
     },
+    "x-logo": { 
+      "url": "https://raw.githubusercontent.com/prakharmittal/leegality-apidocs/master/logo.png"
+    },
     "version": "3.0"
   },
   "externalDocs": {
@@ -1296,7 +1299,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DocumentDetails3.1ApiResponse"
+                  "$ref": "#/components/schemas/DocumentDetails3_1ApiResponse"
                 }
               }
             }
@@ -1981,7 +1984,7 @@
           }
         }
       },
-      "DocumentDetails3.1ApiResponse": {
+      "DocumentDetails3_1ApiResponse": {
         "type": "object",
         "properties": {
           "status": {
@@ -1995,11 +1998,11 @@
             }
           },
           "data": {
-            "$ref": "#/components/schemas/DocumentDetails3.1ApiResponse_data"
+            "$ref": "#/components/schemas/DocumentDetails3_1ApiResponse_data"
           }
         }
       },
-      "DocumentDetails3.1ResponseObject": {
+      "DocumentDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "id": {
@@ -2048,7 +2051,7 @@
           }
         }
       },
-      "WorkflowDetails3.1ResponseObject": {
+      "WorkflowDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "id": {
@@ -2069,7 +2072,7 @@
           }
         }
       },
-      "TemplateDetails3.1ResponseObject": {
+      "TemplateDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "id": {
@@ -2082,7 +2085,7 @@
           }
         }
       },
-      "AccountDetails3.1ResponseObject": {
+      "AccountDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "id": {
@@ -2103,7 +2106,7 @@
           }
         }
       },
-      "SenderDetails3.1ResponseObject": {
+      "SenderDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "name": {
@@ -2116,7 +2119,7 @@
           }
         }
       },
-      "StampDetails3.1ResponseObject": {
+      "StampDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "groupName": {
@@ -2142,12 +2145,12 @@
           "stamps": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/StampArray3.1ResponseObject"
+              "$ref": "#/components/schemas/StampArray3_1ResponseObject"
             }
           }
         }
       },
-      "NeslDetails3.1ResponseObject": {
+      "NeslDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "transactionId": {
@@ -2155,17 +2158,17 @@
             "description": "Transaction Id received durinf NESL transaction."
           },
           "loanDetails": {
-            "$ref": "#/components/schemas/NeslLoanDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/NeslLoanDetails3_1ResponseObject"
           },
           "securityDetails": {
-            "$ref": "#/components/schemas/NeslSecurityDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/NeslSecurityDetails3_1ResponseObject"
           },
           "stampDetails": {
-            "$ref": "#/components/schemas/NeslStampDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/NeslStampDetails3_1ResponseObject"
           }
         }
       },
-      "NeslLoanDetails3.1ResponseObject": {
+      "NeslLoanDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "loanNumber": {
@@ -2282,7 +2285,7 @@
           }
         }
       },
-      "NeslSecurityDetails3.1ResponseObject": {
+      "NeslSecurityDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "securityDescription": {
@@ -2323,7 +2326,7 @@
           }
         }
       },
-      "NeslStampDetails3.1ResponseObject": {
+      "NeslStampDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "firstParty": {
@@ -2356,7 +2359,7 @@
           }
         }
       },
-      "InvitationsArray3.1ResponseObject": {
+      "InvitationsArray3_1ResponseObject": {
         "type": "object",
         "properties": {
           "name": {
@@ -2376,14 +2379,14 @@
             "description": "Type of invitee - Signer/Reviewer/CC/Coordinate Picker."
           },
           "inviteeConfigs": {
-            "$ref": "#/components/schemas/InviteeConfigDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/InviteeConfigDetails3_1ResponseObject"
           },
           "recordReviewerDetails": {
             "type": "string",
             "description": "Reviewer details to be captured in the audit trail."
           },
           "inviteeGroup": {
-            "$ref": "#/components/schemas/InviteeGroupDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/InviteeGroupDetails3_1ResponseObject"
           },
           "invitationUrl": {
             "type": "string",
@@ -2401,23 +2404,23 @@
             "description": "Signature type used for a signed invitation(s)."
           },
           "signatureOptions": {
-            "$ref": "#/components/schemas/InviteeSignatureOptionDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/InviteeSignatureOptionDetails3_1ResponseObject"
           },
           "signatureOptionUsed": {
             "type": "string",
             "description": "Signature option used under the signature type used e.g.OTP/ Bio-Metric/ Iris in case of Aadhaar Sign & Draw/  Computer generated in case of Virtual Sign."
           },
           "neslInvitationDetails": {
-            "$ref": "#/components/schemas/InviteeNESLParticipantDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/InviteeNESLParticipantDetails3_1ResponseObject"
           },
           "invitationStatus": {
-            "$ref": "#/components/schemas/InviteeStatusDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/InviteeStatusDetails3_1ResponseObject"
           },
           "verificationRequest": {
-            "$ref": "#/components/schemas/InviteeVerificationRequestDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/InviteeVerificationRequestDetails3_1ResponseObject"
           },
           "verificationResponse": {
-            "$ref": "#/components/schemas/InvitationsArray3.1ResponseObject_verificationResponse"
+            "$ref": "#/components/schemas/InvitationsArray3_1ResponseObject_verificationResponse"
           },
           "supportingDocuments": {
             "type": "array",
@@ -2428,7 +2431,7 @@
           }
         }
       },
-      "InviteeConfigDetails3.1ResponseObject": {
+      "InviteeConfigDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "emailNotification": {
@@ -2456,13 +2459,13 @@
             "description": "Name(s) supporting document(s) requested."
           },
           "organizationConfig": {
-            "$ref": "#/components/schemas/InviteeOrganisationConfigDetails3.1ArrayResponseObject"
+            "$ref": "#/components/schemas/InviteeOrganisationConfigDetails3_1ArrayResponseObject"
           },
           "security": {
-            "$ref": "#/components/schemas/InviteeSecurityDetails3.1ArrayResponseObject"
+            "$ref": "#/components/schemas/InviteeSecurityDetails3_1ArrayResponseObject"
           },
           "customURL": {
-            "$ref": "#/components/schemas/InviteeCustomURLDetails3.1ArrayResponseObject"
+            "$ref": "#/components/schemas/InviteeCustomURLDetails3_1ArrayResponseObject"
           },
           "customConsent": {
             "type": "string",
@@ -2470,7 +2473,7 @@
           }
         }
       },
-      "InviteeOrganisationConfigDetails3.1ArrayResponseObject": {
+      "InviteeOrganisationConfigDetails3_1ArrayResponseObject": {
         "type": "object",
         "properties": {
           "nameRequired": {
@@ -2495,7 +2498,7 @@
           }
         }
       },
-      "InviteeSecurityDetails3.1ArrayResponseObject": {
+      "InviteeSecurityDetails3_1ArrayResponseObject": {
         "type": "object",
         "properties": {
           "enforceAuthentication": {
@@ -2524,7 +2527,7 @@
           }
         }
       },
-      "InviteeCustomURLDetails3.1ArrayResponseObject": {
+      "InviteeCustomURLDetails3_1ArrayResponseObject": {
         "type": "object",
         "properties": {
           "webhookURL": {
@@ -2549,7 +2552,7 @@
           }
         }
       },
-      "InviteeGroupDetails3.1ResponseObject": {
+      "InviteeGroupDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "id": {
@@ -2574,7 +2577,7 @@
           }
         }
       },
-      "InviteeSignatureOptionDetails3.1ResponseObject": {
+      "InviteeSignatureOptionDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "aadhaar": {
@@ -2593,7 +2596,7 @@
           }
         }
       },
-      "InviteeNESLParticipantDetails3.1ResponseObject": {
+      "InviteeNESLParticipantDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "type": {
@@ -2601,11 +2604,11 @@
             "description": "Nesl Participant type."
           },
           "participantDetails": {
-            "$ref": "#/components/schemas/NeslparticipantDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/NeslparticipantDetails3_1ResponseObject"
           }
         }
       },
-      "NeslparticipantDetails3.1ResponseObject": {
+      "NeslparticipantDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "fullName": {
@@ -2686,7 +2689,7 @@
           }
         }
       },
-      "InviteeStatusDetails3.1ResponseObject": {
+      "InviteeStatusDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "active": {
@@ -2739,24 +2742,24 @@
           }
         }
       },
-      "InviteeVerificationRequestDetails3.1ResponseObject": {
+      "InviteeVerificationRequestDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "aadhaarConfig": {
-            "$ref": "#/components/schemas/InviteeAadhaarVerificationRequestDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/InviteeAadhaarVerificationRequestDetails3_1ResponseObject"
           },
           "offlineConfig": {
-            "$ref": "#/components/schemas/InviteeAadhaarVerificationRequestDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/InviteeAadhaarVerificationRequestDetails3_1ResponseObject"
           },
           "dscConfig": {
-            "$ref": "#/components/schemas/InviteeDSCVerificationRequestDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/InviteeDSCVerificationRequestDetails3_1ResponseObject"
           },
           "neslConfig": {
-            "$ref": "#/components/schemas/InviteeAadhaarVerificationRequestDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/InviteeAadhaarVerificationRequestDetails3_1ResponseObject"
           }
         }
       },
-      "InviteeAadhaarVerificationRequestDetails3.1ResponseObject": {
+      "InviteeAadhaarVerificationRequestDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "smartNamePercentage": {
@@ -2793,7 +2796,7 @@
           }
         }
       },
-      "InviteeDSCVerificationRequestDetails3.1ResponseObject": {
+      "InviteeDSCVerificationRequestDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
           "smartNamePercentage": {
@@ -2818,7 +2821,7 @@
           }
         }
       },
-      "StampArray3.1ResponseObject": {
+      "StampArray3_1ResponseObject": {
         "type": "object",
         "properties": {
           "series": {
@@ -2942,7 +2945,7 @@
             "description": "You will receive this parameter only if you enable it using request parameter failureReason. You will receive appropriate message of failure of this sign invitation."
           },
           "verificationResponse": {
-            "$ref": "InvitationsArray3.1ResponseObject_verificationResponse"
+            "$ref": "#/components/schemas/InvitationsArray3_1ResponseObject_verificationResponse"
           },
           "attachments": {
             "type": "array",
@@ -3620,7 +3623,7 @@
           }
         }
       },
-      "DocumentDetails3.1ApiResponse_data": {
+      "DocumentDetails3_1ApiResponse_data": {
         "type": "object",
         "properties": {
           "file": {
@@ -3632,19 +3635,19 @@
             "description": "Base64 encoded digitally signed audit trail, You will receive value of this parameter only if document is completed and you        enable the same using auditTrail key while API call otherwise you will receive value as NULL."
           },
           "document": {
-            "$ref": "#/components/schemas/DocumentDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/DocumentDetails3_1ResponseObject"
           },
           "workflow": {
-            "$ref": "#/components/schemas/WorkflowDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/WorkflowDetails3_1ResponseObject"
           },
           "template": {
-            "$ref": "#/components/schemas/TemplateDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/TemplateDetails3_1ResponseObject"
           },
           "account": {
-            "$ref": "#/components/schemas/AccountDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/AccountDetails3_1ResponseObject"
           },
           "sender": {
-            "$ref": "#/components/schemas/SenderDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/SenderDetails3_1ResponseObject"
           },
           "folders": {
             "type": "array",
@@ -3654,7 +3657,7 @@
             }
           },
           "stampDetails": {
-            "$ref": "#/components/schemas/StampDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/StampDetails3_1ResponseObject"
           },
           "referenceAttachments": {
             "type": "array",
@@ -3664,18 +3667,18 @@
             }
           },
           "neslDocumentDetails": {
-            "$ref": "#/components/schemas/NeslDetails3.1ResponseObject"
+            "$ref": "#/components/schemas/NeslDetails3_1ResponseObject"
           },
           "invitations": {
             "type": "array",
             "description": "This parameter contains the list of all the signers.",
             "items": {
-              "$ref": "#/components/schemas/InvitationsArray3.1ResponseObject"
+              "$ref": "#/components/schemas/InvitationsArray3_1ResponseObject"
             }
           }
         }
       },
-      "InvitationsArray3.1ResponseObject_verificationResponse": {
+      "InvitationsArray3_1ResponseObject_verificationResponse": {
         "type": "object",
         "properties": {
           "smartNamePercentage": {
