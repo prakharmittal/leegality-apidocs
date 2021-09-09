@@ -1351,6 +1351,12 @@
               "$ref": "#/components/schemas/Invitee"
             }
           },
+          "cc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cc"
+            }
+          },
           "irn": {
             "type": "string",
             "description": "irn stands for Internal Reference Number. Use this value to set a custom Internal Refernce Number to your document. You can later use the internal reference number to search for this document either through the Search API or through your Dashboard."
@@ -1407,6 +1413,52 @@
           "verifyGender": {
             "type": "string",
             "description": "Pass Gender value if you want to verify the user's Gender with the value contained in the Digital Signature Certificate issued.This parameter will only function in case of Aadhaar eSign or Nesl. The document will only be generated if both the values match. Possible values are 'M' for Male, 'F' for Female and 'T' for Transgender. All values have to be in Capitals. In case the certificate does not have this value, the parameter will be ignored. If at the time of configuring the workflow in the Dashboard, this parameter is turned off,  then any value passed for this parameter in the API will be ignored."
+          }
+        }
+      },
+      "OfflineSignConfig": {
+        "type": "object",
+        "properties": {
+          "mobileNumber": {
+            "type": "string",
+            "description": "To fix the signerID to be used for signing, pass the mobile number associated with the SignerID that is to be used for signing the document. Any two of mobileNumber, PAN and SignerID are required for fixing the signerID. "
+          },
+          "pan": {
+            "type": "string",
+            "description": "To fix the signerID to be used for signing, pass the PAN associated with the SignerID that is to be used for signing the document. Any two of mobileNumber, PAN and SignerID are required for fixing the signerID."
+          },
+          "signerId": {
+            "type": "string",
+            "description": "To fix the signerID to be used for signing, pass the SignerID (username) that is to be used for signing the document. Any two of mobileNumber, PAN and SignerID are required for fixing the signerID. "
+          },
+          "verifyName": {
+            "type": "boolean",
+            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification. If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory, then any value passed for this parameter in the API will be ignored.",
+            "default": false
+          },
+          "verifySmartName": {
+            "type": "boolean",
+            "description": "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName. If at the time of configuring the workflow in the Dashboard, this parameter is marked as mandatory, then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyPincode": {
+            "type": "string",
+            "description": "Pass PINCODE if you want to verify the user's PIN Code with the PIN Code contained in the Digital Signature Certificate. The document will only be generated if the PIN Codes match. The parameter will be ignored if this field is not present in the Certificate. If at the time of configuring the workflow in the Dashboard, this parameter is turned off, then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyState": {
+            "type": "string",
+            "description": "Pass Gender value if you want to verify the user's Gender with the value contained in the Digital Signature Certificate issued. The document will only be generated if both the values match. Possible values are 'M' for Male, 'F' for Female and 'T' for Transgender. All values have to be in Capitals. In case the certificate does not have this value, the parameter will be ignored. If at the time of configuring the workflow in the Dashboard, this parameter is turned off, then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyYob": {
+            "type": "integer",
+            "description": "Year of Birth verification is not supported for OFFLINE_SIGN as the signature certificate does not contain this parameter.  Any value passed in the API will be ignored. "
+          },
+          "verifyTitle": {
+            "type": "string",
+            "description": "Pass the last 4 digits of the UID No. if you want to verify the user's identity as contained in the Digital Signature Certificate. This paramater only works with SignerIDs created using Aadhaar XML. The document will only be generated if both the values match. In case, the value is not present in the certificate, this parameter will be ignored. If at the time of configuring the workflow in the Dashboard, this parameter is turned off, then any value passed for this parameter in the API will be ignored."
+          },
+          "verifyGender": {
+            "type": "string",
+            "description": "Gender verification is not supported for OFFLINE_SIGN as the signature certificate does not contain this parameter.  Any value passed in the API will be ignored. "
           }
         }
       },
@@ -1892,11 +1944,27 @@
           "aadhaarConfig": {
             "$ref": "#/components/schemas/AadhaarConfig"
           },
+          "offlineSignConfig": {
+            "$ref": "#/components/schemas/OfflineSignConfig"
+          },
           "dscConfig": {
             "$ref": "#/components/schemas/DscConfig"
           },
           "neslConfig": {
             "$ref": "#/components/schemas/NeslConfig"
+          }
+        }
+      },
+      "Cc": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the CC. ."
+          },
+          "email": {
+            "type": "string",
+            "description": "Valid email ID of the CC."
           }
         }
       },
@@ -2938,7 +3006,7 @@
           },
           "signType": {
             "type": "string",
-            "description": "You will receive the value if the user has already signed the document. Possible value= AADHAAR, VIRTUAL_SIGN, DSC, DOC_SIGNER, AUTOMATED_SIGN"
+            "description": "You will receive the value if the user has already signed the document. Possible value= AADHAAR, VIRTUAL_SIGN, DSC, NESL_ESIGN and OFFLINE_SIGN , DOC_SIGNER, AUTOMATED_SIGN"
           },
           "failureReason": {
             "type": "string",
@@ -3373,7 +3441,7 @@
           },
           "signType": {
             "type": "string",
-            "description": "This parameter will be there only for Webhook when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, DOC_SIGNER, AUTOMATED_SIGN"
+            "description": "This parameter will be there only for Webhook when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, DOC_SIGNER, NESL_ESIGN, OFFLINE_SIGN, AUTOMATED_SIGN"
           }
         }
       },
@@ -3418,7 +3486,7 @@
           },
           "signType": {
             "type": "string",
-            "description": "This parameter will be there only for Webhook when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, DOC_SIGNER, AUTOMATED_SIGN"
+            "description": "This parameter will be there only for Webhook when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, DOC_SIGNER, OFFLINE_SIGN, AUTOMATED_SIGN"
           }
         }
       },
@@ -3427,27 +3495,27 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "Name of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. In case of Virtual Sign and Automated Virtual Sign, the name will be the name used for eSigning the document."
+            "description": "Name of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, NESL_ESIGN, OFFLINE_SIGN, Doc Signer and Automated Signer. In case of Virtual Sign and Automated Virtual Sign, the name will be the name used for eSigning the document."
           },
           "pincode": {
             "type": "string",
-            "description": "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+            "description": "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, NESL_ESIGN, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
           "state": {
             "type": "string",
-            "description": "State of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+            "description": "State of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, NESL_ESIGN, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
           "title": {
             "type": "string",
-            "description": "Last 4 digit of the unique identifier of signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+            "description": "Last 4 digit of the unique identifier of signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign, NESL_ESIGN and OFFLINE_SIGN (for accounts created with Aadhaar XML). Value will be provided only if available in the Certificate."
           },
           "yob": {
             "type": "string",
-            "description": "Year of birth of signer in digits as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+            "description": "Year of birth of signer in digits as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign and NESL_ESIGN. Value will be provided only if available in the Certificate."
           },
           "gender": {
             "type": "string",
-            "description": "Gender of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. M for Male, F for Female and T for Transgender. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+            "description": "Gender of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. M for Male, F for Female and T for Transgender. Only works for Aadhaar eSign and NESL_ESIGN. Value will be provided only if available in the Certificate."
           },
           "photoHash": {
             "type": "string",
