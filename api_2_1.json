@@ -303,6 +303,12 @@
               "$ref": "#/components/schemas/Invitee"
             }
           },
+          "CCInvitees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CcInvitee"
+            }
+          },
           "irn": {
             "type": "string",
             "description": "irn stands for Internal Reference Number. Use this value to set a custom Internal Refernce Number to your document. You can later use the internal reference number to search for this document either through the Search API or through your Dashboard."
@@ -545,6 +551,54 @@
           }
         }
       },
+      "CcInvitee": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the CC."
+          },
+          "email": {
+            "type": "string",
+            "description": "Valid email ID of the CC."
+          },
+          "invitation_notifications": {
+            "type": "boolean",
+            "description": "Pass ‘true’ if you want the CC to receive notifications when an invitation is activated, or when an invitation is resent, or when a reminder notification is sent. ",
+            "default": false
+          },
+          "signing_notifications": {
+            "type": "boolean",
+            "description": "Pass ‘true’ if you want the CC to receive notifications on the signing/rejection/approval of each invitation. ",
+            "default": false
+          },
+          "completion_notifications": {
+            "type": "boolean",
+            "description": "Pass ‘true’ if you want the CC to receive a notification on the completion of the document. ",
+            "default": false
+          },
+          "failure_notifications": {
+            "type": "boolean",
+            "description": "Pass ‘true’ if you want the CC to receive notifications on the occurrence of failure events such as “details mismatch”, “retry attempts exhausted” and “invitation time out”. ",
+            "default": false
+          },
+          "send_invitation_URL": {
+            "type": "boolean",
+            "description": "Pass ‘true’ if you want the CC to receive invitationURLs corresponding to each of the invitees in the document.  Note that in case of NeSL eSign, the invitationURL will not be shared.  This parameter can be set as ‘true’ only if ‘invitation_notifications’ is also set as ‘true’. ",
+            "default": false
+          },
+          "share_doc_audit_trail": {
+            "type": "boolean",
+            "description": "Pass ‘true’ if you want the CC to receive the document and audit trail.  The document and audit trail will be shared as a link in the email notifications sent to the CC,  as well as in the form of attachments to the email sent on document completion. This parameter can be set as ‘true’ only if ‘completion_notifications’ is also set as ‘true’.  ",
+            "default": false
+          },
+          "record_audit_trail": {
+            "type": "boolean",
+            "description": "Pass ‘true’ if you want the notifications shared with the CC to be recorded in the audit trail.  ",
+            "default": false
+          }
+        }
+      },
       "OrgConfig": {
         "type": "object",
         "properties": {
@@ -647,7 +701,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Pass the value of the type of signature. Accepted values are- AADHAAR, VIRTUAL_SIGN, DSC, DOC_SIGNER, AUTOMATED_SIGN."
+            "description": "Pass the value of the type of signature. Accepted values are- AADHAAR, VIRTUAL_SIGN, DSC, OFFLINE_SIGN , DOC_SIGNER, AUTOMATED_SIGN."
           },
           "config": {
             "$ref": "#/components/schemas/SignatureConfig"
@@ -674,21 +728,21 @@
           },
           "verifyName": {
             "type": "boolean",
-            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification.",
+            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, DSC or OFFLINE_SIGN. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification.",
             "default": false
           },
           "verifySmartName": {
             "type": "boolean",
-            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate to a certain percentage specified in the account. This parameter will only work for Aadhaar eSign or DSC. In case of the match perccentage being less than the saved value, the transaction will take the course saved in the account. Character case is ignored for verification.",
+            "description": "Pass 'true' if you want the document to be generated only if the provided Name matches with the Name contained in the Digital Signature Certificate to a certain percentage specified in the account. This parameter will only work for Aadhaar eSign, DSC or OFFLINE_SIGN. In case of the match perccentage being less than the saved value, the transaction will take the course saved in the account. Character case is ignored for verification.",
             "default": false
           },
           "verifyPincode": {
             "type": "string",
-            "description": "Pass PINCODE if you want to verify the user's PIN Code with the PIN Code contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. The document will only be generated if the PIN Codes match. The parameter will be ignored if this field is not present in the Certificate."
+            "description": "Pass PINCODE if you want to verify the user's PIN Code with the PIN Code contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, DSC or OFFLINE_SIGN. The document will only be generated if the PIN Codes match. The parameter will be ignored if this field is not present in the Certificate."
           },
           "verifyState": {
             "type": "string",
-            "description": "Pass value of State if you want to verify the user's State with the value of State contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign or DSC. The document will only be generated if the values of States match.The parameter will be ignored if this field is not present in the Certificate."
+            "description": "Pass value of State if you want to verify the user's State with the value of State contained in the Digital Signature Certificate. This parameter will only work for Aadhaar eSign, DSC or OFFLINE_SIGN. The document will only be generated if the values of States match.The parameter will be ignored if this field is not present in the Certificate."
           },
           "verifyYob": {
             "type": "integer",
@@ -700,7 +754,7 @@
           },
           "verifyTitle": {
             "type": "string",
-            "description": "Pass the last 4 digits of the UID No. if you want to verify the user's identity as contained in the Digital Signature Certificate. This paramater only works with Aadhaar eSign. The document will only be generated if both the values match. In case, the value is not present in the certificate, this parameter will be ignored."
+            "description": "Pass the last 4 digits of the UID No. if you want to verify the user's identity as contained in the Digital Signature Certificate. This paramater only works with Aadhaar eSign or OFFLINE_SIGN (where the SignerID is created using Aadhaar XML). The document will only be generated if both the values match. In case, the value is not present in the certificate, this parameter will be ignored."
           },
           "removeSignatureVerificationDocument": {
             "type": "boolean",
