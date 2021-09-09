@@ -348,7 +348,7 @@
           },
           "signType": {
             "type": "string",
-            "description": "This parameter will be there only for Webhook when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, DOC_SIGNER, AUTOMATED_SIGN"
+            "description": "This parameter will be there only for Webhook when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, OFFLINE_SIGN, DOC_SIGNER, AUTOMATED_SIGN"
           }
         }
       },
@@ -654,15 +654,15 @@
           },
           "pincode": {
             "type": "string",
-            "description": "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+            "description": "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
           "state": {
             "type": "string",
-            "description": "State of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+            "description": "State of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
           "title": {
             "type": "string",
-            "description": "Last 4 digit of the unique identifier of signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+            "description": "Last 4 digit of the unique identifier of signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign and OFFLINE_SIGN (where the SignerID is created using Aadhaar XML). Value will be provided only if available in the Certificate."
           },
           "yob": {
             "type": "string",
@@ -706,23 +706,23 @@
             "maximum": 100,
             "minimum": 0,
             "type": "integer",
-            "description": "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName and only in case of Aadhaar eSign or DSC."
+            "description": "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName and only in case of Aadhaar eSign, OFFLINE_SIGN or DSC."
           },
           "name": {
             "type": "boolean",
-            "description": "This parameter will return true or false depending on whether the Name is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
+            "description": "This parameter will return true or false depending on whether the Name is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN, or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
           },
           "pincode": {
             "type": "boolean",
-            "description": "This parameter will return true or false depending on whether the Pincode is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
+            "description": "This parameter will return true or false depending on whether the Pincode is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN, or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
           },
           "state": {
             "type": "boolean",
-            "description": "This parameter will return true or false depending on whether the State is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
+            "description": "This parameter will return true or false depending on whether the State is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN, or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
           },
           "title": {
             "type": "boolean",
-            "description": "This parameter will return true or false depending on whether the Title is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
+            "description": "This parameter will return true or false depending on whether the Title is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN (where the SignerID is created using Aadhaar XML) or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
           },
           "yob": {
             "type": "boolean",
