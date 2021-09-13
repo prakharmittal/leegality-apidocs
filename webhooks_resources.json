@@ -8,7 +8,7 @@
       "name": "Leegality Support",
       "email": "contact@leegality.com"
     },
-    "x-logo": {
+    "x-logo": { 
       "url": "https://raw.githubusercontent.com/prakharmittal/leegality-apidocs/master/logo.png"
     },
     "version": "ALL"
@@ -348,7 +348,7 @@
           },
           "signType": {
             "type": "string",
-            "description": "This parameter will be there only for Webhook when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, OFFLINE_SIGN, DOC_SIGNER, AUTOMATED_SIGN"
+            "description": "This parameter will be there when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, OFFLINE_SIGN, DOC_SIGNER, AUTOMATED_SIGN. The value OFFLINE_SIGN refers to Cloud DSC."
           }
         }
       },
@@ -576,15 +576,15 @@
           },
           "pincode": {
             "type": "string",
-            "description": "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+            "description": "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated  Signer. Value will be provided only if available in the certificate."
           },
           "state": {
             "type": "string",
-            "description": "State of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+            "description": "State of signer as contained in the Digital Signature Certificate  in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
           "title": {
             "type": "string",
-            "description": "Last 4 digit of the unique identifier of signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+            "description": "Last 4 digit of the unique identifier of signer as contained in the  Digital Signature Certificate issued after Aadhaar authentication.  Only works for Aadhaar eSign and OFFLINE_SIGN (where the SignerID  is created using Aadhaar XML). Value will be provided only if  available in the Certificate."
           },
           "yob": {
             "type": "string",
@@ -613,15 +613,15 @@
           },
           "pincode": {
             "type": "string",
-            "description": "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+            "description": "PIN Code of signer as contained in the Digital Signature Certificate  in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
           "state": {
             "type": "string",
-            "description": "State of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+            "description": "State of signer as contained in the Digital Signature Certificate in  case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
           "title": {
             "type": "string",
-            "description": "Last 4 digit of the unique identifier of signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+            "description": "Last 4 digit of the unique identifier of signer as contained in  the Digital Signature Certificate issued after Aadhaar  authentication. Only works for Aadhaar eSign and OFFLINE_SIGN  (where the SignerID is created using Aadhaar XML). Value will be  provided only if available in the Certificate"
           },
           "yob": {
             "type": "string",
