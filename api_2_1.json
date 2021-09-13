@@ -564,23 +564,23 @@
           },
           "invitation_notifications": {
             "type": "boolean",
-            "description": "Pass ‘true’ if you want the CC to receive notifications when an invitation is activated, or when an invitation is resent, or when a reminder notification is sent. ",
-            "default": false
+            "description": "This parameter is used if you want the CC to receive notifications when an invitation is activated, or when an invitation is resent, or when a reminder notification is sent. Pass 'false' to disable these notifications.",
+            "default": true
           },
           "signing_notifications": {
             "type": "boolean",
-            "description": "Pass ‘true’ if you want the CC to receive notifications on the signing/rejection/approval of each invitation. ",
-            "default": false
+            "description": "This parameter is used if you want the CC to receive notifications on the signing/rejection/approval of each invitation. Pass 'false' to disable these notifications.",
+            "default": true
           },
           "completion_notifications": {
             "type": "boolean",
-            "description": "Pass ‘true’ if you want the CC to receive a notification on the completion of the document. ",
-            "default": false
+            "description": "This parameter is used if you want the CC to receive a notification on the completion of the document.  Pass 'false' to disable these notifications.",
+            "default": true
           },
           "failure_notifications": {
             "type": "boolean",
-            "description": "Pass ‘true’ if you want the CC to receive notifications on the occurrence of failure events such as “details mismatch”, “retry attempts exhausted” and “invitation time out”. ",
-            "default": false
+            "description": "This parameter is used if you want the CC to receive notifications on the occurrence of failure events such as “details mismatch”, “retry attempts exhausted” and “invitation time out”. Pass 'false' to disable these notifications.",
+            "default": true
           },
           "send_invitation_URL": {
             "type": "boolean",
@@ -701,7 +701,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Pass the value of the type of signature. Accepted values are- AADHAAR, VIRTUAL_SIGN, DSC, OFFLINE_SIGN , DOC_SIGNER, AUTOMATED_SIGN."
+            "description": "Pass the value of the type of signature. Accepted values are- AADHAAR, VIRTUAL_SIGN, DSC, OFFLINE_SIGN , DOC_SIGNER, AUTOMATED_SIGN.The value OFFLINE_SIGN refers to Cloud DSC."
           },
           "config": {
             "$ref": "#/components/schemas/SignatureConfig"
