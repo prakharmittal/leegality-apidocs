@@ -1229,7 +1229,7 @@
           {
             "name": "invitations_neslInvitationDetails",
             "in": "query",
-            "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the NESL invitation details of an invitee.\n\nDefault response parameters-\n  \n    \"f2f\"",
+            "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the NESL invitation details of an invitee.\n\nDefault response parameters-\n  \n    \"type\"",
             "required": false,
             "style": "form",
             "explode": true,
@@ -1262,7 +1262,7 @@
           {
             "name": "verificationRequest",
             "in": "query",
-            "description": "Default Value = false\n\n  Pass this parameter as true in order to fetch whether certain certificate parameters have been activated for verification or not. Only applicable to Aadhaar eSign/ Offline aadhaar/DSC/Nesl \n\nDefault response parameters-\n    \n    \"aadhaarConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\",\n      \"titleVerification\",\n      \"yobVerification\",\n      \"genderVerification\"\n\n    \"offlineConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\",\n      \"titleVerification\",\n      \"yobVerification\",\n      \"genderVerification\"\n\n    \"dscConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\"\n\n    \"neslConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\",\n      \"titleVerification\",\n      \"yobVerification\",\n      \"genderVerification\"",
+            "description": "Default Value = false\n\n  Pass this parameter as true in order to fetch whether certain certificate parameters have been activated for verification or not. Only applicable to Aadhaar eSign/ Offline_Sign (Cloud DSC)/DSC/Nesl \n\nDefault response parameters-\n    \n    \"aadhaarConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\",\n      \"titleVerification\",\n      \"yobVerification\",\n      \"genderVerification\"\n\n    \"offlineConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\",\n      \"titleVerification\",\n      \"yobVerification\",\n      \"genderVerification\"\n\n    \"dscConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\"\n\n    \"neslConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\",\n      \"titleVerification\",\n      \"yobVerification\",\n      \"genderVerification\"",
             "required": false,
             "style": "form",
             "explode": true,
@@ -2229,7 +2229,10 @@
             "$ref": "#/components/schemas/NeslLoanDetails3_1ResponseObject"
           },
           "securityDetails": {
-            "$ref": "#/components/schemas/NeslSecurityDetails3_1ResponseObject"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NeslSecurityDetails3_1ResponseObject"
+            }
           },
           "stampDetails": {
             "$ref": "#/components/schemas/NeslStampDetails3_1ResponseObject"
@@ -2450,7 +2453,7 @@
             "$ref": "#/components/schemas/InviteeConfigDetails3_1ResponseObject"
           },
           "recordReviewerDetails": {
-            "type": "string",
+            "type": "boolean",
             "description": "Reviewer details to be captured in the audit trail."
           },
           "inviteeGroup": {
@@ -2462,7 +2465,7 @@
           },
           "allowedSignatures": {
             "type": "array",
-            "description": "Allowed signature types for the signers i.e. Aadhaar/ Virtual/ DSC Token/ NeSL/Offline Aadhaar/ Doc Signer.",
+            "description": "Allowed signature types for the signers i.e. Aadhaar/ Virtual/ DSC Token/ NeSL/Offline Sign/ Doc Signer.",
             "items": {
               "type": "string"
             }
@@ -2571,19 +2574,19 @@
         "properties": {
           "enforceAuthentication": {
             "type": "boolean",
-            "description": "OTP verification before document access ."
+            "description": "OTP verification before document access."
           },
           "twoFactorAuthentication": {
             "type": "boolean",
-            "description": "2 factor authentication (Email & Phone number) ."
+            "description": "2 factor authentication (Email & Phone number)."
           },
           "sendDocumentRawUrl": {
             "type": "boolean",
-            "description": "Raw document pdf URL sent with OTP emails/SMS's ."
+            "description": "Raw document pdf URL sent with OTP emails/SMS's."
           },
           "captureLocation": {
             "type": "boolean",
-            "description": "Geo location capture ."
+            "description": "Geo location capture."
           },
           "capturePhoto": {
             "type": "boolean",
@@ -2669,7 +2672,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Nesl Participant type."
+            "description": "Nesl Participant type. Possible values are F2F and Non F2F.  In case of F2F, the invitee will receive a mail/SMS from Leegality with the signURL. In case of Non F2F the signURL will be sent directly by NeSL."
           },
           "participantDetails": {
             "$ref": "#/components/schemas/NeslparticipantDetails3_1ResponseObject"
@@ -2764,10 +2767,6 @@
             "type": "boolean",
             "description": "The invitation is active and no action has been taken."
           },
-          "offlineVerified": {
-            "type": "string",
-            "description": "The invitation is active and no action has been taken."
-          },
           "signed": {
             "type": "boolean",
             "description": "The invitation has been signed successfuly."
@@ -2786,7 +2785,7 @@
           },
           "rejected": {
             "type": "boolean",
-            "description": "Only for reviewer invite type - The invitation has been rejected."
+            "description": "Only for signer invite type - The invitation has been rejected."
           },
           "expired": {
             "type": "boolean",
@@ -2806,7 +2805,7 @@
           },
           "failureReason": {
             "type": "string",
-            "description": "Reason for failure of a sign invite."
+            "description": "Reason for failure of a sign invite. This includes the message sent by the invitee at the time of rejection of the invitation."
           }
         }
       },
