@@ -1311,6 +1311,205 @@
           }
         ]
       }
+    },
+    "/v3.1/series/list": {
+      "get": {
+        "tags": [
+          "API 3.1"
+        ],
+        "summary": "Use this API to fetch details of all stamp series which exist in your account.",
+        "description": "Use this API to receive details pertaining to each stamp group created in your Leegality account. \n\nThe details include the stamp group name, stamp group number, state, maximum value allowed, and the stamp series constituting that stamp group. ",
+        "parameters": [
+          {
+            "name": "firstPartyName",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the first party name in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "secondPartyName",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the second party name in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "purpose",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the value of purpose in series in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "legend",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the value of legend in series in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "underProcess",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the number of stamps which have status as under process in a series in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "blocked",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the number of stamps which have status as blocked in a series in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "reserved",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the number of stamps which have status as reserved in a series in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "unused",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the number of stamps which have status as unused in a series in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "used",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the number of stamps which have status as used in a series in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "expired",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the number of stamps which have status as expired in a series in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "total",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the total number of stamps in a series in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeriesList3_1ApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    },
+    "/v3.1/series/expiry": {
+      "get": {
+        "tags": [
+          "API 3.1"
+        ],
+        "summary": "Use this API to fetch details of all stamp series which will expire in some days in your account.",
+        "description": "Use this API to receive details pertaining to each stamp group which will expire in your Leegality account. \n\nThe details include the stamp series number, stamp expiry date, purchase date, and the quantity of the stamps in the  series.",
+        "parameters": [
+          {
+            "name": "lookUpPeriod",
+            "in": "query",
+            "description": "Default Value = 30\n\n  Pass this parameter as in number of days to receive all the stamp series that will expire in the days range in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "includeExpired",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive all the stamps which are already expired in the API response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeriesExpiry3_1ApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -2215,6 +2414,124 @@
             "items": {
               "$ref": "#/components/schemas/StampArray3_1ResponseObject"
             }
+          }
+        }
+      },
+      "SeriesList3_1ApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/SeriesList3_1ApiResponse_data"
+          }
+        }
+      },
+      "SeriesArray3_1ResponseObject": {
+        "type": "object",
+        "properties": {
+          "seriesNumber": {
+            "type": "string",
+            "description": "Unique series number"
+          },
+          "state": {
+            "type": "string",
+            "description": "State to which the stamp papers belong."
+          },
+          "denomination": {
+            "type": "integer",
+            "description": "Denomination of stamp in the series."
+          },
+          "firstPartyName": {
+            "type": "string",
+            "description": "Name of first party."
+          },
+          "secondPartyName": {
+            "type": "string",
+            "description": "Name of second party."
+          },
+          "purpose": {
+            "type": "string",
+            "description": "Purpose of stamp."
+          },
+          "legend": {
+            "type": "string",
+            "description": "Legend to be printed on the physical stamp paper."
+          },
+          "underProcess": {
+            "type": "integer",
+            "description": "Number of stamps under process."
+          },
+          "blocked": {
+            "type": "integer",
+            "description": "Number of stamps blocked."
+          },
+          "reserved": {
+            "type": "integer",
+            "description": "Number of stamps reserved."
+          },
+          "unused": {
+            "type": "integer",
+            "description": "Number of stamps available for use."
+          },
+          "used": {
+            "type": "integer",
+            "description": "Number of stamps already used."
+          },
+          "expired": {
+            "type": "integer",
+            "description": "Number of stamps already expired."
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total number of stamps."
+          }
+        }
+      },
+      "SeriesExpiry3_1ApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/SeriesExpiry3_1ApiResponse_data"
+          }
+        }
+      },
+      "SeriesExpiryArray3_1ResponseObject": {
+        "type": "object",
+        "properties": {
+          "seriesNumber": {
+            "type": "string",
+            "description": "Unique series number"
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Expiry Date of the stamp papers."
+          },
+          "purchaseDate": {
+            "type": "string",
+            "description": "Purchase date of the stamp."
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Quantity of stamp in the series."
           }
         }
       },
@@ -3741,6 +4058,28 @@
             "description": "This parameter contains the list of all the signers.",
             "items": {
               "$ref": "#/components/schemas/InvitationsArray3_1ResponseObject"
+            }
+          }
+        }
+      },
+      "SeriesList3_1ApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeriesArray3_1ResponseObject"
+            }
+          }
+        }
+      },
+      "SeriesExpiry3_1ApiResponse_data": {
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeriesExpiryArray3_1ResponseObject"
             }
           }
         }
