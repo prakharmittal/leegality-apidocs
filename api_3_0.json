@@ -1318,7 +1318,7 @@
           "API 3.1"
         ],
         "summary": "Use this API to fetch details of all stamp series which exist in your account.",
-        "description": "Use this API to receive details pertaining to each stamp group created in your Leegality account. \n\nThe details include the stamp group name, stamp group number, state, maximum value allowed, and the stamp series constituting that stamp group. ",
+        "description": "Use this API to receive details pertaining to each stamp series created in your Leegality account.\n\nThe details include information about the stamp papers (such as denomination and party names) as well as inventory status details (number of papers used, number of papers under process, etc). ",
         "parameters": [
           {
             "name": "firstPartyName",
@@ -1467,7 +1467,7 @@
           "API 3.1"
         ],
         "summary": "Use this API to fetch details of all stamp series which will expire in some days in your account.",
-        "description": "Use this API to receive details pertaining to each stamp group which will expire in your Leegality account. \n\nThe details include the stamp series number, stamp expiry date, purchase date, and the quantity of the stamps in the  series.",
+        "description": "Use this API to receive details pertaining to stamps expiry in ascending order of their expiry date. The stamps are grouped for same expiry date per series per purchase request.",
         "parameters": [
           {
             "name": "lookUpPeriod",
@@ -4076,7 +4076,7 @@
       "SeriesExpiry3_1ApiResponse_data": {
         "type": "object",
         "properties": {
-          "series": {
+          "stamps": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SeriesExpiryArray3_1ResponseObject"
