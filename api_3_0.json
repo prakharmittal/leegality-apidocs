@@ -4076,7 +4076,7 @@
       "SeriesExpiry3_1ApiResponse_data": {
         "type": "object",
         "properties": {
-          "stamps": {
+          "seriesList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SeriesExpiryArray3_1ResponseObject"
