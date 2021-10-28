@@ -728,17 +728,17 @@
           },
           "allowDraw": {
             "type": "boolean",
-            "description": "Pass 'true' if youy want to allow user to draw their signature. Only applicable for virtual signature.",
+            "description": "Pass 'true' if you want to allow the signer to draw their signature on the screen. Only applicable for virtual signature.",
             "default": false
           },
           "allowChose": {
             "type": "boolean",
-            "description": "Pass 'true' if youy want to allow user to chose their signature from a set of auto generated signature images. Only applicable for virtual signature.",
+            "description": "Pass 'true' if you want to allow user to chose their signature from a set of auto generated signature images based on their name. Only applicable for virtual signature.",
             "default": false
           },
           "affixFingerprint": {
             "type": "boolean",
-            "description": "Pass 'true' if youy want to allow user to use their fingerprint as the signature image. Biometric device required to capture fingerprint. Only applicable for virtual signature.",
+            "description": "Pass 'true' if you want to allow the signer to affix an image of their fingerprint, scanned using a supported biometric fingerprint detection device. Fingerprint detection works only on Windows and Android devices, and requires access to a supported biometric device. Biometric device required to capture fingerprint. Only applicable for virtual signature.",
             "default": false
           },
           "verifyName": {
