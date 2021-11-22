@@ -34,6 +34,10 @@
     {
       "name": "Webhook 2.3",
       "description": "Sample Webhook Data for V2.3"
+    },
+    {
+      "name": "Webhook 2.5",
+      "description": "Sample Webhook Data for V2.5 (Webhook lite)"
     }
   ],
   "paths": {
