@@ -186,6 +186,31 @@
           }
         }
       }
+    },
+    "/your/successOrError/v2.5/webhook": {
+      "post": {
+        "tags": [
+          "Webhook 2.5"
+        ],
+        "summary": "Success Webhook Data",
+        "description": "Use this Webhook to receive updates on the occurrence of success/failure events for each invitation in your eSign request API call.   The webhook response will provide only the basic details of each event.  For detailed information, or for fetching the updated document and audit trail, use our Details APIs.  We recommend using this Webhook if you prefer to receive updates through light API payloads. ",
+        "requestBody": {
+          "description": "Sample Data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookDatav2.5"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
+          }
+        }
+      }
     }
   },
   "components": {
@@ -304,6 +329,96 @@
           },
           "verification": {
             "$ref": "#/components/schemas/Verification"
+          }
+        }
+      },
+      "WebhookDatav2.5": {
+        "type": "object",
+        "properties": {
+          "webhookType": {
+            "type": "string",
+            "description": "The type of webhook event.  Possible values are \"Success\" and \"Error\"."
+          },
+          "documentId": {
+            "type": "string",
+            "description": "The unique Leegality ID associated with the eSign request API call."
+          },
+          "mac": {
+            "type": "string",
+            "description": "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
+          },
+          "irn": {
+            "type": "string",
+            "description": "The unique Leegality ID associated with the eSign request API call."
+          },
+          "documentStatus": {
+            "type": "string",
+            "description": "The status of the document.  Possible values are \"Draft\", \"Sent\", \"Completed\" and \"Expired\"."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RejectionReason"
+            }
+          },
+          "request": {
+            "$ref": "#/components/schemas/InviteeRequest2.5"
+          },
+          "verification": {
+            "$ref": "#/components/schemas/Verification"
+          }
+        }
+      },
+      "InviteeRequest2.5": {
+        "type": "object",
+        "properties": {
+          "inviteeType": {
+            "type": "string",
+            "description": "The type of invitee associated with the webhook event.  Possible values are \"signer\" and \"reviewer\"."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the invitee."
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the invitee."
+          },
+          "phone": {
+            "type": "string",
+            "description": "The mobile number of the invitee."
+          },
+          "invitationUrl": {
+            "type": "string",
+            "description": "The invitation URL of the invitee."
+          },
+          "active": {
+            "type": "boolean",
+            "description": "The status of the invitee. An invitation is active when it can be signed or reviewed immediately.  In-active invitations become active according to the signing order configured in the eSign request API.  Possible values are 'true' (when the invitation is active) and 'false' (when the invitation is inactive)."
+          },
+          "action": {
+            "type": "string",
+            "description": "The action pertaining to the webhoook event. Possible values are \"Signed\", \"Approved\",\"Rejected\" ."
+          },
+          "error": {
+            "type": "string",
+            "description": "The error pertaining to the webhook event."
+          },
+          "expired": {
+            "type": "boolean",
+            "description": "The expiry status of the invitation.  Possible values are \"true\" (if the invitation has expired) and \"false\"(if the invitation has not expired)."
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "The expiry date of the invitation. Format (dd-MM-yyyy HH:mm:ss)"
+          },
+          "rejectionMessage": {
+            "type": "string",
+            "description": "The message sent by the reviewer at the time of rejecting the invitation, if any."
+          },
+          "signType": {
+            "type": "string",
+            "description": "The type of signature applied.  Possible values are AADHAAR, VIRTUAL_SIGN, DSC, NESL_SIGN, OFFLINE_SIGN, DOC_SIGNER, AUTOMATED_SIGN. The value OFFLINE_SIGN refers to Cloud DSC."
           }
         }
       },
