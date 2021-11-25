@@ -24,6 +24,10 @@
   ],
   "tags": [
     {
+      "name": "Coordinate Picker Webhook",
+      "description": "Sample Webhook Data for Coordinate picker enabled."
+    },
+    {
       "name": "Webhook 2.1",
       "description": "Sample Webhook Data for V2.1 (This version is deprecated. Please use version 2.3)"
     },
@@ -34,13 +38,34 @@
     {
       "name": "Webhook 2.3",
       "description": "Sample Webhook Data for V2.3"
-    },
-    {
-      "name": "Webhook 2.5",
-      "description": "Sample Webhook Data for V2.5 (Webhook lite)"
     }
   ],
   "paths": {
+    "/your/coordinate/picker/webhook": {
+      "post": {
+        "tags": [
+          "Coordinate Picker Webhook"
+        ],
+        "summary": "Coordinate Picker Webhook Data",
+        "description": "A call is made to the Coordinate Picker Webhook URL provided by you on   successfully placing the coordinates for signature in case coordinate  picker is enabled. The webhook should expect application/json data and  should be publically accessible.",
+        "requestBody": {
+          "description": "Sample Data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CoordinatePickerResponse"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
+          }
+        }
+      }
+    },
     "/your/success/v2.1/webhook": {
       "post": {
         "tags": [
@@ -219,6 +244,54 @@
   },
   "components": {
     "schemas": {
+      "CoordinatePickerResponse": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string",
+            "description": "documentId is a unique Leegality ID created for every eSigning request."
+          },
+          "irn": {
+            "type": "string",
+            "description": "Internal Reference Number."
+          },
+          "invitations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Request"
+            }
+          }
+        }
+      },
+      "Request": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the invitee."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the invitee."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone Number of the invitee."
+          },
+          "signUrl": {
+            "type": "string",
+            "description": "Invitee specfic URL unique to the request."
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Status of the URL."
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Request expiration date. Format (dd-MM-yyyy HH:mm:ss)"
+          }
+        }
+      },
       "WebhookDatav2.1": {
         "type": "object",
         "properties": {
