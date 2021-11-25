@@ -4122,7 +4122,7 @@
       "SeriesList3_1ApiResponse_data": {
         "type": "object",
         "properties": {
-          "series": {
+          "seriesList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SeriesArray3_1ResponseObject"
