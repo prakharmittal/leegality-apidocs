@@ -8,7 +8,7 @@
       "name": "Leegality Support",
       "email": "contact@leegality.com"
     },
-     "x-logo": { 
+    "x-logo": { 
       "url": "https://raw.githubusercontent.com/prakharmittal/leegality-apidocs/master/logo.png"
     },
     "version": "2.1"
@@ -363,7 +363,7 @@
           },
           "coordinate_picker_webhook": {
             "type": "string",
-            "description": "Enter the URL where you wish to receive a webhook notification when the eSign coordinates are set and the invitations are active.  \n\nThe structure of the webhook response can be found [here]. \n\nThis parameter is relevant only if you pass coordinate_picker as ‘true’.   "
+            "description": "Enter the URL where you wish to receive a webhook notification when the eSign coordinates are set and the invitations are active.  \n\nThe structure of the webhook response can be found here: https://docs.leegality.com/webhooks_resources#tag/Coordinate-Picker-Webhook. \n\nThis parameter is relevant only if you pass coordinate_picker as ‘true’.   "
           }
         }
       },
