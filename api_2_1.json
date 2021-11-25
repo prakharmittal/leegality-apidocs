@@ -8,7 +8,7 @@
       "name": "Leegality Support",
       "email": "contact@leegality.com"
     },
-    "x-logo": { 
+     "x-logo": { 
       "url": "https://raw.githubusercontent.com/prakharmittal/leegality-apidocs/master/logo.png"
     },
     "version": "2.1"
@@ -355,6 +355,15 @@
             "items": {
               "$ref": "#/components/schemas/Attachment"
             }
+          },
+          "coordinate_picker": {
+            "type": "boolean",
+            "description": "Pass this parameter as ‘true’ to receive a URL in return for setting custom eSign coordinates for all signers in the API call.  The eSign coordinates that are set through the URL will be in addition to any coordinates you pass in the Invitees array (Invitees. appearances). \n\nNote 1: If you pass coordinate_picker as ‘true’ the response structure of the API call will be different.  Click [here] to view the response structure. \n\nNote 2: Invitations in the API call will become active only after the eSign coordinates are set through the URL received in return.  \n\nNote 3: If you pass coordinate_picker as ‘true’, we highly recommend that you also pass a URL in the “coordinate_picker_webhook” parameter to receive an update when the eSign coordinates are set and the invitations are active. ",
+            "default": false
+          },
+          "coordinate_picker_webhook": {
+            "type": "string",
+            "description": "Enter the URL where you wish to receive a webhook notification when the eSign coordinates are set and the invitations are active.  \n\nThe structure of the webhook response can be found [here]. \n\nThis parameter is relevant only if you pass coordinate_picker as ‘true’.   "
           }
         }
       },
@@ -1248,9 +1257,14 @@
           },
           "invitations": {
             "type": "array",
+            "description": "This parameter is passed only if coordinate_picker parameter is set 'false'.",
             "items": {
               "$ref": "#/components/schemas/Request"
             }
+          },
+          "coordinatePickerURL": {
+            "type": "string",
+            "description": "This parameter is passed only if coordinate_picker parameter is set 'true'. This is a URL that allows a user to set  custom eSign coordinates for all signers.  \n\nYou can show this URL to users inside your application using our SDKs. "
           }
         }
       },
