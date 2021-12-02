@@ -38,6 +38,10 @@
     {
       "name": "Webhook 2.3",
       "description": "Sample Webhook Data for V2.3"
+    },
+    {
+      "name": "Webhook 2.5",
+      "description": "Sample Webhook Data for V2.5 (This version of webhook does not contain signed files or audit trail. It is also known as webhook lite. )"
     }
   ],
   "paths": {
@@ -221,7 +225,7 @@
         "tags": [
           "Webhook 2.5"
         ],
-        "summary": "Success Webhook Data",
+        "summary": "Webhook Data",
         "description": "Use this Webhook to receive updates on the occurrence of success/failure events for each invitation in your eSign request API call.   The webhook response will provide only the basic details of each event.  For detailed information, or for fetching the updated document and audit trail, use our Details APIs.  We recommend using this Webhook if you prefer to receive updates through light API payloads. ",
         "requestBody": {
           "description": "Sample Data",
@@ -426,7 +430,7 @@
           },
           "irn": {
             "type": "string",
-            "description": "The unique Leegality ID associated with the eSign request API call."
+            "description": "The internal reference number passsed in the eSign request API."
           },
           "documentStatus": {
             "type": "string",
