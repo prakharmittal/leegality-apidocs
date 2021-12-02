@@ -1544,7 +1544,7 @@
           {
             "name": "supportDocumentUrl",
             "in": "query",
-            "description": "URL of Invitee whose supporting documents is to be fetched.\n \n\nPass the invitation URL of the Invitee whose supporting documents you want to receive.  The invitation URL is received in response to the API call made to create an eSign request.  This parameter is relevant only if the Document Type is SUPPORTING_DOCUMENT.\n\nNote- Only if the Document Type = Supporting Document - if not the value passed will be ignored. ",
+            "description": "URL of Invitee whose supporting documents is to be fetched.\n \n\nPass the invitation URL of the Invitee whose supporting documents you want to receive.  The invitation URL is received in response to the API call made to create an eSign request.  This parameter is relevant only if the documentDownloadType is SUPPORTING_DOCUMENT.\n\nNote- Only if the documentDownloadType = SUPPORTING_DOCUMENT  - if not the value passed will be ignored. ",
             "required": false,
             "style": "form",
             "explode": true,
@@ -1555,7 +1555,7 @@
           {
             "name": "index",
             "in": "query",
-            "description": "Will be a numeric value indicating which attachment is to be fetched.\n\nPass the index number of the Supporting Document or Attachment you want to receive. The index starts from 0 with an increment of 1. For example, if you want to receive the 1st supporting document uploaded by an invitee, pass the index value as 0, and if you want to receive the 2nd supporting document uploaded by an invitee, pass the index value as 1, and so on and so forth.  This is relevant only if the Document Type is Supporting_Document or Attachment. \n\nNote- Only if Document the Document Type = Supporting Document or Attachment - if not the value passed will be ignored.",
+            "description": "Will be a numeric value indicating which attachment is to be fetched.\n\nPass the index number of the Supporting Document or Attachment you want to receive. The index starts from 0 with an increment of 1. For example, if you want to receive the 1st supporting document uploaded by an invitee, pass the index value as 0, and if you want to receive the 2nd supporting document uploaded by an invitee, pass the index value as 1, and so on and so forth.  This is relevant only if the documentDownloadType is SUPPORTING_DOCUMENT or ATTACHMENT. \n\nNote- Only if Document the documentDownloadType = SUPPORTING_DOCUMENT or ATTACHMENT - if not the value passed will be ignored.",
             "required": false,
             "style": "form",
             "explode": true,
