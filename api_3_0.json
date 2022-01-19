@@ -718,7 +718,7 @@
           "API 3.1"
         ],
         "summary": "Use this API to check document details",
-        "description": "You need to call this API to get the in-depth detail of the document.",
+        "description": "Use this API to get in-depth details about all documents triggered from your Leegality account.   This API can be used to fetch:\n\n\n  1.The signed document and other files related to the document such as the audit trail, reference attachments and supporting documents.  \n  \n  \n  2.The details about each signer & reviewer associated with the document, and the status of the document. \n  \n  \n  3.The details of the template/workflow used to trigger the document. \n  \n  \n  4.The details of the account/sender/folder from which the document was sent. \n\nThe API is highly configurable.  In the request parameters, you can enable exactly those parameters that you need to receive, while ignoring those parameters corresponding to data that you don’t need. ",
         "parameters": [
           {
             "name": "documentId",
@@ -776,9 +776,31 @@
             }
           },
           {
+            "name": "document_deleteOnComplete",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive information if delete on complete was switched on for the document.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "document_requestSigningOrder",
             "in": "query",
             "description": "Default Value = false\n\n  Pass this parameter as TRUE to fetch the signing order status whether the signature links are activated sequentially or not.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "document_requireSigningOrder",
+            "in": "query",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to fetch whether the signing order was required.",
             "required": false,
             "style": "form",
             "explode": true,
@@ -1051,6 +1073,28 @@
             }
           },
           {
+            "name": "cc",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this parameter as true to receive details about contacts configured as “CCs” for the document.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "coordinatePicker",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this parameter as ‘true' if you want to check if coordinate picker has been enabled for this document.  Note that the response will 'true’ if coordinate picker is enabled and is active for a document (i.e., the document has not yet been sent out for signing).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "invitations_inviteeConfigs",
             "in": "query",
             "description": "Default Value = false\n  \n  Pass this as true to recieve invitee level configurations associated with this invitation.\n\nDefault response parameters-\n  \n    \"name\",\n    \"email\",\n    \"phone\",\n    \"inviteetype\"",
@@ -1205,7 +1249,18 @@
             }
           },
           {
-            "name": "invitations_signatureAuthTypeAllowed",
+            "name": "invitations_inviteeGroup_completed",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this parameter as TRUE to receive whether the group sign has been completed.\n\n\"invitations_inviteeGroup\" parameter also needs to be passed as true to recieve this in response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "invitations_signatureOptions",
             "in": "query",
             "description": "Default Value = false\n  \n  Pass this parameter as true to receive the Signature options allowed under a specific eSign for an type invitation i.e.\n  \n  \"aadhaar\" - OTP/ Biometric/ Iris\n  \n  *virtual\" - Draw signature/ Computer-generated signature",
             "required": false,
@@ -1216,7 +1271,7 @@
             }
           },
           {
-            "name": "invitations_signatureAuthTypeUsed",
+            "name": "invitations_signatureOptionsUsed",
             "in": "query",
             "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the Signature options used for an invitation.",
             "required": false,
@@ -1249,9 +1304,9 @@
             }
           },
           {
-            "name": "invitations_invitationStatus_failureReason",
+            "name": "invitations_InvitationOfflineSignDetails",
             "in": "query",
-            "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the the reson due to which the invitation failed.",
+            "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the details of the cloud DSC invitation.",
             "required": false,
             "style": "form",
             "explode": true,
@@ -1260,7 +1315,40 @@
             }
           },
           {
-            "name": "verificationRequest",
+            "name": "invitations_invitationStatus_failureReason",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the reason due to which the invitation failed.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "invitations_invitationStatus_rejectionMessage",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the reason provided by the signer for rejecting the invitation.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "invitations_certificateData",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the data received in the signing certificate.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "invitations_verificationRequest",
             "in": "query",
             "description": "Default Value = false\n\n  Pass this parameter as true in order to fetch whether certain certificate parameters have been activated for verification or not. Only applicable to Aadhaar eSign/ Offline_Sign (Cloud DSC)/DSC/Nesl \n\nDefault response parameters-\n    \n    \"aadhaarConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\",\n      \"titleVerification\",\n      \"yobVerification\",\n      \"genderVerification\"\n\n    \"offlineConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\",\n      \"titleVerification\",\n      \"yobVerification\",\n      \"genderVerification\"\n\n    \"dscConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\"\n\n    \"neslConfig\"-\n      \"smartNamePercentage\",\n      \"signatureVerification\",\n      \"pincodeVerification\",\n      \"stateVerification\",\n      \"titleVerification\",\n      \"yobVerification\",\n      \"genderVerification\"",
             "required": false,
@@ -1271,7 +1359,7 @@
             }
           },
           {
-            "name": "verificationResponse",
+            "name": "invitations_verificationResponse",
             "in": "query",
             "description": "Default Value = false\n  \n  Pass this parameter as true to the get the results of the certificate details fetched matched against the input provided.\n\n Default response parameters-\n\n    \"smartNamePercentage\",\n    \"signatureVerification\",\n    \"nameVerification\",\n    \"pincodeVerification\",\n    \"stateVerification\",\n    \"titleVerification\",\n    \"yobVerification\",\n    \"genderVerification\"",
             "required": false,
@@ -1282,7 +1370,7 @@
             }
           },
           {
-            "name": "supportingDocuments",
+            "name": "invitations_supportingDocuments",
             "in": "query",
             "description": "Default Value = false\n  \n  Pass this parameter as true to receive the supporting documents requested from the signer.\n\nDefault response parameters-\n\n    \"file\",\n    \"name\",\n    \"type\"",
             "required": false,
@@ -1843,7 +1931,7 @@
           },
           "registrationType": {
             "type": "string",
-            "description": "Type of debt (Individual Loan or Non-Individual Loan)."
+            "description": "Type of debt (Individual Loan or Non-Individual Loan).\nAccepted values are- INDIVIDUAL_LOAN, NON_INDIVIDUAL_LOAN."
           },
           "state": {
             "type": "string",
@@ -1879,23 +1967,23 @@
           },
           "typeOfDebt": {
             "type": "string",
-            "description": "The type of loan (financial debt or operational debt)."
+            "description": "The type of loan (financial debt or operational debt).\nAccepted values are- FINANCIAL, OPERATIONAL."
           },
           "accountClosedFlag": {
             "type": "string",
-            "description": "Whether the account is closed (yes, no, or assigned debt)."
+            "description": "Whether the account is closed (yes, no, or assigned debt).\nAccepted values are- YES, NO, ASSIGNED."
           },
           "fundType": {
             "type": "string",
-            "description": "Whether the credit facility is funded or non funded."
+            "description": "Whether the credit facility is funded or non funded.\nAccepted values are- FUNDED, NON_FUNDED."
           },
           "sanctionCurrency": {
             "type": "string",
-            "description": "The currency in which the loan is denominated (INR or USD)."
+            "description": "The currency in which the loan is denominated (INR or USD).\nAccepted values are- INR, USD."
           },
           "creditSubtype": {
             "type": "string",
-            "description": "Whether the financial debt is created pursuant to a credit facility or the purchase of a property."
+            "description": "Whether the financial debt is created pursuant to a credit facility or the purchase of a property.\nAccepted values are- CREDIT_FACILITY, PROPERTY_BUYER."
           },
           "facilityName": {
             "type": "string",
@@ -1953,7 +2041,9 @@
           "considerationPrice",
           "descriptionOfDocument",
           "firstParty",
+          "firstPartyPin",
           "secondParty",
+          "secondPartyPin",
           "stampDutyAmount",
           "stampDutyPaidBy"
         ],
@@ -1986,6 +2076,14 @@
           "articleCode": {
             "type": "string",
             "description": "Article code for payment of stamp duty."
+          },
+          "firstPartyPin": {
+            "type": "string",
+            "description": "The pincode of the first party (for the stamp paper). This is mandatory for the states of Madhya Pradesh & West Bengal."
+          },
+          "secondPartyPin": {
+            "type": "string",
+            "description": "The pincode of the second party (for the stamp paper). This is mandatory for the states of Madhya Pradesh & West Bengal."
           }
         }
       },
@@ -2014,7 +2112,7 @@
           },
           "contactRelation": {
             "type": "string",
-            "description": "Relation of the party to the debt (Debtor, Guarantor, Co-obligant)."
+            "description": "Relation of the party to the debt (Debtor, Guarantor, Co-obligant).\nAccepted values are- CREDITOR, DEBTOR, GUARANTOR, CO_OBLIGANT, SECURITY_PROVIDER, ASSIGNEE."
           },
           "emailId": {
             "type": "string",
@@ -2030,7 +2128,7 @@
           },
           "legalConstitution": {
             "type": "string",
-            "description": "Legal constitution of the signer (Resident Individual, Private Limited, Public Limited, LLP, Proprietorship, Partnership, Entity created by Statute, Trust, HUF, Coop Society, Association of Persons, Government, Self Help Groups, Non-Resident, Foreign Company)."
+            "description": "Legal constitution of the signer (Resident Individual, Private Limited, Public Limited, LLP, Proprietorship, Partnership, Entity created by Statute, Trust, HUF, Coop Society, Association of Persons, Government, Self Help Groups, Non-Resident, Foreign Company).\nAccepted values are- RESIDENT_INDIVIDUAL, PUBLIC_LTD, PRIVATE_LTD, LLP, PROPRIETORSHIP, PARTNERSHIP, ENTITY_CREATED_BY_STATUTE, TRUST, HUF, CO_OP_SOCIETY, ASSOCIATION_OF_PERSONS, GOVERNMENT, SELF_HELP_GROUP, NON_RESIDENT, FOREIGN_COMPANY."
           },
           "alternateEmailId": {
             "type": "string",
@@ -2042,7 +2140,7 @@
           },
           "officialDocType": {
             "type": "string",
-            "description": "Official Document Type (Pan Card, Driving License, Voter ID, Passport, Others)."
+            "description": "Official Document Type (Pan Card, Driving License, Voter ID, Passport, Others).\nAccepted values are- PAN_CARD, DRIVING_LICENSE, VOTER_ID, PASSPORT, ANY_OTHER_OFFICIAL_ID."
           },
           "officialDocId": {
             "type": "string",
@@ -2078,7 +2176,7 @@
           },
           "partyType": {
             "type": "string",
-            "description": "Type of Party (Indian entity/ Resident Individual/ Foreign Entity/ NRI/Foreign Individual."
+            "description": "Type of Party (Indian entity/ Resident Individual/ Foreign Entity/ NRI/Foreign Individual.\nAccepted values are- INDIAN_ENTITY, RESIDENT_INDIVIDUAL, FOREIGN_ENTITY, NRI."
           }
         }
       },
@@ -2097,11 +2195,11 @@
           },
           "assetsType": {
             "type": "string",
-            "description": "Type of asset forming security (Movable, Immovable, Intangible, Not Classified)."
+            "description": "Type of asset forming security (Movable, Immovable, Intangible, Not Classified).\nAccepted values are- MOVABLE, IMMOVABLE, INTANGIBLE, NOT_CLASSIFIED."
           },
           "chargeType": {
             "type": "string",
-            "description": "Type of charge created (Mortgage, Hypothecation, Charge, Assignment, Pledge, Lien, Negative Lien, Guarantee, Others, Not Classified)."
+            "description": "Type of charge created (Mortgage, Hypothecation, Charge, Assignment, Pledge, Lien, Negative Lien, Guarantee, Others, Not Classified).\nAccepted values are- MORTGAGE, HYPOTHECATION, CHARGE, ASSIGNMENT, PLEDGE, LIEN, NEGATIVE_LIEN, GUARANTEE, OTHERS, NOT_CLASSIFIED."
           },
           "assetId": {
             "type": "string",
@@ -2361,6 +2459,10 @@
             "type": "string",
             "description": "Document status. Possible values - Active/Offline Verified/ Signed/ Expired/ Draft/ Reviewed/ Rejected/Approved/coordinatesSet. *This response maybe sent in case of a deleted document. Subject to availability."
           },
+          "coordinatePicker": {
+            "type": "string",
+            "description": "Coordinate picker status."
+          },
           "deleted": {
             "type": "boolean",
             "description": "Document deleted status."
@@ -2388,6 +2490,10 @@
           "requestSigningOrder": {
             "type": "boolean",
             "description": "Signing order status whether the signature links are activated sequentially or not."
+          },
+          "requireSigningOrder": {
+            "type": "boolean",
+            "description": "Signing order status whether the signing order is required or not."
           }
         }
       },
@@ -2629,6 +2735,19 @@
           }
         }
       },
+      "CoordinatePickerDetails3_1ResponseObject": {
+        "type": "object",
+        "properties": {
+          "coordinatePickerUrl": {
+            "type": "string",
+            "description": "The URL for setting eSign coordinates."
+          },
+          "coordinatePickerWebhook": {
+            "type": "string",
+            "description": "The webhook URL on which a response will be sent when eSign coordinates are set."
+          }
+        }
+      },
       "NeslLoanDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
@@ -2817,6 +2936,14 @@
           "articleCode": {
             "type": "string",
             "description": "Article code for payment of stamp duty."
+          },
+          "FirstPartyPin:": {
+            "type": "string",
+            "description": "Article code for payment of stamp duty."
+          },
+          "secondPartyPin:": {
+            "type": "string",
+            "description": "Article code for payment of stamp duty."
           }
         }
       },
@@ -2874,8 +3001,14 @@
           "neslInvitationDetails": {
             "$ref": "#/components/schemas/InviteeNESLParticipantDetails3_1ResponseObject"
           },
+          "offlineSignDetails": {
+            "$ref": "#/components/schemas/InviteeOfflineSignDetails3_1ResponseObject"
+          },
           "invitationStatus": {
             "$ref": "#/components/schemas/InviteeStatusDetails3_1ResponseObject"
+          },
+          "certificateData": {
+            "$ref": "#/components/schemas/InviteeCertificateDetails3_1ResponseObject"
           },
           "verificationRequest": {
             "$ref": "#/components/schemas/InviteeVerificationRequestDetails3_1ResponseObject"
@@ -3035,6 +3168,10 @@
           "size": {
             "type": "integer",
             "description": "Number of invitations in the group."
+          },
+          "completed": {
+            "type": "boolean",
+            "description": "If the group signatue is completed."
           }
         }
       },
@@ -3150,6 +3287,27 @@
           }
         }
       },
+      "InviteeOfflineSignDetails3_1ResponseObject": {
+        "type": "object",
+        "properties": {
+          "fixSignerId": {
+            "type": "boolean",
+            "description": "Parameter to find out if signerID is fixed for the invitation."
+          },
+          "mobileNumber": {
+            "type": "string",
+            "description": "Mobile number corresponding to the signerID fixed for the invitation."
+          },
+          "pan": {
+            "type": "string",
+            "description": "PAN corresponding to the signerID fixed for the invitation."
+          },
+          "signerId": {
+            "type": "string",
+            "description": "SignerID corresponding to the signerID fixed for the invitation."
+          }
+        }
+      },
       "InviteeStatusDetails3_1ResponseObject": {
         "type": "object",
         "properties": {
@@ -3169,10 +3327,6 @@
             "type": "boolean",
             "description": "Only for reviewer invite type - The invitation has been approved."
           },
-          "coordinatesSet": {
-            "type": "boolean",
-            "description": "Only for coordinate picker invite type - The coordinates have been set."
-          },
           "rejected": {
             "type": "boolean",
             "description": "Only for signer invite type - The invitation has been rejected."
@@ -3180,6 +3334,10 @@
           "expired": {
             "type": "boolean",
             "description": "The invitation has expired - the invitee will no longer be able to access the URL."
+          },
+          "recordApproverResponse": {
+            "type": "boolean",
+            "description": "Parameter to find out if the reviewer’s actions are recorded in audit trail."
           },
           "creationDate": {
             "type": "string",
@@ -3196,6 +3354,39 @@
           "failureReason": {
             "type": "string",
             "description": "Reason for failure of a sign invite. This includes the message sent by the invitee at the time of rejection of the invitation."
+          },
+          "rejectionMessage": {
+            "type": "string",
+            "description": "The message sent by the invitee at the time of rejection the invitation."
+          }
+        }
+      },
+      "InviteeCertificateDetails3_1ResponseObject": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the signer as set out in the digital signature certificate (if available)."
+          },
+          "yob": {
+            "type": "string",
+            "description": "The year of birth of the signer as set out in the digital signature certificate (if available)."
+          },
+          "gender": {
+            "type": "string",
+            "description": "The gender of the signer as set out in the digital signature certificate (if available)."
+          },
+          "pincode": {
+            "type": "string",
+            "description": "The PIN code of the signer as set out in the digital signature certificate (if available)."
+          },
+          "title": {
+            "type": "string",
+            "description": "The last 4 digits of the Aadhar Number of the signer as set out in the digital signature certificate (if available)."
+          },
+          "state": {
+            "type": "string",
+            "description": "The state of the signer as set out in the digital signature certificate (if available)."
           }
         }
       },
@@ -3222,10 +3413,6 @@
           "smartNamePercentage": {
             "type": "boolean",
             "description": "Whether amart name verification is turned on or not."
-          },
-          "signatureVerification": {
-            "type": "boolean",
-            "description": "Signature verification."
           },
           "nameVerification": {
             "type": "boolean",
@@ -3259,10 +3446,6 @@
           "smartNamePercentage": {
             "type": "boolean",
             "description": "Whether amart name verification is turned on or not."
-          },
-          "signatureVerification": {
-            "type": "boolean",
-            "description": "Signature verification."
           },
           "nameVerification": {
             "type": "boolean",
@@ -3309,6 +3492,55 @@
           "name": {
             "type": "string",
             "description": "Folder Name, if you are saving document in any folder."
+          }
+        }
+      },
+      "CCArrayResponseObject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the CC."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the CC."
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the CC."
+          },
+          "invitationNotification": {
+            "type": "string",
+            "description": "Parameter to find out if invitation notifications have been enabled for the CC."
+          },
+          "signingNotification": {
+            "type": "string",
+            "description": "Parameter to find out if signing notifications have been enabled for the CC."
+          },
+          "completionNotification": {
+            "type": "string",
+            "description": "Parameter to find out if completion notifications have been enabled for the CC."
+          },
+          "failureNotification": {
+            "type": "string",
+            "description": "Parameter to find out if failure notifications have been enabled for the CC."
+          },
+          "sendInvitationUrl": {
+            "type": "string",
+            "description": "Parameter to find out if invitation URLs will be shared with the CC."
+          },
+          "shareDocAuditTrail": {
+            "type": "string",
+            "description": "Parameter to find out if audit trail will be shared with the CC."
+          },
+          "enforceOneFactorAuthentication": {
+            "type": "string",
+            "description": "Parameter to find out if one factor authentication are enabled for the CC."
+          },
+          "recordAuditTrail": {
+            "type": "string",
+            "description": "Parameter to find out if CC notifications are recorded in the audit trail."
           }
         }
       },
@@ -4109,6 +4341,15 @@
           },
           "neslDocumentDetails": {
             "$ref": "#/components/schemas/NeslDetails3_1ResponseObject"
+          },
+          "cc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CCArrayResponseObject"
+            }
+          },
+          "coordinatePicker": {
+            "$ref": "#/components/schemas/CoordinatePickerDetails3_1ResponseObject"
           },
           "invitations": {
             "type": "array",
