@@ -7,7 +7,7 @@
     "contact": {
       "name": "Leegality Support",
       "email": "contact@leegality.com"
-    },
+    }, 
     "x-logo": { 
       "url": "https://raw.githubusercontent.com/prakharmittal/leegality-apidocs/master/logo.png"
     },
@@ -1042,7 +1042,7 @@
           {
             "name": "neslDocumentDetails",
             "in": "query",
-            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the NESL data details if NESL type signer is present.\n\nDefault response parameters-\n\n    \"transactionId\",\n    \"loanDetails\"-\n    {\"\n      loanNumber\", \n      \"sanctionNumber\", \n      \"registrationType\", \n      \"state\", \n      \"branchName\", \n      \"branchAddress\",\n      \"dateOfSanction\", \n      \"emiAmount\", \n      \"rateOfInterest\",\n      \"sanctionAmount\", \n      \"tenure\", \n      \"typeOfDebt\", \n      \"accountClosedFlag\", \n      \"fundType\", \n      \"sanctionCurrency\", \n      \"creditSubtype\", \n      \"facilityName\", \n      \"amountOverdue\", \n      \"otherChargeAmount\", \n      \"debtStartDate\", \n      \"interestAmount\", \n      \"oldDebtRefNo\", \n      \"principalOutstanding\", \n      \"loanRemark\", \n      \"totalOutstandingAmount\", \n      \"creditorBusinessUnit\", \n      \"drawingPower\", \n      \"daysPastDue\"\n    }",
+            "description": "Default Value = false\n\n  Pass this parameter as TRUE to receive the NESL data details if NESL type signer is present.\n\nDefault response parameters-\n\n    \"transactionId\",\n    \"loanDetails\":\n    {\n      \"loanNumber\", \n      \"sanctionNumber\", \n      \"registrationType\", \n      \"state\", \n      \"branchName\", \n      \"branchAddress\",\n      \"dateOfSanction\", \n      \"emiAmount\", \n      \"rateOfInterest\",\n      \"sanctionAmount\", \n      \"tenure\", \n      \"typeOfDebt\", \n      \"accountClosedFlag\", \n      \"fundType\", \n      \"sanctionCurrency\", \n      \"creditSubtype\", \n      \"facilityName\", \n      \"amountOverdue\", \n      \"otherChargeAmount\", \n      \"debtStartDate\", \n      \"interestAmount\", \n      \"oldDebtRefNo\", \n      \"principalOutstanding\", \n      \"loanRemark\", \n      \"totalOutstandingAmount\", \n      \"creditorBusinessUnit\", \n      \"drawingPower\", \n      \"daysPastDue\"\n    }",
             "required": false,
             "style": "form",
             "explode": true,
