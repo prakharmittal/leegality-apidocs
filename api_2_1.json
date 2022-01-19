@@ -303,6 +303,9 @@
               "$ref": "#/components/schemas/Invitee"
             }
           },
+          "neslData": {
+            "$ref": "#/components/schemas/Nesl"
+          },
           "CCInvitees": {
             "type": "array",
             "items": {
@@ -560,6 +563,355 @@
           }
         }
       },
+      "Nesl": {
+        "type": "object",
+        "properties": {
+          "documentDetail": {
+            "$ref": "#/components/schemas/NeslDocument"
+          },
+          "stampData": {
+            "$ref": "#/components/schemas/NeslStamp"
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NeslParticipants"
+            }
+          },
+          "neslSecurities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NeslSecurities"
+            }
+          }
+        }
+      },
+      "NeslDocument": {
+        "required": [
+          "accountClosedFlag",
+          "creditSubtype",
+          "dateOfSanction",
+          "emiAmount",
+          "facilityName",
+          "fundType",
+          "loanNumber",
+          "rateOfInterest",
+          "registrationType",
+          "sanctionAmount",
+          "sanctionCurrency",
+          "sanctionNumber",
+          "state",
+          "tenure",
+          "typeOfDebt"
+        ],
+        "type": "object",
+        "properties": {
+          "loanNumber": {
+            "type": "string",
+            "description": "The loan number associated with the debt."
+          },
+          "sanctionNumber": {
+            "type": "string",
+            "description": "The sanction number associated with the debt."
+          },
+          "registrationType": {
+            "type": "string",
+            "description": "Type of debt (Individual Loan or Non-Individual Loan).\nAccepted values are- INDIVIDUAL_LOAN, NON_INDIVIDUAL_LOAN."
+          },
+          "state": {
+            "type": "string",
+            "description": "The state in which stamp duty is being paid."
+          },
+          "branchName": {
+            "type": "string",
+            "description": "The name of the branch granting the loan."
+          },
+          "branchAddress": {
+            "type": "string",
+            "description": "The address of the branch granting the loan."
+          },
+          "dateOfSanction": {
+            "type": "string",
+            "description": "The date on which the loan was sanctioned as per the lender's CBS."
+          },
+          "emiAmount": {
+            "type": "string",
+            "description": "Interest installment amount payable on the loan."
+          },
+          "rateOfInterest": {
+            "type": "string",
+            "description": "Rate of Interest on the loan."
+          },
+          "sanctionAmount": {
+            "type": "string",
+            "description": "The amount sanctioned by the financial creditor."
+          },
+          "tenure": {
+            "type": "string",
+            "description": "The tenure of the loan."
+          },
+          "typeOfDebt": {
+            "type": "string",
+            "description": "The type of loan (financial debt or operational debt).\nAccepted values are- FINANCIAL, OPERATIONAL."
+          },
+          "accountClosedFlag": {
+            "type": "string",
+            "description": "Whether the account is closed (yes, no, or assigned debt).\nAccepted values are- YES, NO, ASSIGNED."
+          },
+          "fundType": {
+            "type": "string",
+            "description": "Whether the credit facility is funded or non funded.\nAccepted values are- FUNDED, NON_FUNDED."
+          },
+          "sanctionCurrency": {
+            "type": "string",
+            "description": "The currency in which the loan is denominated (INR or USD).\nAccepted values are- INR, USD."
+          },
+          "creditSubtype": {
+            "type": "string",
+            "description": "Whether the financial debt is created pursuant to a credit facility or the purchase of a property.\nAccepted values are- CREDIT_FACILITY, PROPERTY_BUYER."
+          },
+          "facilityName": {
+            "type": "string",
+            "description": "The name of the loan facility."
+          },
+          "amountOverdue": {
+            "type": "string",
+            "description": "The amount overdue on the loan."
+          },
+          "otherChargeAmount": {
+            "type": "string",
+            "description": "Any other charges (if applicable)."
+          },
+          "debtStartDate": {
+            "type": "string",
+            "description": "The date on which the financial debt started."
+          },
+          "interestAmount": {
+            "type": "string",
+            "description": "The amount of interest."
+          },
+          "oldDebtRefNo": {
+            "type": "string",
+            "description": "The old debt reference number (applicable in case there is a change in the debt reference number)."
+          },
+          "principalOutstanding": {
+            "type": "string",
+            "description": "The outstanding principal amount."
+          },
+          "loanRemark": {
+            "type": "string",
+            "description": "Loan remarks (if any)."
+          },
+          "totalOutstandingAmount": {
+            "type": "string",
+            "description": "Total outstanding amount."
+          },
+          "creditorBusinessUnit": {
+            "type": "string",
+            "description": "The business unit of the creditor providing the debt (such as SME, Retail etc)."
+          },
+          "drawingPower": {
+            "type": "string",
+            "description": "The drawing power of the loan."
+          },
+          "daysPastDue": {
+            "type": "string",
+            "description": "The number of days past due date."
+          }
+        }
+      },
+      "NeslStamp": {
+        "required": [
+          "articleCode",
+          "considerationPrice",
+          "descriptionOfDocument",
+          "firstParty",
+          "firstPartyPin",
+          "secondParty",
+          "secondPartyPin",
+          "stampDutyAmount",
+          "stampDutyPaidBy"
+        ],
+        "type": "object",
+        "properties": {
+          "firstParty": {
+            "type": "string",
+            "description": "The name of the first party (for the stamp paper)."
+          },
+          "secondParty": {
+            "type": "string",
+            "description": "The name of the second party (for the stamp paper)."
+          },
+          "stampDutyAmount": {
+            "type": "string",
+            "description": "The stamp duty amount."
+          },
+          "considerationPrice": {
+            "type": "string",
+            "description": "The consideration price for the purposes of stamp duty."
+          },
+          "descriptionOfDocument": {
+            "type": "string",
+            "description": "The description of the document for the purposes of stamp duty."
+          },
+          "stampDutyPaidBy": {
+            "type": "string",
+            "description": "The name of the party paying the stamp duty."
+          },
+          "articleCode": {
+            "type": "string",
+            "description": "Article code for payment of stamp duty."
+          },
+          "firstPartyPin": {
+            "type": "string",
+            "description": "The pincode of the first party (for the stamp paper). This is mandatory for the states of Madhya Pradesh & West Bengal."
+          },
+          "secondPartyPin": {
+            "type": "string",
+            "description": "The pincode of the second party (for the stamp paper). This is mandatory for the states of Madhya Pradesh & West Bengal."
+          }
+        }
+      },
+      "NeslParticipants": {
+        "required": [
+          "contactPersonName",
+          "contactRelation",
+          "dob",
+          "emailId",
+          "fullName",
+          "legalConstitution",
+          "mobileNumber",
+          "officialDocId",
+          "officialDocType",
+          "partyType"
+        ],
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "description": "Full name of the Party."
+          },
+          "contactPersonName": {
+            "type": "string",
+            "description": "Full name of the contact person of the Party."
+          },
+          "contactRelation": {
+            "type": "string",
+            "description": "Relation of the party to the debt (Debtor, Guarantor, Co-obligant).\nAccepted values are- CREDITOR, DEBTOR, GUARANTOR, CO_OBLIGANT, SECURITY_PROVIDER, ASSIGNEE."
+          },
+          "emailId": {
+            "type": "string",
+            "description": "Email ID of the signer."
+          },
+          "mobileNumber": {
+            "type": "string",
+            "description": "Mobile Number of the signer."
+          },
+          "dob": {
+            "type": "string",
+            "description": "Date of Birth/Incorporation."
+          },
+          "legalConstitution": {
+            "type": "string",
+            "description": "Legal constitution of the signer (Resident Individual, Private Limited, Public Limited, LLP, Proprietorship, Partnership, Entity created by Statute, Trust, HUF, Coop Society, Association of Persons, Government, Self Help Groups, Non-Resident, Foreign Company).\nAccepted values are- RESIDENT_INDIVIDUAL, PUBLIC_LTD, PRIVATE_LTD, LLP, PROPRIETORSHIP, PARTNERSHIP, ENTITY_CREATED_BY_STATUTE, TRUST, HUF, CO_OP_SOCIETY, ASSOCIATION_OF_PERSONS, GOVERNMENT, SELF_HELP_GROUP, NON_RESIDENT, FOREIGN_COMPANY."
+          },
+          "alternateEmailId": {
+            "type": "string",
+            "description": "Alternate email ID of the signer."
+          },
+          "alternateMobileNumber": {
+            "type": "string",
+            "description": "Alternate mobile of the signer."
+          },
+          "officialDocType": {
+            "type": "string",
+            "description": "Official Document Type (Pan Card, Driving License, Voter ID, Passport, Others).\nAccepted values are- PAN_CARD, DRIVING_LICENSE, VOTER_ID, PASSPORT, ANY_OTHER_OFFICIAL_ID."
+          },
+          "officialDocId": {
+            "type": "string",
+            "description": "Official Document ID."
+          },
+          "registeredAddress": {
+            "type": "string",
+            "description": "Registered address of the signer."
+          },
+          "registeredPinCode": {
+            "type": "string",
+            "description": "PIN code of the registered address of the signer."
+          },
+          "designation": {
+            "type": "string",
+            "description": "Designation of the signer (relevant in case of corporate entities)."
+          },
+          "communicationAddress": {
+            "type": "string",
+            "description": "Communication address of the signer."
+          },
+          "communicationAddressPinCode": {
+            "type": "string",
+            "description": "PIN code of the communication address of the signer."
+          },
+          "cin": {
+            "type": "string",
+            "description": "Corporate Identification Number (relevant in case of corporate entities)."
+          },
+          "kin": {
+            "type": "string",
+            "description": "KYC Identification Number of signer."
+          },
+          "partyType": {
+            "type": "string",
+            "description": "Type of Party (Indian entity/ Resident Individual/ Foreign Entity/ NRI/Foreign Individual.\nAccepted values are- INDIAN_ENTITY, RESIDENT_INDIVIDUAL, FOREIGN_ENTITY, NRI."
+          }
+        }
+      },
+      "NeslSecurities": {
+        "required": [
+          "assetId",
+          "assetsType",
+          "chargeType",
+          "securityDescription"
+        ],
+        "type": "object",
+        "properties": {
+          "securityDescription": {
+            "type": "string",
+            "description": "Description of security."
+          },
+          "assetsType": {
+            "type": "string",
+            "description": "Type of asset forming security (Movable, Immovable, Intangible, Not Classified).\nAccepted values are- MOVABLE, IMMOVABLE, INTANGIBLE, NOT_CLASSIFIED."
+          },
+          "chargeType": {
+            "type": "string",
+            "description": "Type of charge created (Mortgage, Hypothecation, Charge, Assignment, Pledge, Lien, Negative Lien, Guarantee, Others, Not Classified).\nAccepted values are- MORTGAGE, HYPOTHECATION, CHARGE, ASSIGNMENT, PLEDGE, LIEN, NEGATIVE_LIEN, GUARANTEE, OTHERS, NOT_CLASSIFIED."
+          },
+          "assetId": {
+            "type": "string",
+            "description": "Asset ID of the Security (used internally by the lender)."
+          },
+          "doc": {
+            "type": "string",
+            "description": "Date of creation of security."
+          },
+          "dov": {
+            "type": "string",
+            "description": "Date of valuation of security."
+          },
+          "cersaiId": {
+            "type": "string",
+            "description": "CERSAI ID of security created."
+          },
+          "rocChargeId": {
+            "type": "string",
+            "description": "ROC ID for security created."
+          },
+          "securityValue": {
+            "type": "string",
+            "description": "Value of security."
+          }
+        }
+      },
       "CcInvitee": {
         "type": "object",
         "properties": {
@@ -710,7 +1062,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Pass the value of the type of signature. Accepted values are- AADHAAR, VIRTUAL_SIGN, DSC, OFFLINE_SIGN , DOC_SIGNER, AUTOMATED_SIGN.The value OFFLINE_SIGN refers to Cloud DSC."
+            "description": "Pass the value of the type of signature. Accepted values are- AADHAAR, VIRTUAL_SIGN, DSC, OFFLINE_SIGN , DOC_SIGNER, AUTOMATED_SIGN, NESL_ESIGN.The value OFFLINE_SIGN refers to Cloud DSC."
           },
           "config": {
             "$ref": "#/components/schemas/SignatureConfig"
@@ -748,6 +1100,11 @@
           "affixFingerprint": {
             "type": "boolean",
             "description": "Pass 'true' if you want to allow the signer to affix an image of their fingerprint, scanned using a supported biometric fingerprint detection device. Fingerprint detection works only on Windows and Android devices, and requires access to a supported biometric device. Biometric device required to capture fingerprint. Only applicable for virtual signature.",
+            "default": false
+          },
+          "f2fmode": {
+            "type": "boolean",
+            "description": "Pass 'true' if you want to enable f2f mode in NESL eSign.",
             "default": false
           },
           "verifyName": {
