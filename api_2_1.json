@@ -321,7 +321,7 @@
             "description": "folder id stands for the Unique ID of the folder obtained from your Dashboard. Pass this value in the Create API to add the document to a particular folder."
           },
           "expiryDays": {
-            "maximum": 30,
+            "maximum": 365,
             "minimum": -1,
             "type": "integer",
             "description": "Can be used to define the timeout period after which an uncompleted transaction gets cancelled and reversed. -1 is for 45 minutes, 0 means same day (11:59 PM) , 1 stands for next day , 2 stands for 2 days and so on.",
@@ -990,10 +990,11 @@
           },
           "version": {
             "type": "number",
-            "description": "If provided, we will make call to specific version of webhook data. Valid values are '2.1', '2.2', '2.3'.",
+            "description": "If provided, we will make call to specific version of webhook data. Valid values are '2.1', '2.2', '2.3', '2.5'.",
             "default": 2.1
           }
-        }
+        },
+        "description": "Webhook should be configured in order to receive a POST API call to the URL provided when the invitee signs the \n document. A call is made to success URL in case of successful signing of the document and in case of signature \n failure, a call is made to the error URL. Note: In case of webhook version 2.5, the URL has to be passed for both \n success and error parameter in order to receive the corresponding call. Same webhook URL can also be \n passed in both success and error"
       },
       "Attachment": {
         "required": [
