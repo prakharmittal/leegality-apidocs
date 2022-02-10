@@ -2040,8 +2040,12 @@
           "considerationPrice",
           "descriptionOfDocument",
           "firstParty",
+          "firstPartyOVDType",
+          "firstPartyOVDValue",
           "firstPartyPin",
           "secondParty",
+          "secondPartyOVDType",
+          "secondPartyOVDValue",
           "secondPartyPin",
           "stampDutyAmount",
           "stampDutyPaidBy"
@@ -2083,6 +2087,22 @@
           "secondPartyPin": {
             "type": "string",
             "description": "The pincode of the second party (for the stamp paper). This is mandatory for the states of Madhya Pradesh & West Bengal."
+          },
+          "firstPartyOVDType": {
+            "type": "string",
+            "description": "The OVD Type of the first party (for the stamp paper). This will be List of values. This is mandatory for the states of West Bengal."
+          },
+          "firstPartyOVDValue": {
+            "type": "string",
+            "description": "The OVD Value of the first party (for the stamp paper). This is mandatory for the states of West Bengal."
+          },
+          "secondPartyOVDType": {
+            "type": "string",
+            "description": "The OVD Type of the second party (for the stamp paper). This will be List of values. This is mandatory for the states of West Bengal."
+          },
+          "secondPartyOVDValue": {
+            "type": "string",
+            "description": "The OVD Value of the second party (for the stamp paper). This is mandatory for the states of West Bengal."
           }
         }
       },
