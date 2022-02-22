@@ -259,6 +259,10 @@
             "type": "string",
             "description": "Internal Reference Number."
           },
+          "mac": {
+            "type": "string",
+            "description": "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
+          },
           "invitations": {
             "type": "array",
             "items": {
