@@ -566,7 +566,7 @@
             "description": "Pass this parameter as \"true\" to allow signers to reject sign invitations in the signing journey. This is compatible with Aadhaar eSign, Secure Virtual Sign, DSC Sign, Offline Sign & DocSigner. ",
             "default": false
           },
-          "EnableRejectMessage": {
+          "enableRejectMessage": {
             "type": "boolean",
             "description": "Pass this parameter as \"true\" to mandate the invitee to share a message if they are rejecting the sign invitation.  This parameter can be passed \"true\" only if EnableRejectDocument is also set as \"true\".",
             "default": false
