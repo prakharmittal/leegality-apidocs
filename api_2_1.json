@@ -560,6 +560,16 @@
             "type": "boolean",
             "description": "Pass true if you want to enable two factor authentication for the invitee.",
             "default": false
+          },
+          "enableRejectDocument": {
+            "type": "boolean",
+            "description": "Pass this parameter as \"true\" to allow signers to reject sign invitations in the signing journey. This is compatible with Aadhaar eSign, Secure Virtual Sign, DSC Sign, Offline Sign & DocSigner. ",
+            "default": false
+          },
+          "EnableRejectMessage": {
+            "type": "boolean",
+            "description": "Pass this parameter as \"true\" to mandate the invitee to share a message if they are rejecting the sign invitation.  This parameter can be passed \"true\" only if EnableRejectDocument is also set as \"true\".",
+            "default": false
           }
         }
       },
@@ -1644,7 +1654,8 @@
             "type": "string",
             "description": "This parameter is passed only if coordinate_picker parameter is set 'true'. This is a URL that allows a user to set  custom eSign coordinates for all signers.  \n\nYou can show this URL to users inside your application using our SDKs. "
           }
-        }
+        },
+        "example": null
       },
       "ReactivateApiResponse_data": {
         "type": "object",
@@ -1663,7 +1674,8 @@
               "$ref": "#/components/schemas/ReactivateResponseInvitation"
             }
           }
-        }
+        },
+        "example": null
       },
       "DetailsApiResponse_data": {
         "type": "object",
@@ -1703,7 +1715,8 @@
               "$ref": "#/components/schemas/Signer"
             }
           }
-        }
+        },
+        "example": null
       },
       "ListApiResponse_data": {
         "type": "object",
@@ -1718,7 +1731,8 @@
               "$ref": "#/components/schemas/ListData"
             }
           }
-        }
+        },
+        "example": null
       },
       "EditApiResponse_data": {
         "type": "object",
@@ -1737,7 +1751,8 @@
               "$ref": "#/components/schemas/InviteeRequest"
             }
           }
-        }
+        },
+        "example": null
       }
     },
     "securitySchemes": {
