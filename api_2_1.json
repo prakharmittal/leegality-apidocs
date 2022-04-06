@@ -1123,7 +1123,7 @@
             "description": "Pass 'true' if you want to allow the signer to draw their signature on the screen. Only applicable for virtual signature.",
             "default": false
           },
-          "allowChose": {
+          "allowChoose": {
             "type": "boolean",
             "description": "Pass 'true' if you want to allow user to chose their signature from a set of auto generated signature images based on their name. Only applicable for virtual signature.",
             "default": false
