@@ -8,9 +8,6 @@
       "name": "Leegality Support",
       "email": "contact@leegality.com"
     },
-    "x-logo": { 
-      "url": "https://raw.githubusercontent.com/prakharmittal/leegality-apidocs/master/logo.png"
-    },
     "version": "2.1"
   },
   "externalDocs": {
@@ -580,7 +577,10 @@
             "$ref": "#/components/schemas/NeslDocument"
           },
           "stampData": {
-            "$ref": "#/components/schemas/NeslStamp"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NeslStampArray"
+            }
           },
           "participants": {
             "type": "array",
@@ -730,19 +730,13 @@
           }
         }
       },
-      "NeslStamp": {
+      "NeslStampArray": {
         "required": [
           "articleCode",
           "considerationPrice",
           "descriptionOfDocument",
           "firstParty",
-          "firstPartyOVDType",
-          "firstPartyOVDValue",
-          "firstPartyPin",
           "secondParty",
-          "secondPartyOVDType",
-          "secondPartyOVDValue",
-          "secondPartyPin",
           "stampDutyAmount",
           "stampDutyPaidBy"
         ],
@@ -786,7 +780,7 @@
           },
           "firstPartyOVDType": {
             "type": "string",
-            "description": "The OVD Type of the first party (for the stamp paper). This will be List of values. This is mandatory for the states of West Bengal."
+            "description": "The OVD Type of the first party (for the stamp paper). This will be List of values. This is mandatory for the states of West Bengal. Accepted values are - PAN_CARD, DRIVING_LICENSE, VOTER_ID, PASSPORT, ANY_OTHER_OFFICIAL_ID."
           },
           "firstPartyOVDValue": {
             "type": "string",
@@ -794,7 +788,7 @@
           },
           "secondPartyOVDType": {
             "type": "string",
-            "description": "The OVD Type of the second party (for the stamp paper). This will be List of values. This is mandatory for the states of West Bengal."
+            "description": "The OVD Type of the second party (for the stamp paper). This will be List of values. This is mandatory for the states of West Bengal.Accepted values are - PAN_CARD, DRIVING_LICENSE, VOTER_ID, PASSPORT, ANY_OTHER_OFFICIAL_ID."
           },
           "secondPartyOVDValue": {
             "type": "string",
