@@ -1072,6 +1072,72 @@
             }
           },
           {
+            "name": "neslDocumentDetails_stampDetails_firstPartyPin",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this value as \"true\" to know the pin of the first party (for the stamp paper). Default value is \"false\".\n  \n  \"neslDocumentDetails_stampDetails\" parameters also need to be passed as true to recieve this in response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "neslDocumentDetails_stampDetails_secondPartyPin",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this value as \"true\" to know the pin of the second party (for the stamp paper). Default value is \"false\".\n  \n  \"neslDocumentDetails_stampDetails\" parameters also need to be passed as true to recieve this in response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "neslDocumentDetails_stampDetails_firstPartyOVDType",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this value as \"true\" to know the OVD Type of the first party (for the stamp paper). Default value is \"false\".\n  \n  \"neslDocumentDetails_stampDetails\" parameters also need to be passed as true to recieve this in response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "neslDocumentDetails_stampDetails_firstPartyOVDValue",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this value as \"true\" to know the OVD Value of the first party (for the stamp paper). Default value is \"false\". \n  \n  \"neslDocumentDetails_stampDetails\" parameters also need to be passed as true to recieve this in response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "neslDocumentDetails_stampDetails_secondPartyOVDType",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this value as \"true\" to know the OVD Type of the second party (for the stamp paper). Default value is \"false\".  \n  \n  \"neslDocumentDetails_stampDetails\" parameters also need to be passed as true to recieve this in response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "neslDocumentDetails_stampDetails_secondPartyOVDValue",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this value as \"true\" to know the OVD Value of the second party (for the stamp paper). Default value is \"false\". \n  \n  \"neslDocumentDetails_stampDetails\" parameters also need to be passed as true to recieve this in response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "cc",
             "in": "query",
             "description": "Default Value = false\n  \n  Pass this parameter as true to receive details about contacts configured as “CCs” for the document.",
@@ -1185,6 +1251,28 @@
             "name": "invitations_inviteeConfigs_customConsent",
             "in": "query",
             "description": "Default Value = false\nPass this parameter as TRUE to receive the custom consent content configured. Custom consent is an additional configurable consent that has to be mandatorily accepted by the signer before he or she can proceed to sign the document.\n\n\"invitations_inviteeConfigs\" parameter also needs to be passed as true to recieve this in response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "invitations_inviteeConfigs_enableRejectDocument",
+            "in": "query",
+            "description": "Default Value = false\nPass this parameter as \"true\" to know if the signer is allowed to reject this invitation in the signing journey.  Default value is \"False\".\n\n\"invitations_inviteeConfigs\" parameter also needs to be passed as true to recieve this in response.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "invitations_inviteeConfigs_enableRejectMessage",
+            "in": "query",
+            "description": "Default Value = false\nPass this parameter as \"true\" to know if the signer is required to share a message when rejecting the invitation.  Default value is \"False\"\n\n\"invitations_inviteeConfigs\" parameter also needs to be passed as true to recieve this in response.",
             "required": false,
             "style": "form",
             "explode": true,
@@ -1326,6 +1414,17 @@
           },
           {
             "name": "invitations_invitationStatus_rejectionMessage",
+            "in": "query",
+            "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the reason provided by the approver for rejecting the invitation.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "invitations_invitationStatus_signRejectionMessage",
             "in": "query",
             "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the reason provided by the signer for rejecting the invitation.",
             "required": false,
@@ -1884,7 +1983,10 @@
             "$ref": "#/components/schemas/NeslDocument"
           },
           "stampData": {
-            "$ref": "#/components/schemas/NeslStamp"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NeslStamp"
+            }
           },
           "participants": {
             "type": "array",
@@ -2040,13 +2142,7 @@
           "considerationPrice",
           "descriptionOfDocument",
           "firstParty",
-          "firstPartyOVDType",
-          "firstPartyOVDValue",
-          "firstPartyPin",
           "secondParty",
-          "secondPartyOVDType",
-          "secondPartyOVDValue",
-          "secondPartyPin",
           "stampDutyAmount",
           "stampDutyPaidBy"
         ],
@@ -2090,7 +2186,7 @@
           },
           "firstPartyOVDType": {
             "type": "string",
-            "description": "The OVD Type of the first party (for the stamp paper). This will be List of values. This is mandatory for the states of West Bengal."
+            "description": "The OVD Type of the first party (for the stamp paper). This will be List of values. This is mandatory for the states of West Bengal. Accepted values are - PAN_CARD, DRIVING_LICENSE, VOTER_ID, PASSPORT, ANY_OTHER_OFFICIAL_ID."
           },
           "firstPartyOVDValue": {
             "type": "string",
@@ -2098,7 +2194,7 @@
           },
           "secondPartyOVDType": {
             "type": "string",
-            "description": "The OVD Type of the second party (for the stamp paper). This will be List of values. This is mandatory for the states of West Bengal."
+            "description": "The OVD Type of the second party (for the stamp paper). This will be List of values. This is mandatory for the states of West Bengal. Accepted values are - PAN_CARD, DRIVING_LICENSE, VOTER_ID, PASSPORT, ANY_OTHER_OFFICIAL_ID."
           },
           "secondPartyOVDValue": {
             "type": "string",
@@ -2243,6 +2339,10 @@
           "securityValue": {
             "type": "string",
             "description": "Value of security."
+          },
+          "abc": {
+            "type": "string",
+            "description": "Asset ID of the Security (used internally by the lender)."
           }
         }
       },
@@ -2956,13 +3056,29 @@
             "type": "string",
             "description": "Article code for payment of stamp duty."
           },
-          "FirstPartyPin:": {
+          "firstPartyPin": {
             "type": "string",
-            "description": "Article code for payment of stamp duty."
+            "description": "The pin of the first party (for the stamp paper)."
           },
-          "secondPartyPin:": {
+          "secondPartyPin": {
             "type": "string",
-            "description": "Article code for payment of stamp duty."
+            "description": "The pin of the second party (for the stamp paper)."
+          },
+          "firstPartyOVDType": {
+            "type": "string",
+            "description": "The OVD Type of the first party (for the stamp paper)."
+          },
+          "firstPartyOVDValue": {
+            "type": "string",
+            "description": "The OVD Value of the first party (for the stamp paper)."
+          },
+          "secondPartyOVDType": {
+            "type": "string",
+            "description": "The OVD Type of the second party (for the stamp paper)."
+          },
+          "secondPartyOVDValue": {
+            "type": "string",
+            "description": "The OVD Value of the second party (for the stamp paper)."
           }
         }
       },
@@ -3083,6 +3199,14 @@
           "customConsent": {
             "type": "string",
             "description": "Custome consent content (if any)."
+          },
+          "enableRejectDocument": {
+            "type": "boolean",
+            "description": "The signer is allowed to reject this invitation in the signing journey."
+          },
+          "enableRejectMessage": {
+            "type": "boolean",
+            "description": "The signer is required to share a message when rejecting the invitation."
           }
         }
       },
@@ -3375,6 +3499,10 @@
             "description": "Reason for failure of a sign invite. This includes the message sent by the invitee at the time of rejection of the invitation."
           },
           "rejectionMessage": {
+            "type": "string",
+            "description": "The message sent by the approver at the time of rejection the invitation."
+          },
+          "signRejectionMessage": {
             "type": "string",
             "description": "The message sent by the invitee at the time of rejection the invitation."
           }
@@ -4210,7 +4338,8 @@
               "$ref": "#/components/schemas/Request"
             }
           }
-        }
+        },
+        "example": null
       },
       "ReactivateApiResponse_data": {
         "type": "object",
@@ -4229,7 +4358,8 @@
               "$ref": "#/components/schemas/ReactivateResponseInvitation"
             }
           }
-        }
+        },
+        "example": null
       },
       "DocumentDetailsApiResponse_data": {
         "type": "object",
@@ -4313,7 +4443,8 @@
               "$ref": "#/components/schemas/InvitationsArrayResponseObject"
             }
           }
-        }
+        },
+        "example": null
       },
       "DocumentDetails3_1ApiResponse_data": {
         "type": "object",
@@ -4377,7 +4508,8 @@
               "$ref": "#/components/schemas/InvitationsArray3_1ResponseObject"
             }
           }
-        }
+        },
+        "example": null
       },
       "SeriesList3_1ApiResponse_data": {
         "type": "object",
@@ -4388,7 +4520,8 @@
               "$ref": "#/components/schemas/SeriesArray3_1ResponseObject"
             }
           }
-        }
+        },
+        "example": null
       },
       "SeriesExpiry3_1ApiResponse_data": {
         "type": "object",
@@ -4399,7 +4532,8 @@
               "$ref": "#/components/schemas/SeriesExpiryArray3_1ResponseObject"
             }
           }
-        }
+        },
+        "example": null
       },
       "InvitationsArray3_1ResponseObject_verificationResponse": {
         "type": "object",
@@ -4437,7 +4571,8 @@
             "description": "This will contain the value ‘true’, ‘false’ or ‘null’. If you have enabled this verification you will get response as null, if verification passed then ‘true’ otherwise ‘false’"
           }
         },
-        "description": "You will receive this parameter only if you enable using the verificationResponse key while making API call. This verificationResponse parameter will contain the verification data"
+        "description": "You will receive this parameter only if you enable using the verificationResponse key while making API call. This verificationResponse parameter will contain the verification data",
+        "example": null
       },
       "DocumentCompletedApiResponse_data": {
         "type": "object",
@@ -4452,7 +4587,8 @@
             "type": "integer",
             "description": "Total count of document as per the given filters"
           }
-        }
+        },
+        "example": null
       },
       "SeriesListApiResponse_data": {
         "type": "object",
@@ -4463,7 +4599,8 @@
               "$ref": "#/components/schemas/SeriesArrayResponseObject"
             }
           }
-        }
+        },
+        "example": null
       },
       "SeriesGroupApiResponse_data": {
         "type": "object",
@@ -4474,7 +4611,8 @@
               "$ref": "#/components/schemas/SeriesGroupArrayResponseObject"
             }
           }
-        }
+        },
+        "example": null
       },
       "WalletBalanceDetailsApiResponse_data": {
         "type": "object",
@@ -4499,7 +4637,8 @@
             "type": "integer",
             "description": "Total eSign Credits."
           }
-        }
+        },
+        "example": null
       },
       "WalletBalanceListApiResponse_data": {
         "type": "object",
@@ -4510,7 +4649,8 @@
               "$ref": "#/components/schemas/WalletBalanceListApiResponseObject"
             }
           }
-        }
+        },
+        "example": null
       },
       "ResendApiResponse_data": {
         "type": "object",
@@ -4521,7 +4661,8 @@
               "$ref": "#/components/schemas/ResendInvitationApiResponseObject"
             }
           }
-        }
+        },
+        "example": null
       },
       "DetailsApiResponse_data": {
         "type": "object",
@@ -4561,7 +4702,8 @@
               "$ref": "#/components/schemas/Signer"
             }
           }
-        }
+        },
+        "example": null
       },
       "ListApiResponse_data": {
         "type": "object",
@@ -4576,7 +4718,8 @@
               "$ref": "#/components/schemas/ListData"
             }
           }
-        }
+        },
+        "example": null
       }
     },
     "securitySchemes": {
