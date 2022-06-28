@@ -7,7 +7,7 @@
     "title" : "Leegality Documentation Gateway",
     "contact" : {
       "name" : "Leegality Support",
-      "email" : "contact@leegality.com"
+      "email" : "support@leegality.com"
     },
     "x-logo": { 
       "url": "https://raw.githubusercontent.com/prakharmittal/leegality-apidocs/master/logo.png"
@@ -672,7 +672,7 @@
           },
           "stampDutyAmount" : {
             "type" : "string",
-            "description" : "The stamp duty amount."
+            "description" : "The stamp duty amount.For the states of West Bengal, Maharashtra, Madhya Pradesh and Kerala, the stamp duty is calculated automatically based on considerationPrice and will override the value passed in this parameter, if there is a difference between the two."
           },
           "considerationPrice" : {
             "type" : "string",
