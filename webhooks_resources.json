@@ -1,936 +1,912 @@
 {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Leegality Webhooks & Resources",
-    "description": "Welcome to the reference for the Leegality REST API \nIntegrate with our eSigning Gateway using our REST API resources.\n\nYou can use our API for creating and deleting Signing invitations; for fetching Documents, Audit Trails and other details for existing invitations; and for searching documents based on your custom query.\n\nBehind our API calls are layers of secure channeling to ensure that your data is processed in a safe and secure manner.  The API is based on REST principles, and is a JSON-backed interface.\n## Resources\n\n  This section contains all the optional SDKs which may be useful while integrating leegality APIs.\n\n  Web SDK (Front-end) - https://gitlab.leegality.com/leegality-public/web-sdk\n  \n  Android SDK (Front-end) - https://gitlab.leegality.com/leegality-public/android-sdk\n  \n  Android Biometric SDK (APK file for Front-end Integration) - https://gitlab.leegality.com/leegality-public/leegality-helper \n  \n  iOS SDK (Front end) - https://gitlab.leegality.com/leegality-public/ios-sdk \n  \n  Document Signer Server Utility (Backend) - https://gitlab.leegality.com/leegality-public/docsigner \n  \n  USB Dongle Utility (Windows and Mac Desktop Utility) - https://gitlab.leegality.com/leegality-public/dsc-utility\n\n## Webhooks\nThis documentation contains the different versions and details of all the webhooks payload.",
-    "termsOfService": "https://leegality.com/tnc.html",
-    "contact": {
-      "name": "Leegality Support",
-      "email": "contact@leegality.com"
+  "openapi" : "3.0.0",
+  "info" : {
+    "description" : "Welcome to the reference for the Leegality REST API \nIntegrate with our eSigning Gateway using our REST API resources.\n\nYou can use our API for creating and deleting Signing invitations; for fetching Documents, Audit Trails and other details for existing invitations; and for searching documents based on your custom query.\n\nBehind our API calls are layers of secure channeling to ensure that your data is processed in a safe and secure manner.  The API is based on REST principles, and is a JSON-backed interface.\n## Resources\n\n  This section contains all the optional SDKs which may be useful while integrating leegality APIs.\n\n  Web SDK (Front-end) - https://gitlab.leegality.com/leegality-public/web-sdk/tree/v5\n  \n  Android SDK (Front-end) - https://gitlab.leegality.com/leegality-public/android-sdk\n  \n  Android Biometric SDK (APK file for Front-end Integration) - https://gitlab.leegality.com/leegality-public/leegality-helper \n  \n  iOS SDK (Front end) - https://gitlab.leegality.com/leegality-public/ios-sdk \n  \n  Document Signer Server Utility (Backend) - https://gitlab.leegality.com/leegality-public/docsigner \n  \n  USB Dongle Utility (Windows and Mac Desktop Utility) - https://gitlab.leegality.com/leegality-public/dsc-utility\n\n## Webhooks\nThis documentation contains the different versions and details of all the webhooks payload.",
+    "version" : "ALL",
+    "termsOfService" : "https://leegality.com/tnc.html",
+    "title" : "Leegality Webhooks & Resources",
+    "contact" : {
+      "name" : "Leegality Support",
+      "email" : "support@leegality.com"
     },
     "x-logo": { 
       "url": "https://raw.githubusercontent.com/prakharmittal/leegality-apidocs/master/logo.png"
-    },
-    "version": "ALL"
-  },
-  "externalDocs": {
-    "description": "Website",
-    "url": "https://leegality.com"
-  },
-  "servers": [
-    {
-      "url": "https://sandbox.leegality.com/api/v3.0"
     }
-  ],
-  "tags": [
-    {
-      "name": "Coordinate Picker Webhook",
-      "description": "Sample Webhook Data for Coordinate picker enabled."
-    },
-    {
-      "name": "Webhook 2.1",
-      "description": "Sample Webhook Data for V2.1 (This version is deprecated. Please use version 2.3)"
-    },
-    {
-      "name": "Webhook 2.2",
-      "description": "Sample Webhook Data for V2.2 (This version is deprecated. Please use version 2.3)"
-    },
-    {
-      "name": "Webhook 2.3",
-      "description": "Sample Webhook Data for V2.3"
-    },
-    {
-      "name": "Webhook 2.5",
-      "description": "Sample Webhook Data for V2.5 (This version of webhook does not contain signed files or audit trail. It is also known as webhook lite. )"
-    }
-  ],
-  "paths": {
-    "/your/coordinate/picker/webhook": {
-      "post": {
-        "tags": [
-          "Coordinate Picker Webhook"
-        ],
-        "summary": "Coordinate Picker Webhook Data",
-        "description": "A call is made to the Coordinate Picker Webhook URL provided by you on   successfully placing the coordinates for signature in case coordinate  picker is enabled. The webhook should expect application/json data and  should be publically accessible.",
-        "requestBody": {
-          "description": "Sample Data",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CoordinatePickerResponse"
+  },
+  "externalDocs" : {
+    "description" : "Website",
+    "url" : "https://leegality.com"
+  },
+  "tags" : [ {
+    "name" : "Coordinate Picker Webhook",
+    "description" : "Sample Webhook Data for Coordinate picker enabled."
+  }, {
+    "name" : "Webhook 2.1",
+    "description" : "Sample Webhook Data for V2.1 (This version is deprecated. Please use version 2.3)"
+  }, {
+    "name" : "Webhook 2.2",
+    "description" : "Sample Webhook Data for V2.2 (This version is deprecated. Please use version 2.3)"
+  }, {
+    "name" : "Webhook 2.3",
+    "description" : "Sample Webhook Data for V2.3"
+  }, {
+    "name" : "Webhook 2.5",
+    "description" : "Sample Webhook Data for V2.5 (This version of webhook does not contain signed files or audit trail. It is also known as webhook lite. )"
+  } ],
+  "paths" : {
+    "/your/coordinate/picker/webhook" : {
+      "post" : {
+        "tags" : [ "Coordinate Picker Webhook" ],
+        "summary" : "Coordinate Picker Webhook Data",
+        "description" : "A call is made to the Coordinate Picker Webhook URL provided by you on   successfully placing the coordinates for signature in case coordinate  picker is enabled. The webhook should expect application/json data and  should be publically accessible.",
+        "responses" : {
+          "200" : {
+            "description" : "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
+          }
+        },
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CoordinatePickerResponse"
               }
             }
           },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
-          }
+          "description" : "Sample Data",
+          "required" : true
         }
       }
     },
-    "/your/success/v2.1/webhook": {
-      "post": {
-        "tags": [
-          "Webhook 2.1"
-        ],
-        "summary": "Success Webhook Data",
-        "description": "A call is made to the Webhook URL provided by you on every successful eSignature. The webhook should expect application/json data and should be publically accessible.",
-        "requestBody": {
-          "description": "Sample Data",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WebhookDatav2.1"
+    "/your/success/v2.1/webhook" : {
+      "post" : {
+        "tags" : [ "Webhook 2.1" ],
+        "summary" : "Success Webhook Data",
+        "description" : "A call is made to the Webhook URL provided by you on every successful eSignature. The webhook should expect application/json data and should be publically accessible.",
+        "responses" : {
+          "200" : {
+            "description" : "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
+          }
+        },
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/WebhookDatav2.1"
               }
             }
           },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
-          }
+          "description" : "Sample Data",
+          "required" : true
         }
       }
     },
-    "/your/error/v2.1/webhook": {
-      "post": {
-        "tags": [
-          "Webhook 2.1"
-        ],
-        "summary": "Error Webhook Data",
-        "description": "A call is made to the Webhook URL provided by you in case of authentication failures, attempt exhaustion and expiry of invitations. The webhook should expect application/json data and should be publically accessible.",
-        "requestBody": {
-          "description": "Sample Data",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorWebhookDatav2.1"
+    "/your/error/v2.1/webhook" : {
+      "post" : {
+        "tags" : [ "Webhook 2.1" ],
+        "summary" : "Error Webhook Data",
+        "description" : "A call is made to the Webhook URL provided by you in case of authentication failures, attempt exhaustion and expiry of invitations. The webhook should expect application/json data and should be publically accessible.",
+        "responses" : {
+          "200" : {
+            "description" : "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
+          }
+        },
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ErrorWebhookDatav2.1"
               }
             }
           },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
-          }
+          "description" : "Sample Data",
+          "required" : true
         }
       }
     },
-    "/your/success/v2.2/webhook": {
-      "post": {
-        "tags": [
-          "Webhook 2.2"
-        ],
-        "summary": "Success Webhook Data",
-        "description": "A call is made to the Webhook URL provided by you on every successful eSignature. The webhook should expect application/json data and should be publically accessible.",
-        "requestBody": {
-          "description": "Sample Data",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WebhookDatav2.2"
+    "/your/success/v2.2/webhook" : {
+      "post" : {
+        "tags" : [ "Webhook 2.2" ],
+        "summary" : "Success Webhook Data",
+        "description" : "A call is made to the Webhook URL provided by you on every successful eSignature. The webhook should expect application/json data and should be publically accessible.",
+        "responses" : {
+          "200" : {
+            "description" : "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
+          }
+        },
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/WebhookDatav2.2"
               }
             }
           },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
-          }
+          "description" : "Sample Data",
+          "required" : true
         }
       }
     },
-    "/your/error/v2.2/webhook": {
-      "post": {
-        "tags": [
-          "Webhook 2.2"
-        ],
-        "summary": "Error Webhook Data",
-        "description": "A call is made to the Webhook URL provided by you in case of authentication failures, attempt exhaustion and expiry of invitations. The webhook should expect application/json data and should be publically accessible.",
-        "requestBody": {
-          "description": "Sample Data",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorWebhookDatav2.2"
+    "/your/error/v2.2/webhook" : {
+      "post" : {
+        "tags" : [ "Webhook 2.2" ],
+        "summary" : "Error Webhook Data",
+        "description" : "A call is made to the Webhook URL provided by you in case of authentication failures, attempt exhaustion and expiry of invitations. The webhook should expect application/json data and should be publically accessible.",
+        "responses" : {
+          "200" : {
+            "description" : "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
+          }
+        },
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ErrorWebhookDatav2.2"
               }
             }
           },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
-          }
+          "description" : "Sample Data",
+          "required" : true
         }
       }
     },
-    "/your/success/v2.3/webhook": {
-      "post": {
-        "tags": [
-          "Webhook 2.3"
-        ],
-        "summary": "Success Webhook Data",
-        "description": "A call is made to the Webhook URL provided by you on every successful eSignature. The webhook should expect application/json data and should be publically accessible.",
-        "requestBody": {
-          "description": "Sample Data",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WebhookDatav2.3"
+    "/your/success/v2.3/webhook" : {
+      "post" : {
+        "tags" : [ "Webhook 2.3" ],
+        "summary" : "Success Webhook Data",
+        "description" : "A call is made to the Webhook URL provided by you on every successful eSignature. The webhook should expect application/json data and should be publically accessible.",
+        "responses" : {
+          "200" : {
+            "description" : "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
+          }
+        },
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/WebhookDatav2.3"
               }
             }
           },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
-          }
+          "description" : "Sample Data",
+          "required" : true
         }
       }
     },
-    "/your/error/v2.3/webhook": {
-      "post": {
-        "tags": [
-          "Webhook 2.3"
-        ],
-        "summary": "Error Webhook Data",
-        "description": "A call is made to the Webhook URL provided by you in case of authentication failures, attempt exhaustion and expiry of invitations. The webhook should expect application/json data and should be publically accessible.",
-        "requestBody": {
-          "description": "Sample Data",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorWebhookDatav2.3"
+    "/your/error/v2.3/webhook" : {
+      "post" : {
+        "tags" : [ "Webhook 2.3" ],
+        "summary" : "Error Webhook Data",
+        "description" : "A call is made to the Webhook URL provided by you in case of authentication failures, attempt exhaustion and expiry of invitations. The webhook should expect application/json data and should be publically accessible.",
+        "responses" : {
+          "200" : {
+            "description" : "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
+          }
+        },
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ErrorWebhookDatav2.3"
               }
             }
           },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
-          }
+          "description" : "Sample Data",
+          "required" : true
         }
       }
     },
-    "/your/successOrError/v2.5/webhook": {
-      "post": {
-        "tags": [
-          "Webhook 2.5"
-        ],
-        "summary": "Webhook Data",
-        "description": "Use this Webhook to receive updates on the occurrence of success/failure events for each invitation in your eSign request API call.   The webhook response will provide only the basic details of each event.  For detailed information, or for fetching the updated document and audit trail, use our Details APIs.  We recommend using this Webhook if you prefer to receive updates through light API payloads. ",
-        "requestBody": {
-          "description": "Sample Data",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WebhookDatav2.5"
+    "/your/successOrError/v2.5/webhook" : {
+      "post" : {
+        "tags" : [ "Webhook 2.5" ],
+        "summary" : "Webhook Data",
+        "description" : "Use this Webhook to receive updates on the occurrence of success/failure events for each invitation in your eSign request API call.   The webhook response will provide only the basic details of each event.  For detailed information, or for fetching the updated document and audit trail, use our Details APIs.  We recommend using this Webhook if you prefer to receive updates through light API payloads. ",
+        "responses" : {
+          "200" : {
+            "description" : "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
+          }
+        },
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/WebhookDatav2.5"
               }
             }
           },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response is expected from your Webhook on every successful call. In case, we do not receive a 200 response, 3 re-attempts are made. First re-attempt is made immediately, Second after 1 hour and the Third after 3 hours."
-          }
+          "description" : "Sample Data",
+          "required" : true
         }
       }
     }
   },
-  "components": {
-    "schemas": {
-      "CoordinatePickerResponse": {
-        "type": "object",
-        "properties": {
-          "documentId": {
-            "type": "string",
-            "description": "documentId is a unique Leegality ID created for every eSigning request."
+  "servers" : [ {
+    "url" : "https://sandbox.leegality.com/api/v3.0"
+  } ],
+  "components" : {
+    "schemas" : {
+      "CoordinatePickerResponse" : {
+        "type" : "object",
+        "properties" : {
+          "documentId" : {
+            "type" : "string",
+            "description" : "documentId is a unique Leegality ID created for every eSigning request."
           },
-          "irn": {
-            "type": "string",
-            "description": "Internal Reference Number."
+          "irn" : {
+            "type" : "string",
+            "description" : "Internal Reference Number."
           },
-          "mac": {
-            "type": "string",
-            "description": "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
+          "mac" : {
+            "type" : "string",
+            "description" : "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
           },
-          "invitations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Request"
+          "invitations" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Request"
             }
           }
         }
       },
-      "Request": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the invitee."
+      "Request" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the invitee."
           },
-          "email": {
-            "type": "string",
-            "description": "Email of the invitee."
+          "email" : {
+            "type" : "string",
+            "description" : "Email of the invitee."
           },
-          "phone": {
-            "type": "string",
-            "description": "Phone Number of the invitee."
+          "phone" : {
+            "type" : "string",
+            "description" : "Phone Number of the invitee."
           },
-          "signUrl": {
-            "type": "string",
-            "description": "Invitee specfic URL unique to the request."
+          "signUrl" : {
+            "type" : "string",
+            "description" : "Invitee specfic URL unique to the request."
           },
-          "active": {
-            "type": "boolean",
-            "description": "Status of the URL."
+          "active" : {
+            "type" : "boolean",
+            "description" : "Status of the URL."
           },
-          "expiryDate": {
-            "type": "string",
-            "description": "Request expiration date. Format (dd-MM-yyyy HH:mm:ss)"
+          "expiryDate" : {
+            "type" : "string",
+            "description" : "Request expiration date. Format (dd-MM-yyyy HH:mm:ss)"
           }
         }
       },
-      "WebhookDatav2.1": {
-        "type": "object",
-        "properties": {
-          "documentId": {
-            "type": "string",
-            "description": "Same as the documentId received in POST call."
+      "WebhookDatav2.1" : {
+        "type" : "object",
+        "properties" : {
+          "documentId" : {
+            "type" : "string",
+            "description" : "Same as the documentId received in POST call."
           },
-          "mac": {
-            "type": "string",
-            "description": "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
+          "mac" : {
+            "type" : "string",
+            "description" : "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
           },
-          "folderId": {
-            "type": "string",
-            "description": "Folder ID of the document."
+          "folderId" : {
+            "type" : "string",
+            "description" : "Folder ID of the document."
           },
-          "irn": {
-            "type": "string",
-            "description": "Internal Reference Number of the document."
+          "irn" : {
+            "type" : "string",
+            "description" : "Internal Reference Number of the document."
           },
-          "files": {
-            "type": "array",
-            "description": "Base64 encoded string format of latest version of the document.",
-            "items": {
-              "type": "string"
+          "files" : {
+            "type" : "array",
+            "description" : "Base64 encoded string format of latest version of the document.",
+            "items" : {
+              "type" : "string"
             }
           },
-          "auditTrail": {
-            "type": "string",
-            "description": "Base64 encoded string format of the Audit Trail generated on completion of the document."
+          "auditTrail" : {
+            "type" : "string",
+            "description" : "Base64 encoded string format of the Audit Trail generated on completion of the document."
           },
-          "signer": {
-            "$ref": "#/components/schemas/Signerv2.1"
+          "signer" : {
+            "$ref" : "#/components/schemas/Signerv2.1"
           },
-          "request": {
-            "$ref": "#/components/schemas/SuccessInviteeRequest"
+          "request" : {
+            "$ref" : "#/components/schemas/SuccessInviteeRequest"
           }
         }
       },
-      "WebhookDatav2.2": {
-        "type": "object",
-        "properties": {
-          "documentId": {
-            "type": "string",
-            "description": "Same as the documentId received in POST call."
+      "WebhookDatav2.2" : {
+        "type" : "object",
+        "properties" : {
+          "documentId" : {
+            "type" : "string",
+            "description" : "Same as the documentId received in POST call."
           },
-          "mac": {
-            "type": "string",
-            "description": "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
+          "mac" : {
+            "type" : "string",
+            "description" : "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
           },
-          "folderId": {
-            "type": "string",
-            "description": "Folder ID of the document."
+          "folderId" : {
+            "type" : "string",
+            "description" : "Folder ID of the document."
           },
-          "irn": {
-            "type": "string",
-            "description": "Internal Reference Number of the document."
+          "irn" : {
+            "type" : "string",
+            "description" : "Internal Reference Number of the document."
           },
-          "files": {
-            "type": "array",
-            "description": "Base64 encoded string format of latest version of the document.",
-            "items": {
-              "type": "string"
+          "files" : {
+            "type" : "array",
+            "description" : "Base64 encoded string format of latest version of the document.",
+            "items" : {
+              "type" : "string"
             }
           },
-          "auditTrail": {
-            "type": "string",
-            "description": "Base64 encoded string format of the Audit Trail generated on completion of the document."
+          "auditTrail" : {
+            "type" : "string",
+            "description" : "Base64 encoded string format of the Audit Trail generated on completion of the document."
           },
-          "signer": {
-            "$ref": "#/components/schemas/Signerv2.2"
+          "signer" : {
+            "$ref" : "#/components/schemas/Signerv2.2"
           },
-          "request": {
-            "$ref": "#/components/schemas/SuccessInviteeRequest"
+          "request" : {
+            "$ref" : "#/components/schemas/SuccessInviteeRequest"
           }
         }
       },
-      "WebhookDatav2.3": {
-        "type": "object",
-        "properties": {
-          "documentId": {
-            "type": "string",
-            "description": "Same as the documentId received in POST call."
+      "WebhookDatav2.3" : {
+        "type" : "object",
+        "properties" : {
+          "documentId" : {
+            "type" : "string",
+            "description" : "Same as the documentId received in POST call."
           },
-          "mac": {
-            "type": "string",
-            "description": "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
+          "mac" : {
+            "type" : "string",
+            "description" : "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
           },
-          "folderId": {
-            "type": "string",
-            "description": "Folder ID of the document."
+          "folderId" : {
+            "type" : "string",
+            "description" : "Folder ID of the document."
           },
-          "irn": {
-            "type": "string",
-            "description": "Internal Reference Number of the document."
+          "irn" : {
+            "type" : "string",
+            "description" : "Internal Reference Number of the document."
           },
-          "files": {
-            "type": "array",
-            "description": "Base64 encoded string format of latest version of the document.",
-            "items": {
-              "type": "string"
+          "files" : {
+            "type" : "array",
+            "description" : "Base64 encoded string format of latest version of the document.",
+            "items" : {
+              "type" : "string"
             }
           },
-          "auditTrail": {
-            "type": "string",
-            "description": "Base64 encoded string format of the Audit Trail generated on completion of the document."
+          "auditTrail" : {
+            "type" : "string",
+            "description" : "Base64 encoded string format of the Audit Trail generated on completion of the document."
           },
-          "signer": {
-            "$ref": "#/components/schemas/Signerv2.3"
+          "signer" : {
+            "$ref" : "#/components/schemas/Signerv2.3"
           },
-          "request": {
-            "$ref": "#/components/schemas/SuccessInviteeRequest"
+          "request" : {
+            "$ref" : "#/components/schemas/SuccessInviteeRequest"
           },
-          "verification": {
-            "$ref": "#/components/schemas/Verification"
+          "verification" : {
+            "$ref" : "#/components/schemas/Verification"
           }
         }
       },
-      "WebhookDatav2.5": {
-        "type": "object",
-        "properties": {
-          "webhookType": {
-            "type": "string",
-            "description": "The type of webhook event.  Possible values are \"Success\" and \"Error\"."
+      "WebhookDatav2.5" : {
+        "type" : "object",
+        "properties" : {
+          "webhookType" : {
+            "type" : "string",
+            "description" : "The type of webhook event.  Possible values are \"Success\" and \"Error\"."
           },
-          "documentId": {
-            "type": "string",
-            "description": "The unique Leegality ID associated with the eSign request API call."
+          "documentId" : {
+            "type" : "string",
+            "description" : "The unique Leegality ID associated with the eSign request API call."
           },
-          "mac": {
-            "type": "string",
-            "description": "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
+          "mac" : {
+            "type" : "string",
+            "description" : "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
           },
-          "irn": {
-            "type": "string",
-            "description": "The internal reference number passsed in the eSign request API."
+          "irn" : {
+            "type" : "string",
+            "description" : "The internal reference number passsed in the eSign request API."
           },
-          "documentStatus": {
-            "type": "string",
-            "description": "The status of the document.  Possible values are \"Draft\", \"Sent\", \"Completed\" and \"Expired\"."
+          "documentStatus" : {
+            "type" : "string",
+            "description" : "The status of the document.  Possible values are \"Draft\", \"Sent\", \"Completed\" and \"Expired\"."
           },
-          "messages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RejectionReason"
+          "messages" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/RejectionReason"
             }
           },
-          "request": {
-            "$ref": "#/components/schemas/InviteeRequest2.5"
+          "request" : {
+            "$ref" : "#/components/schemas/InviteeRequest2.5"
           },
-          "verification": {
-            "$ref": "#/components/schemas/Verification"
+          "verification" : {
+            "$ref" : "#/components/schemas/Verification"
           }
         }
       },
-      "InviteeRequest2.5": {
-        "type": "object",
-        "properties": {
-          "inviteeType": {
-            "type": "string",
-            "description": "The type of invitee associated with the webhook event.  Possible values are \"signer\" and \"reviewer\"."
+      "InviteeRequest2.5" : {
+        "type" : "object",
+        "properties" : {
+          "inviteeType" : {
+            "type" : "string",
+            "description" : "The type of invitee associated with the webhook event.  Possible values are \"signer\" and \"reviewer\"."
           },
-          "name": {
-            "type": "string",
-            "description": "The name of the invitee."
+          "name" : {
+            "type" : "string",
+            "description" : "The name of the invitee."
           },
-          "email": {
-            "type": "string",
-            "description": "The email of the invitee."
+          "email" : {
+            "type" : "string",
+            "description" : "The email of the invitee."
           },
-          "phone": {
-            "type": "string",
-            "description": "The mobile number of the invitee."
+          "phone" : {
+            "type" : "string",
+            "description" : "The mobile number of the invitee."
           },
-          "invitationUrl": {
-            "type": "string",
-            "description": "The invitation URL of the invitee."
+          "invitationUrl" : {
+            "type" : "string",
+            "description" : "The invitation URL of the invitee."
           },
-          "active": {
-            "type": "boolean",
-            "description": "The status of the invitee. An invitation is active when it can be signed or reviewed immediately.  In-active invitations become active according to the signing order configured in the eSign request API.  Possible values are 'true' (when the invitation is active) and 'false' (when the invitation is inactive)."
+          "active" : {
+            "type" : "boolean",
+            "description" : "The status of the invitee. An invitation is active when it can be signed or reviewed immediately.  In-active invitations become active according to the signing order configured in the eSign request API.  Possible values are 'true' (when the invitation is active) and 'false' (when the invitation is inactive)."
           },
-          "action": {
-            "type": "string",
-            "description": "The action pertaining to the webhoook event. Possible values are \"Signed\", \"Approved\",\"Rejected\" ."
+          "action" : {
+            "type" : "string",
+            "description" : "The action pertaining to the webhoook event. Possible values are \"Signed\", \"Approved\",\"Rejected\" ."
           },
-          "error": {
-            "type": "string",
-            "description": "The error pertaining to the webhook event."
+          "error" : {
+            "type" : "string",
+            "description" : "The error pertaining to the webhook event."
           },
-          "expired": {
-            "type": "boolean",
-            "description": "The expiry status of the invitation.  Possible values are \"true\" (if the invitation has expired) and \"false\"(if the invitation has not expired)."
+          "expired" : {
+            "type" : "boolean",
+            "description" : "The expiry status of the invitation.  Possible values are \"true\" (if the invitation has expired) and \"false\"(if the invitation has not expired)."
           },
-          "expiryDate": {
-            "type": "string",
-            "description": "The expiry date of the invitation. Format (dd-MM-yyyy HH:mm:ss)"
+          "expiryDate" : {
+            "type" : "string",
+            "description" : "The expiry date of the invitation. Format (dd-MM-yyyy HH:mm:ss)"
           },
-          "rejectionMessage": {
-            "type": "string",
-            "description": "The message sent by the reviewer at the time of rejecting the invitation, if any."
+          "rejectionMessage" : {
+            "type" : "string",
+            "description" : "The message sent by the reviewer at the time of rejecting the invitation, if any."
           },
-          "signType": {
-            "type": "string",
-            "description": "The type of signature applied.  Possible values are AADHAAR, VIRTUAL_SIGN, DSC, NESL_SIGN, OFFLINE_SIGN, DOC_SIGNER, AUTOMATED_SIGN. The value OFFLINE_SIGN refers to Cloud DSC."
+          "signType" : {
+            "type" : "string",
+            "description" : "The type of signature applied.  Possible values are AADHAAR, VIRTUAL_SIGN, DSC, NESL_SIGN, OFFLINE_SIGN, DOC_SIGNER, AUTOMATED_SIGN. The value OFFLINE_SIGN refers to Cloud DSC."
           }
         }
       },
-      "SuccessInviteeRequest": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the invitee."
+      "SuccessInviteeRequest" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the invitee."
           },
-          "email": {
-            "type": "string",
-            "description": "Email of the invitee."
+          "email" : {
+            "type" : "string",
+            "description" : "Email of the invitee."
           },
-          "phone": {
-            "type": "string",
-            "description": "Phone Number of the invitee."
+          "phone" : {
+            "type" : "string",
+            "description" : "Phone Number of the invitee."
           },
-          "signUrl": {
-            "type": "string",
-            "description": "User specfic URL unique to the request."
+          "signUrl" : {
+            "type" : "string",
+            "description" : "User specfic URL unique to the request."
           },
-          "active": {
-            "type": "boolean",
-            "description": "Status of the URL."
+          "active" : {
+            "type" : "boolean",
+            "description" : "Status of the URL."
           },
-          "signed": {
-            "type": "boolean",
-            "description": "Request eSigning status."
+          "signed" : {
+            "type" : "boolean",
+            "description" : "Request eSigning status."
           },
-          "rejected": {
-            "type": "boolean",
-            "description": "Request rejection status."
+          "rejected" : {
+            "type" : "boolean",
+            "description" : "Request rejection status."
           },
-          "expired": {
-            "type": "boolean",
-            "description": "Request expiration status."
+          "expired" : {
+            "type" : "boolean",
+            "description" : "Request expiration status."
           },
-          "expiryDate": {
-            "type": "string",
-            "description": "Request expiration date. Format (dd-MM-yyyy HH:mm:ss)"
+          "expiryDate" : {
+            "type" : "string",
+            "description" : "Request expiration date. Format (dd-MM-yyyy HH:mm:ss)"
           },
-          "signType": {
-            "type": "string",
-            "description": "This parameter will be there when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, OFFLINE_SIGN, DOC_SIGNER, AUTOMATED_SIGN. The value OFFLINE_SIGN refers to Cloud DSC."
+          "signType" : {
+            "type" : "string",
+            "description" : "This parameter will be there when the document has been signed. Possible values are- AADHAAR, VIRTUAL_SIGN, DSC, OFFLINE_SIGN, DOC_SIGNER, AUTOMATED_SIGN. The value OFFLINE_SIGN refers to Cloud DSC."
           }
         }
       },
-      "ErrorWebhookDatav2.1": {
-        "type": "object",
-        "properties": {
-          "documentId": {
-            "type": "string",
-            "description": "Same as the documentId received in POST call."
+      "ErrorWebhookDatav2.1" : {
+        "type" : "object",
+        "properties" : {
+          "documentId" : {
+            "type" : "string",
+            "description" : "Same as the documentId received in POST call."
           },
-          "mac": {
-            "type": "string",
-            "description": "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
+          "mac" : {
+            "type" : "string",
+            "description" : "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
           },
-          "folderId": {
-            "type": "string",
-            "description": "Folder ID of the document."
+          "folderId" : {
+            "type" : "string",
+            "description" : "Folder ID of the document."
           },
-          "irn": {
-            "type": "string",
-            "description": "Internal Reference Number of the document."
+          "irn" : {
+            "type" : "string",
+            "description" : "Internal Reference Number of the document."
           },
-          "request": {
-            "$ref": "#/components/schemas/ErrorRequestv2.1"
+          "request" : {
+            "$ref" : "#/components/schemas/ErrorRequestv2.1"
           }
         }
       },
-      "ErrorRequestv2.1": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the invitee."
+      "ErrorRequestv2.1" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the invitee."
           },
-          "email": {
-            "type": "string",
-            "description": "Email of the invitee."
+          "email" : {
+            "type" : "string",
+            "description" : "Email of the invitee."
           },
-          "phone": {
-            "type": "string",
-            "description": "Phone Number of the invitee."
+          "phone" : {
+            "type" : "string",
+            "description" : "Phone Number of the invitee."
           },
-          "signUrl": {
-            "type": "string",
-            "description": "User specfic URL unique to the request."
+          "signUrl" : {
+            "type" : "string",
+            "description" : "User specfic URL unique to the request."
           },
-          "active": {
-            "type": "boolean",
-            "description": "Status of the URL."
+          "active" : {
+            "type" : "boolean",
+            "description" : "Status of the URL."
           },
-          "signed": {
-            "type": "boolean",
-            "description": "Request eSigning status."
+          "signed" : {
+            "type" : "boolean",
+            "description" : "Request eSigning status."
           },
-          "rejected": {
-            "type": "boolean",
-            "description": "Request rejection status."
+          "rejected" : {
+            "type" : "boolean",
+            "description" : "Request rejection status."
           },
-          "expired": {
-            "type": "boolean",
-            "description": "Request expiration status."
+          "expired" : {
+            "type" : "boolean",
+            "description" : "Request expiration status."
           },
-          "expiryDate": {
-            "type": "string",
-            "description": "Request expiration date."
+          "expiryDate" : {
+            "type" : "string",
+            "description" : "Request expiration date."
           },
-          "error": {
-            "type": "string",
-            "description": "Request failure reason. Possible errors- \n Name doesn't match with the Digital Signature Certificate. \n Pincode doesn't match with the Digital Signature Certificate. \n Year of birth doesn't match with the Digital Signature Certificate. \n Gender doesn't match with the Digital Signature Certificate. \n Title doesn't match with the Digital Signature Certificate. \n State doesn't match with the Digital Signature Certificate. \n PAN doesn't match with the Digital Signature Certificate. \n Transaction timed out. \n Retry attempt exhausted. Error Message from ESP."
+          "error" : {
+            "type" : "string",
+            "description" : "Request failure reason. Possible errors- \n Name doesn't match with the Digital Signature Certificate. \n Pincode doesn't match with the Digital Signature Certificate. \n Year of birth doesn't match with the Digital Signature Certificate. \n Gender doesn't match with the Digital Signature Certificate. \n Title doesn't match with the Digital Signature Certificate. \n State doesn't match with the Digital Signature Certificate. \n PAN doesn't match with the Digital Signature Certificate. \n Transaction timed out. \n Retry attempt exhausted. Error Message from ESP."
           }
         }
       },
-      "ErrorWebhookDatav2.2": {
-        "type": "object",
-        "properties": {
-          "documentId": {
-            "type": "string",
-            "description": "Same as the documentId received in POST call."
+      "ErrorWebhookDatav2.2" : {
+        "type" : "object",
+        "properties" : {
+          "documentId" : {
+            "type" : "string",
+            "description" : "Same as the documentId received in POST call."
           },
-          "mac": {
-            "type": "string",
-            "description": "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
+          "mac" : {
+            "type" : "string",
+            "description" : "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
           },
-          "folderId": {
-            "type": "string",
-            "description": "Folder ID of the document."
+          "folderId" : {
+            "type" : "string",
+            "description" : "Folder ID of the document."
           },
-          "irn": {
-            "type": "string",
-            "description": "Internal Reference Number of the document."
+          "irn" : {
+            "type" : "string",
+            "description" : "Internal Reference Number of the document."
           },
-          "request": {
-            "$ref": "#/components/schemas/ErrorRequestv2.2"
+          "request" : {
+            "$ref" : "#/components/schemas/ErrorRequestv2.2"
           }
         }
       },
-      "ErrorRequestv2.2": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the invitee."
+      "ErrorRequestv2.2" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the invitee."
           },
-          "email": {
-            "type": "string",
-            "description": "Email of the invitee."
+          "email" : {
+            "type" : "string",
+            "description" : "Email of the invitee."
           },
-          "phone": {
-            "type": "string",
-            "description": "Phone Number of the invitee."
+          "phone" : {
+            "type" : "string",
+            "description" : "Phone Number of the invitee."
           },
-          "signUrl": {
-            "type": "string",
-            "description": "User specfic URL unique to the request."
+          "signUrl" : {
+            "type" : "string",
+            "description" : "User specfic URL unique to the request."
           },
-          "active": {
-            "type": "boolean",
-            "description": "Status of the URL."
+          "active" : {
+            "type" : "boolean",
+            "description" : "Status of the URL."
           },
-          "signed": {
-            "type": "boolean",
-            "description": "Request eSigning status."
+          "signed" : {
+            "type" : "boolean",
+            "description" : "Request eSigning status."
           },
-          "rejected": {
-            "type": "boolean",
-            "description": "Request rejection status."
+          "rejected" : {
+            "type" : "boolean",
+            "description" : "Request rejection status."
           },
-          "expired": {
-            "type": "boolean",
-            "description": "Request expiration status."
+          "expired" : {
+            "type" : "boolean",
+            "description" : "Request expiration status."
           },
-          "expiryDate": {
-            "type": "string",
-            "description": "Request expiration date."
+          "expiryDate" : {
+            "type" : "string",
+            "description" : "Request expiration date."
           },
-          "error": {
-            "type": "string",
-            "description": "Request failure reason. Possible errors- \n Name doesn't match with the Digital Signature Certificate. \n Pincode doesn't match with the Digital Signature Certificate. \n Year of birth doesn't match with the Digital Signature Certificate. \n Gender doesn't match with the Digital Signature Certificate. \n Title doesn't match with the Digital Signature Certificate. \n State doesn't match with the Digital Signature Certificate. \n PAN doesn't match with the Digital Signature Certificate. \n Transaction timed out. \n Retry attempt exhausted. Error Message from ESP."
+          "error" : {
+            "type" : "string",
+            "description" : "Request failure reason. Possible errors- \n Name doesn't match with the Digital Signature Certificate. \n Pincode doesn't match with the Digital Signature Certificate. \n Year of birth doesn't match with the Digital Signature Certificate. \n Gender doesn't match with the Digital Signature Certificate. \n Title doesn't match with the Digital Signature Certificate. \n State doesn't match with the Digital Signature Certificate. \n PAN doesn't match with the Digital Signature Certificate. \n Transaction timed out. \n Retry attempt exhausted. Error Message from ESP."
           }
         }
       },
-      "ErrorWebhookDatav2.3": {
-        "type": "object",
-        "properties": {
-          "documentId": {
-            "type": "string",
-            "description": "Same as the documentId received in POST call."
+      "ErrorWebhookDatav2.3" : {
+        "type" : "object",
+        "properties" : {
+          "documentId" : {
+            "type" : "string",
+            "description" : "Same as the documentId received in POST call."
           },
-          "mac": {
-            "type": "string",
-            "description": "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
+          "mac" : {
+            "type" : "string",
+            "description" : "The value of mac is calculated by applying HMAC-SHA1 algorithm on documentId with your Private Salt provided in your API Settings Tab. You can use it to ensure that the calls are coming from our servers."
           },
-          "folderId": {
-            "type": "string",
-            "description": "Folder ID of the document."
+          "folderId" : {
+            "type" : "string",
+            "description" : "Folder ID of the document."
           },
-          "irn": {
-            "type": "string",
-            "description": "Internal Reference Number of the document."
+          "irn" : {
+            "type" : "string",
+            "description" : "Internal Reference Number of the document."
           },
-          "signer": {
-            "$ref": "#/components/schemas/Signerv2.3"
+          "signer" : {
+            "$ref" : "#/components/schemas/Signerv2.3"
           },
-          "request": {
-            "$ref": "#/components/schemas/ErrorRequestv2.3"
+          "request" : {
+            "$ref" : "#/components/schemas/ErrorRequestv2.3"
           },
-          "verification": {
-            "$ref": "#/components/schemas/Verification"
+          "verification" : {
+            "$ref" : "#/components/schemas/Verification"
           },
-          "messages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RejectionReason"
+          "messages" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/RejectionReason"
             }
           }
         }
       },
-      "ErrorRequestv2.3": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the invitee."
+      "ErrorRequestv2.3" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the invitee."
           },
-          "email": {
-            "type": "string",
-            "description": "Email of the invitee."
+          "email" : {
+            "type" : "string",
+            "description" : "Email of the invitee."
           },
-          "phone": {
-            "type": "string",
-            "description": "Phone Number of the invitee."
+          "phone" : {
+            "type" : "string",
+            "description" : "Phone Number of the invitee."
           },
-          "signUrl": {
-            "type": "string",
-            "description": "User specfic URL unique to the request."
+          "signUrl" : {
+            "type" : "string",
+            "description" : "User specfic URL unique to the request."
           },
-          "active": {
-            "type": "boolean",
-            "description": "Status of the URL."
+          "active" : {
+            "type" : "boolean",
+            "description" : "Status of the URL."
           },
-          "signed": {
-            "type": "boolean",
-            "description": "Request eSigning status."
+          "signed" : {
+            "type" : "boolean",
+            "description" : "Request eSigning status."
           },
-          "rejected": {
-            "type": "boolean",
-            "description": "Request rejection status."
+          "rejected" : {
+            "type" : "boolean",
+            "description" : "Request rejection status."
           },
-          "expired": {
-            "type": "boolean",
-            "description": "Request expiration status."
+          "expired" : {
+            "type" : "boolean",
+            "description" : "Request expiration status."
           },
-          "expiryDate": {
-            "type": "string",
-            "description": "Request expiration date."
+          "expiryDate" : {
+            "type" : "string",
+            "description" : "Request expiration date."
           }
         }
       },
-      "Signerv2.1": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. In case of Virtual Sign and Automated Virtual Sign, the name will be the name used for eSigning the document."
+      "Signerv2.1" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. In case of Virtual Sign and Automated Virtual Sign, the name will be the name used for eSigning the document."
           },
-          "pincode": {
-            "type": "string",
-            "description": "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated  Signer. Value will be provided only if available in the certificate."
+          "pincode" : {
+            "type" : "string",
+            "description" : "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated  Signer. Value will be provided only if available in the certificate."
           },
-          "state": {
-            "type": "string",
-            "description": "State of signer as contained in the Digital Signature Certificate  in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+          "state" : {
+            "type" : "string",
+            "description" : "State of signer as contained in the Digital Signature Certificate  in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
-          "title": {
-            "type": "string",
-            "description": "Last 4 digit of the unique identifier of signer as contained in the  Digital Signature Certificate issued after Aadhaar authentication.  Only works for Aadhaar eSign and OFFLINE_SIGN (where the SignerID  is created using Aadhaar XML). Value will be provided only if  available in the Certificate."
+          "title" : {
+            "type" : "string",
+            "description" : "Last 4 digit of the unique identifier of signer as contained in the  Digital Signature Certificate issued after Aadhaar authentication.  Only works for Aadhaar eSign and OFFLINE_SIGN (where the SignerID  is created using Aadhaar XML). Value will be provided only if  available in the Certificate."
           },
-          "yob": {
-            "type": "string",
-            "description": "Year of birth of signer in digits as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "yob" : {
+            "type" : "string",
+            "description" : "Year of birth of signer in digits as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           },
-          "gender": {
-            "type": "string",
-            "description": "Gender of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. M for Male, F for Female and T for Transgender. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "gender" : {
+            "type" : "string",
+            "description" : "Gender of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. M for Male, F for Female and T for Transgender. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           },
-          "photoHash": {
-            "type": "string",
-            "description": "SHA256 Hash of the photo of the signer in Base64 Format contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "photoHash" : {
+            "type" : "string",
+            "description" : "SHA256 Hash of the photo of the signer in Base64 Format contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           },
-          "uid": {
-            "type": "string",
-            "description": "UIDToken of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "uid" : {
+            "type" : "string",
+            "description" : "UIDToken of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           }
         }
       },
-      "Signerv2.2": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. In case of Virtual Sign and Automated Virtual Sign, the name will be the name used for eSigning the document."
+      "Signerv2.2" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. In case of Virtual Sign and Automated Virtual Sign, the name will be the name used for eSigning the document."
           },
-          "pincode": {
-            "type": "string",
-            "description": "PIN Code of signer as contained in the Digital Signature Certificate  in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+          "pincode" : {
+            "type" : "string",
+            "description" : "PIN Code of signer as contained in the Digital Signature Certificate  in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
-          "state": {
-            "type": "string",
-            "description": "State of signer as contained in the Digital Signature Certificate in  case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+          "state" : {
+            "type" : "string",
+            "description" : "State of signer as contained in the Digital Signature Certificate in  case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
-          "title": {
-            "type": "string",
-            "description": "Last 4 digit of the unique identifier of signer as contained in  the Digital Signature Certificate issued after Aadhaar  authentication. Only works for Aadhaar eSign and OFFLINE_SIGN  (where the SignerID is created using Aadhaar XML). Value will be  provided only if available in the Certificate"
+          "title" : {
+            "type" : "string",
+            "description" : "Last 4 digit of the unique identifier of signer as contained in  the Digital Signature Certificate issued after Aadhaar  authentication. Only works for Aadhaar eSign and OFFLINE_SIGN  (where the SignerID is created using Aadhaar XML). Value will be  provided only if available in the Certificate"
           },
-          "yob": {
-            "type": "string",
-            "description": "Year of birth of signer in digits as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "yob" : {
+            "type" : "string",
+            "description" : "Year of birth of signer in digits as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           },
-          "gender": {
-            "type": "string",
-            "description": "Gender of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. M for Male, F for Female and T for Transgender. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "gender" : {
+            "type" : "string",
+            "description" : "Gender of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. M for Male, F for Female and T for Transgender. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           },
-          "photoHash": {
-            "type": "string",
-            "description": "SHA256 Hash of the photo of the signer in Base64 Format contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "photoHash" : {
+            "type" : "string",
+            "description" : "SHA256 Hash of the photo of the signer in Base64 Format contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           },
-          "uid": {
-            "type": "string",
-            "description": "UIDToken of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "uid" : {
+            "type" : "string",
+            "description" : "UIDToken of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           },
-          "serialNumber": {
-            "type": "string",
-            "description": "Serial number issued by the Certifying Authority on the digital signature."
+          "serialNumber" : {
+            "type" : "string",
+            "description" : "Serial number issued by the Certifying Authority on the digital signature."
           }
         }
       },
-      "Signerv2.3": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. In case of Virtual Sign and Automated Virtual Sign, the name will be the name used for eSigning the document."
+      "Signerv2.3" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, Doc Signer and Automated Signer. In case of Virtual Sign and Automated Virtual Sign, the name will be the name used for eSigning the document."
           },
-          "pincode": {
-            "type": "string",
-            "description": "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+          "pincode" : {
+            "type" : "string",
+            "description" : "PIN Code of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
-          "state": {
-            "type": "string",
-            "description": "State of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
+          "state" : {
+            "type" : "string",
+            "description" : "State of signer as contained in the Digital Signature Certificate in case of Aadhaar, DSC, OFFLINE_SIGN, Doc Signer and Automated Signer. Value will be provided only if available in the certificate."
           },
-          "title": {
-            "type": "string",
-            "description": "Last 4 digit of the unique identifier of signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign and OFFLINE_SIGN (where the SignerID is created using Aadhaar XML). Value will be provided only if available in the Certificate."
+          "title" : {
+            "type" : "string",
+            "description" : "Last 4 digit of the unique identifier of signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign and OFFLINE_SIGN (where the SignerID is created using Aadhaar XML). Value will be provided only if available in the Certificate."
           },
-          "yob": {
-            "type": "string",
-            "description": "Year of birth of signer in digits as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "yob" : {
+            "type" : "string",
+            "description" : "Year of birth of signer in digits as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           },
-          "gender": {
-            "type": "string",
-            "description": "Gender of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. M for Male, F for Female and T for Transgender. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "gender" : {
+            "type" : "string",
+            "description" : "Gender of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. M for Male, F for Female and T for Transgender. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           },
-          "photoHash": {
-            "type": "string",
-            "description": "SHA256 Hash of the photo of the signer in Base64 Format contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "photoHash" : {
+            "type" : "string",
+            "description" : "SHA256 Hash of the photo of the signer in Base64 Format contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           },
-          "uid": {
-            "type": "string",
-            "description": "UIDToken of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
+          "uid" : {
+            "type" : "string",
+            "description" : "UIDToken of the signer as contained in the Digital Signature Certificate issued after Aadhaar authentication. Only works for Aadhaar eSign. Value will be provided only if available in the Certificate."
           },
-          "serialNumber": {
-            "type": "string",
-            "description": "Serial number issued by the Certifying Authority on the digital signature."
+          "serialNumber" : {
+            "type" : "string",
+            "description" : "Serial number issued by the Certifying Authority on the digital signature."
           }
         }
       },
-      "RejectionReason": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Message Code."
+      "RejectionReason" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "Message Code."
           },
-          "message": {
-            "type": "string",
-            "description": "Error Message."
+          "message" : {
+            "type" : "string",
+            "description" : "Error Message."
           }
         }
       },
-      "Verification": {
-        "type": "object",
-        "properties": {
-          "smartName": {
-            "maximum": 100,
-            "minimum": 0,
-            "type": "integer",
-            "description": "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName and only in case of Aadhaar eSign, OFFLINE_SIGN or DSC."
+      "Verification" : {
+        "type" : "object",
+        "properties" : {
+          "smartName" : {
+            "type" : "integer",
+            "minimum" : 0,
+            "maximum" : 100,
+            "description" : "Smart Name value will indicate a value percentage of comparision between the name on the certificate and the name provided while signing. Value will be provided only if invitation is made using 'true' in verifySmartName and only in case of Aadhaar eSign, OFFLINE_SIGN or DSC."
           },
-          "name": {
-            "type": "boolean",
-            "description": "This parameter will return true or false depending on whether the Name is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN, or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
+          "name" : {
+            "type" : "boolean",
+            "description" : "This parameter will return true or false depending on whether the Name is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN, or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
           },
-          "pincode": {
-            "type": "boolean",
-            "description": "This parameter will return true or false depending on whether the Pincode is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN, or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
+          "pincode" : {
+            "type" : "boolean",
+            "description" : "This parameter will return true or false depending on whether the Pincode is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN, or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
           },
-          "state": {
-            "type": "boolean",
-            "description": "This parameter will return true or false depending on whether the State is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN, or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
+          "state" : {
+            "type" : "boolean",
+            "description" : "This parameter will return true or false depending on whether the State is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN, or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
           },
-          "title": {
-            "type": "boolean",
-            "description": "This parameter will return true or false depending on whether the Title is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN (where the SignerID is created using Aadhaar XML) or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
+          "title" : {
+            "type" : "boolean",
+            "description" : "This parameter will return true or false depending on whether the Title is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign, OFFLINE_SIGN (where the SignerID is created using Aadhaar XML) or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
           },
-          "yob": {
-            "type": "boolean",
-            "description": "This parameter will return true or false depending on whether the Year of Birth is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
+          "yob" : {
+            "type" : "boolean",
+            "description" : "This parameter will return true or false depending on whether the Year of Birth is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
           },
-          "gender": {
-            "type": "boolean",
-            "description": "This parameter will return true or false depending on whether the Gender is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
+          "gender" : {
+            "type" : "boolean",
+            "description" : "This parameter will return true or false depending on whether the Gender is matched to the Digital Signing Certificate. It will only work for Aadhaar eSign or DSC. In case of mismatch, the transaction will be charged but the document will be rejected. Character case is ignored for verification."
           }
         }
       }
