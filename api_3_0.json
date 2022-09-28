@@ -808,6 +808,17 @@
             }
           },
           {
+            "name": "document_sftpDetails",
+            "in": "query",
+            "description": "Pass this parameter as TRUE to receive information if SFTP was switched on for the document. Also receive the SFTP ID of the server configured where the completed document and audit trail will be sent (if SFTP was switched ON).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "workflow",
             "in": "query",
             "description": "Default Value = false\n\n  Details of the workflow associated with the documentID.\n\nDefault response parameters- \n  \n    \"id\"",
@@ -1360,7 +1371,7 @@
           {
             "name": "invitations_signatureOptionsUsed",
             "in": "query",
-            "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the Signature options used for an invitation.",
+            "description": "Default Value = false\n  \n  Pass this parameter as true to recieve the Signature options used for an invitation.\n  NOTE: This parameter is currently deprecated.",
             "required": false,
             "style": "form",
             "explode": true,
@@ -2645,6 +2656,14 @@
           "requireSigningOrder": {
             "type": "boolean",
             "description": "Signing order status whether the signing order is required or not."
+          },
+          "sftp": {
+            "type": "boolean",
+            "description": "SFTP status- Whether SFTP was switched on for the document"
+          },
+          "sftpId": {
+            "type": "string",
+            "description": "Receive SFTP ID of the server configured where the completed document and audit trail will be sent (if SFTP was switched ON)."
           }
         }
       },
@@ -3163,7 +3182,7 @@
           },
           "signatureOptionUsed": {
             "type": "string",
-            "description": "Signature option used under the signature type used e.g.OTP/ Bio-Metric/ Iris in case of Aadhaar Sign & Draw/  Computer generated in case of Virtual Sign."
+            "description": "Signature option used under the signature type used e.g.OTP/ Bio-Metric/ Iris in case of Aadhaar Sign & Draw/  Computer generated in case of Virtual Sign. NOTE- This parameter is currently deprecated."
           },
           "neslInvitationDetails": {
             "$ref": "#/components/schemas/InviteeNESLParticipantDetails3_1ResponseObject"
