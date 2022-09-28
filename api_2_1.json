@@ -306,10 +306,10 @@
           "neslData": {
             "$ref": "#/components/schemas/Nesl"
           },
-          "CCInvitees": {
+          "ccInvitees": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CcInvitee"
+              "$ref": "#/components/schemas/ccInvitee"
             }
           },
           "irn": {
@@ -352,6 +352,11 @@
           "stampValue": {
             "type": "string",
             "description": "If you are using Series group stamp value is required. It significes the value of stamp you want to use along with the document."
+          },
+          "replicateStampCoordinates": {
+            "type": "boolean",
+            "description": "If this value is passed as TRUE, then for each invitee, in appearance, ‘page’ = 1 will corresponding to the coordinates of all stamps. In this case, ‘page’ = 2 would be the 1st page of the document.",
+            "default": false
           },
           "attachments": {
             "type": "array",
@@ -948,7 +953,7 @@
           }
         }
       },
-      "CcInvitee": {
+      "ccInvitee": {
         "type": "object",
         "properties": {
           "name": {
@@ -1136,6 +1141,11 @@
           "affixFingerprint": {
             "type": "boolean",
             "description": "Pass 'true' if you want to allow the signer to affix an image of their fingerprint, scanned using a supported biometric fingerprint detection device. Fingerprint detection works only on Windows and Android devices, and requires access to a supported biometric device. Biometric device required to capture fingerprint. Only applicable for virtual signature.",
+            "default": false
+          },
+          "physicalSignature": {
+            "type": "boolean",
+            "description": "Pass 'true' if you want to allow the signer to upload an image of their signature.",
             "default": false
           },
           "f2fmode": {
