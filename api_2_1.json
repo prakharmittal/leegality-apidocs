@@ -582,8 +582,17 @@
           },
           "enableRejectMessage": {
             "type": "boolean",
-            "description": "Pass this parameter as \"true\" to mandate the invitee to share a message if they are rejecting the sign invitation.  This parameter can be passed \"true\" only if EnableRejectDocument is also set as \"true\".",
+            "description": "Pass this parameter as \"true\" to mandate the invitee to share a message if they are rejecting the sign invitation.  This parameter can be passed \"true\" only if enableRejectDocument is also set as \"true\".",
             "default": false
+          },
+          "paymentCollectionEnabled": {
+            "type": "boolean",
+            "description": "Pass this parameter as \"true\" to enable Leegality Payment Collect. This parameter can be passed as \"true\" only if Payment Collect is enabled for the organisation and a payment gateway acccount is linked with an admin's account. ",
+            "default": false
+          },
+          "amount": {
+            "type": "string",
+            "description": "Pass the amount (greater than Rs.10) to be collected from the signer. This parameter can be passed \"true\" only if paymentCollectionEnabled is also set as \"true\"."
           }
         }
       },
