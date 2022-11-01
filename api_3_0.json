@@ -808,7 +808,7 @@
             }
           },
           {
-            "name": "document_sftpDetails",
+            "name": "sftp",
             "in": "query",
             "description": "Pass this parameter as TRUE to receive information if SFTP was switched on for the document. Also receive the SFTP ID of the server configured where the completed document and audit trail will be sent (if SFTP was switched ON).",
             "required": false,
@@ -1854,6 +1854,15 @@
           }
         }
       },
+      "workflowPaymentCollectionConfig": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "description": "Pass the amount (greater than Rs.10) to be collected from the signer."
+          }
+        }
+      },
       "AadhaarConfig": {
         "type": "object",
         "properties": {
@@ -2473,6 +2482,9 @@
             "type": "string",
             "description": "Name of organization of the signer, If you have enabled the configuration to use organizational signatrue while setting up workflow then you can use this parameter to pass the orgnaization name of the signer."
           },
+          "workflowPaymentCollectionConfig": {
+            "$ref": "#/components/schemas/workflowPaymentCollectionConfig"
+          },
           "aadhaarConfig": {
             "$ref": "#/components/schemas/AadhaarConfig"
           },
@@ -2657,11 +2669,11 @@
             "type": "boolean",
             "description": "Signing order status whether the signing order is required or not."
           },
-          "sftp": {
+          "sftpEnabled": {
             "type": "boolean",
             "description": "SFTP status- Whether SFTP was switched on for the document"
           },
-          "sftpId": {
+          "profileId": {
             "type": "string",
             "description": "Receive SFTP ID of the server configured where the completed document and audit trail will be sent (if SFTP was switched ON)."
           }
