@@ -2414,6 +2414,10 @@
             "type": "integer",
             "description": "Can be used to define the new timeout period after which an uncompleted transaction gets cancelled and reversed. -1 is for 45 minutes, 0 means same day (11:59 PM) , 1 stands for next day , 2 stands for 2 days and so on.",
             "default": 10
+          },
+          "expiryTime": {
+            "type": "integer",
+            "description": "Can be used to define the new timeout time after which an uncompleted transaction get cancelled and reversed. Max value can be equal to 365 days. Value in this parameter to be passed as long format of date."
           }
         }
       },
