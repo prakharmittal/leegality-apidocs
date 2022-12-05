@@ -1708,6 +1708,45 @@
         ]
       }
     },
+    "/v3.1/invitation/activate": {
+      "put": {
+        "tags": [
+          "API 3.1"
+        ],
+        "summary": "Use this API to manually activate invitations of invitees.",
+        "description": "Use this API to activate invitations which are not yet active as per the pre-defined signing order.\nThis API will allow you to enable invitations out of turn where necessary - for example, when an intervening signer is unable to sign but you want other signers to proceed with signing.",
+        "parameters": [
+          {
+            "name": "signUrl",
+            "in": "query",
+            "description": "Pass the sign URL of the inactive invitation in this parameter to manually activate it.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualActivationApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Auth-Token": []
+          }
+        ]
+      }
+    },
     "/v3.1/document/fetchDocument": {
       "get": {
         "tags": [
@@ -3772,6 +3811,21 @@
           "serialNumber": {
             "type": "string",
             "description": "Stamp serial number, if you are using stamp papers."
+          }
+        }
+      },
+      "ManualActivationApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "if success then 1, else 0."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
           }
         }
       },
